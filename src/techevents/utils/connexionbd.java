@@ -4,12 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author Wael
- */
+
 public class connexionbd {
-    private static String url="jdbc:mysql://127.0.0.1:3306/workshop";
+    private static String url="jdbc:mysql://127.0.0.1:3306/techevent";
     private static String user = "root";
     private static String password = "";
     private static Connection conn;
@@ -25,11 +22,6 @@ public class connexionbd {
         System.out.println("erreur");
         }
     }
-   
-    
-       
-
-   
     public static connexionbd getinstance(){
         if (inst == null)
        { inst = new connexionbd();
