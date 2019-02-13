@@ -14,8 +14,77 @@ import techevent.utils.connexionbd;
 
 /**
  *
- * @author Hannachi
+ * @author Taboubi
  */
 public class ServiceEtudiant {
-  
+   Connection c = techevent.utils.connexionbd.getinstance().getConn();
+
+    public void AjouterEtudiant(Etudiant e) {
+        Statement st;
+        try {
+            st = c.createStatement();
+            String req = "insert into user (nom,dtype,prenom,datedenaissance,email,motpasse,numerotelephone,classe,responsabilite) values('" + e.getNom() + "','Etudiant','" + e.getPrenom() + "','" + e.getDatedenaissance() + "','" + e.getEmail() + "','" + e.getMotpasse() + "'," + e.getNumerotelephone() + ",'" + e.getClasse() + "','Membre')";
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void ModifierEtudiant(int id, Etudiant e) {
+
+        PreparedStatement pt;
+        try {
+            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?,   where id=?");
+            pt.setString(1, e.getNom());
+            pt.setString(2, e.getPrenom());
+            pt.setString(3, e.getEmail());
+            pt.setLong(4, e.getNumerotelephone());
+            pt.setString(5, e.getMotpasse());
+            pt.setString(6, e.getClasse());
+            pt.setInt(7, id);
+            pt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void AfficherEtudiant() {
+        Statement st;
+        try {
+            st = c.createStatement();
+            String req = "select * from user where dtype='etudiant'";
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                System.out.println("etudiant num : " + rs.getInt(1) + " /responsabilite : " + rs.getString(17) + " / nom : " + rs.getString(6) + " / prenom : " + rs.getString(8) + " / date de naissance : " + rs.getString(3) + " / email : " + rs.getString(4) + " / classe : " + rs.getString(12));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public boolean Login(String email, String mdp) {
+
+        try {
+            PreparedStatement pt = c.prepareStatement("select motpasse from user where email=?");
+            pt.setString(1, email);
+            ResultSet rs = pt.executeQuery();
+            if (rs.getCursorName() == mdp) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public void SupprimerEtudiant(Etudiant e) {
+        try {
+            PreparedStatement pt = c.prepareStatement("delete from user where id=?");
+            pt.setInt(1, e.getId());
+            pt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

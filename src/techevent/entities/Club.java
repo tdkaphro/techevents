@@ -7,7 +7,7 @@ public class Club implements java.io.Serializable
 { 
 	private int id ;
 	private String nom ; 
-	private String universiteduclub;
+	private Universite universiteduclub;
 	private Date datedecreation;
 	private String domaineduclub;
 	private President president;
@@ -30,10 +30,10 @@ public class Club implements java.io.Serializable
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getUniversiteduclub() {
+	public Universite getUniversiteduclub() {
 		return universiteduclub;
 	}
-	public void setUniversiteduclub(String universiteduclub) {
+	public void setUniversiteduclub(Universite universiteduclub) {
 		this.universiteduclub = universiteduclub;
 	}
 	public Date getDatedecreation() {
