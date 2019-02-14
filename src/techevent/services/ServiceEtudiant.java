@@ -34,7 +34,7 @@ public class ServiceEtudiant {
 
         PreparedStatement pt;
         try {
-            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?,   where id=?");
+            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?   where id=?");
             pt.setString(1, e.getNom());
             pt.setString(2, e.getPrenom());
             pt.setString(3, e.getEmail());
@@ -66,10 +66,11 @@ public class ServiceEtudiant {
     public boolean Login(String email, String mdp) {
 
         try {
-            PreparedStatement pt = c.prepareStatement("select motpasse from user where email=?");
+            PreparedStatement pt = c.prepareStatement("select * from user where email=? and motpasse=?");
             pt.setString(1, email);
+            pt.setString(2, mdp);
             ResultSet rs = pt.executeQuery();
-            if (rs.getCursorName() == mdp) {
+            if (rs.isBeforeFirst()) {
                 return true;
             }
         } catch (SQLException ex) {
