@@ -76,19 +76,4 @@ public class ServiceResponsable {
             Logger.getLogger(ServiceResponsable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public boolean Login(String email, String mdp) {
-
-        try {
-            PreparedStatement pt = c.prepareStatement("select * from user where email=? and motpasse=?");
-            pt.setString(1, email);
-            pt.setString(2, mdp);
-            ResultSet rs = pt.executeQuery();
-            if (rs.isBeforeFirst()) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
 }
