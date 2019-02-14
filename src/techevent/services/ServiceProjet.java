@@ -17,7 +17,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author Hannachi
+ * @author wael
  */
 public class ServiceProjet {
     Connection c = connexionbd.getinstance().getConn();
