@@ -24,11 +24,11 @@ public class ServiceEvenement {
         try{
         PreparedStatement req = C.prepareStatement("insert into evenement(NOM,CLUB_ID,LOCALISATION,DATEORGANISATION,DESCRIPTION,SOPNSOR_ID,ETATDEFINANCEMENT,CONFIRMATIONORGANISATION) values (?,?,?,?,?,?,?,?)");
         req.setString(1,e1.getNom());
-        req.setInt(2, 1);
+        req.setInt(2, e1.getClub().getId());
         req.setString(3, e1.getLocalisation());
         req.setDate(4, e1.getDateorganisation());
         req.setString(5, e1.getDescription());
-        req.setInt(6, 1);
+        req.setInt(6, e1.getSopnsor().getId());
         req.setBoolean(7, e1.isEtatdefinancement());
         req.setBoolean(8, e1.isConfirmationorganisation());
         req.execute(); 
