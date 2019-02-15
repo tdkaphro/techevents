@@ -27,6 +27,8 @@ public class Projet {
         public Projet() {
         }
 
+     
+
          public int getId() {
             return id;
         }
