@@ -97,4 +97,17 @@ public class ServiceEvenement {
             }
             return null ;
         }
+    public Evenement getEvenementById(int id){
+           Evenement e;
+        try {
+             PreparedStatement st=C.prepareStatement("select * from evenement");
+             ResultSet rs=st.executeQuery();
+             rs.getObject(id);
+             e=(Evenement) rs;
+             return e;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;  
+        }
 }

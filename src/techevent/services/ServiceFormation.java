@@ -17,7 +17,7 @@ public class ServiceFormation {
     Connection C = connexionbd.getinstance().getConn();
     
     
-    public void ajouterformationdeclub(Formation p , Club cl,int formateur,int univer){
+    public void ajouterformationdeclub(Formation p , int cl,int formateur,int univer){
         try{
     
     PreparedStatement req = C.prepareStatement("insert into formation (CAPACITE,CERTIFICATION,DATEDEBUT,DATEDEFIN,DESCRIPTION,DOMAINE,LOCALISATION,NOM,PRIX,VOLUMEHORAIRE,CLUB_ID,FORMATEUR_ID,UNIVERSITEDUFORMATION_ID)values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -31,9 +31,8 @@ public class ServiceFormation {
         req.setString(8,p.getNom());
         req.setDouble(9,p.getPrix());
         req.setInt(10,p.getVolumehoraire());
-        req.setInt(11,cl.getId());
+        req.setInt(11,cl);
         req.setInt(12,formateur);
-        req.setInt(13,univer);
         req.execute(); 
      ;
         }

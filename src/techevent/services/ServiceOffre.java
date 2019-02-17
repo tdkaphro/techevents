@@ -8,7 +8,9 @@ import java.sql.*;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import techevent.entities.Evenement;
 import techevent.entities.Offre;
+import techevent.entities.Sponsor;
 import techevent.utils.connexionbd;
 /**
  *
@@ -16,23 +18,34 @@ import techevent.utils.connexionbd;
  */
 public class ServiceOffre {
     Connection c = techevent.utils.connexionbd.getinstance().getConn();
-    public void ajouterOffre(Offre f){
+    public void DemanderOffre(Offre f,int even){
       Statement st;
         try {
             st = c.createStatement();
-            String req = "insert into offre (prix,evenement_id,sponsor_id) values("+f.getPrix()+","+f.getEvenement().getId()+","+f.getSponsor().getId()+")";
+            String req = "insert into offre (prix,evenement_id,sponsor_id) values("+f.getPrix()+","+even+",'1')";
             st.executeUpdate(req);
         } catch (SQLException ex) {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    public void modifierOffre(Offre f,int id){
+    
+    public void OffrirOffre(Offre f,int spons){
+        Statement st;
+        try {
+            st = c.createStatement();
+            String req = "insert into offre (prix,sponsor_id,evenement_id) values("+f.getPrix()+","+spons+",'1')";
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    public void modifierOffre(int pr,int id,int even,int spons){
          PreparedStatement pt;
         try {
             pt = c.prepareStatement("update offre set prix=? ,evenement_id=? ,sponsor_id=? where id=?");
-            pt.setInt(1, f.getPrix());
-            pt.setInt(2,f.getEvenement().getId());
-            pt.setInt(3,f.getSponsor().getId());
+            pt.setInt(1, pr);
+            pt.setInt(2,even);
+            pt.setInt(3,spons);
             pt.setInt(4, id);
             pt.executeUpdate();
         } catch (SQLException ex) {
@@ -40,10 +53,10 @@ public class ServiceOffre {
         }
         
     }
-    public void supprimerOffre(Offre f){
+    public void supprimerOffre(int id){
         try {
             PreparedStatement pt = c.prepareStatement("delete from offre where id=?");
-            pt.setInt(1, f.getId());
+            pt.setInt(1, id);
             pt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
@@ -57,10 +70,54 @@ public class ServiceOffre {
             String req = "select * from offre ";
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                System.out.println("offre num : " + rs.getInt(1) + " /prix : " + rs.getInt(2) + " / Evenement num : " + rs.getInt(3) + " / Sponsor num : " + rs.getInt(4));
+                System.out.println("Offre num : " + rs.getInt(1) + " /Prix : " + rs.getInt(2) + " / Evenement num : " + rs.getInt(3) + " / Sponsor num : " + rs.getInt(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public int getPrixDeOffrebyId(int id){
+        
+        try {
+             PreparedStatement st=c.prepareStatement("select prix from offre where id=?");
+             st.setInt(1, id);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getInt(1);}
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return 0;
+        }
+
+
+    public int getEvenIdDeOffrebyId(int id){
+        
+        try {
+             PreparedStatement st=c.prepareStatement("select EVENEMENT_ID  from offre where id=?");
+             st.setInt(1, id);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getInt(1);}
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return 0;
+        }
+    
+    public int getSponsIdDeOffrebyId(int id){
+        
+        try {
+             PreparedStatement st=c.prepareStatement("select SPONSOR_ID  from offre where id=?");
+             st.setInt(1, id);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getInt(1);}
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return 0;
+        }
 }
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1E90FF;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceOffre5Controller">
+   <children>
+      <Label alignment="CENTER" layoutX="85.0" layoutY="78.0" prefHeight="36.0" prefWidth="132.0" style="-fx-background-color: AliceBlue;" text="Sponsor_ID" textFill="#20438a">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="85.0" layoutY="162.0" prefHeight="36.0" prefWidth="132.0" style="-fx-background-color: AliceBlue;" text="Prix" textFill="#20438a">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="idspons" layoutX="323.0" layoutY="78.0" prefHeight="36.0" prefWidth="185.0" promptText="L'id du Sponsor" />
+      <TextField fx:id="prix" layoutX="323.0" layoutY="162.0" prefHeight="36.0" prefWidth="185.0" promptText="Prix Offert" />
+      <Button layoutX="209.0" layoutY="250.0" mnemonicParsing="false" onAction="#offrir" prefHeight="55.0" prefWidth="160.0" text="Offrir" />
+      <Button layoutX="209.0" layoutY="333.0" mnemonicParsing="false" onAction="#retour" prefHeight="55.0" prefWidth="160.0" text="Retour" />
+   </children>
+</AnchorPane>

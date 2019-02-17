@@ -22,11 +22,11 @@ import techevent.utils.connexionbd;
 public class ServicePresident {
     Connection c=connexionbd.getinstance().getConn();
     
-    public void AjouterPresident(President e){
+    public void AjouterPresident(President e,int club){
         Statement st;
         try {
             st = c.createStatement();
-            String req="insert into user (nom,dtype,prenom,datedenaissance,email,motpasse,numerotelephone,classe,responsabilite,club_id) values('"+e.getNom()+"','etudiant','"+e.getPrenom()+"','"+e.getDatedenaissance()+"','"+e.getEmail()+"','"+e.getMotpasse()+"',"+e.getNumerotelephone()+",'"+e.getClasse()+"','president','"+e.getClub().getId()+"')";
+            String req="insert into user (nom,dtype,prenom,datedenaissance,email,motpasse,numerotelephone,classe,responsabilite,club_id) values('"+e.getNom()+"','etudiant','"+e.getPrenom()+"','"+e.getDatedenaissance()+"','"+e.getEmail()+"','"+e.getMotpasse()+"',"+e.getNumerotelephone()+",'"+e.getClasse()+"','president',"+club+")";
             st.executeUpdate(req);
         } catch (SQLException ex) {
             Logger.getLogger(ServicePresident.class.getName()).log(Level.SEVERE, null, ex);

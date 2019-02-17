@@ -84,5 +84,20 @@ public class ServiceSponsor {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Sponsor getSponsorById(int id){
+        Sponsor s;
+        try {
+             PreparedStatement st=c.prepareStatement("select * from user where dtype='sponsor'");
+             ResultSet rs=st.executeQuery();
+             rs.getObject(id);
+             s=(Sponsor) rs;
+             return s;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceSponsor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
 
 }
