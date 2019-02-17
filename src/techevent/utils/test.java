@@ -19,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import techevent.entities.Offre;
 import techevent.services.ServiceOffre;
+import techevent.services.ServiceUser;
 
 /**
  *
@@ -29,7 +30,7 @@ public class test extends Application {
     @Override
     public void start(Stage primaryStage) {
        try {
-            Parent root =FXMLLoader.load(getClass().getResource("/views/InterfaceOffre.fxml"));
+            Parent root =FXMLLoader.load(getClass().getResource("/views/login.fxml"));
             Scene scene = new Scene(root);
             
             // primaryStage.setTitle("Hello World!");
@@ -44,10 +45,10 @@ public class test extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //launch(args);
-        ServiceOffre so=new ServiceOffre();
-        Offre f=new Offre();
-        so.OffrirOffre(f, 1);
+        launch(args);
+        //ServiceUser su=new ServiceUser();
+        //System.out.println(su.Login("sysyysy", "xx"));
+        //System.out.println(su.TypeUser("sysyysy", "xx"));
         
     }
     
