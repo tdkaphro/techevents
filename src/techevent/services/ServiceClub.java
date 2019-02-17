@@ -23,15 +23,18 @@ public class ServiceClub {
     Connection c=connexionbd.getinstance().getConn();
     
     
-    public void AjouterClub(Club cl){
+    public void AjouterClub(Club cl,int president,int univer){
         Statement st;
         try {
-            
-            st=c.createStatement();
-            
-            String req="insert into club (DATEDECREATION,DOMAINEDUCLUB,FRAISINSCRIPTION,NOM,confirmationcreation,president_id )  values('"+cl.getDatedecreation().toString()+"','"+cl.getDomaineduclub()+"',"+cl.getFraisinscription()+",'"+cl.getNom()+"','0',"+cl.getPresident().getId()+")";
-            
-            st.executeUpdate(req);
+            PreparedStatement ps = c.prepareStatement("insert into club (CONFIRMATIONCREATION,DATEDECREATION,DOMAINEDUCLUB,FRAISINSCRIPTION,NOM,PRESIDENT_ID,UNIVERSITEDUCLUB_ID) values(?,?,?,?,?,?,?)");
+            ps.setBoolean(1, cl.isConfirmationcreation());
+            ps.setDate(2, cl.getDatedecreation());
+            ps.setString(3, cl.getDomaineduclub());
+            ps.setInt(4, cl.getFraisinscription());
+            ps.setString(5, cl.getNom());
+            ps.setInt(6, president);
+            ps.setInt(7, univer);
+            ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceClub.class.getName()).log(Level.SEVERE, null, ex);
         }
