@@ -7,6 +7,7 @@ package techevents;
 
 /**
  *
+ * @author Hannachi
  * @author ahmed
  */
 public class Techevents {
