@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package techevent.utils;
+package techevent.views;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import techevent.entities.Offre;
-import techevent.services.ServiceOffre;
-import techevent.services.ServiceUser;
+
 
 /**
  *
  * @author Taboubi
  */
-public class test extends Application {
+public class NewFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) {
@@ -37,7 +36,7 @@ public class test extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
-            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -51,5 +50,4 @@ public class test extends Application {
         //System.out.println(su.TypeUser("sysyysy", "xx"));
         
     }
-    
 }

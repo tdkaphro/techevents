@@ -43,6 +43,14 @@ public class LoginController implements Initializable {
     private Label label;
     @FXML
     private JFXButton b11;
+    
+    public String mail (){
+        return t1.getText();
+    }
+    
+    public String mdp (){
+        return t2.getText();
+    }
 
     /**
      * Initializes the controller class.
@@ -61,20 +69,20 @@ public class LoginController implements Initializable {
         if (su.Login(user, mdp)) {
             type = su.TypeUser(user, mdp);
             if (type.equals("Sponsor")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/InterfaceSponseur.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilsponsor.fxml"));
                 try {
                     Parent root = loader.load();
-                    InterfaceSponseurController ioff = loader.getController();
+                    AccueilsponsorController ioff = loader.getController();
                     b1.getScene().setRoot(root);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (type.equals("Etudiant")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/InterfaceEtudiant.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueiletudiant.fxml"));
                 try {
                     Parent root = loader.load();
-                    InterfaceEtudiantController ioff = loader.getController();
+                    AccueiletudiantController ioff = loader.getController();
                     b1.getScene().setRoot(root);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,10 +90,10 @@ public class LoginController implements Initializable {
 
             }
             if (type.equals("Formateur")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/InterfaceFormateur.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilformateur.fxml"));
                 try {
                     Parent root = loader.load();
-                    InterfaceFormateurController ioff = loader.getController();
+                    AccueilformateurController ioff = loader.getController();
                     b1.getScene().setRoot(root);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,10 +101,10 @@ public class LoginController implements Initializable {
 
             }
             if (type.equals("Enseignant")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/InterfaceEnseignant.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilenseignant.fxml"));
                 try {
                     Parent root = loader.load();
-                    InterfaceEnseignantController ioff = loader.getController();
+                    AccueilenseignantController ioff = loader.getController();
                     b1.getScene().setRoot(root);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,6 +119,8 @@ public class LoginController implements Initializable {
             alert.showAndWait();
         }
     }
+    
+    
 
     @FXML
     private void MotpassOubliee(ActionEvent event) {

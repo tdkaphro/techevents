@@ -18,27 +18,19 @@ import techevent.utils.connexionbd;
  */
 public class ServiceOffre {
     Connection c = techevent.utils.connexionbd.getinstance().getConn();
-    public void DemanderOffre(Offre f,int even){
+    
+    public void AjouterOffre(Offre f,int even,int spons){
       Statement st;
         try {
             st = c.createStatement();
-            String req = "insert into offre (prix,evenement_id,sponsor_id) values("+f.getPrix()+","+even+",'1')";
+            String req = "insert into offre (prix,evenement_id,sponsor_id) values("+f.getPrix()+","+even+","+spons+")";
             st.executeUpdate(req);
         } catch (SQLException ex) {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
     
-    public void OffrirOffre(Offre f,int spons){
-        Statement st;
-        try {
-            st = c.createStatement();
-            String req = "insert into offre (prix,sponsor_id,evenement_id) values("+f.getPrix()+","+spons+",'1')";
-            st.executeUpdate(req);
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-    }
+    
     public void modifierOffre(int pr,int id,int even,int spons){
          PreparedStatement pt;
         try {
@@ -119,5 +111,19 @@ public class ServiceOffre {
         }
             return 0;
         }
+    
+    public ResultSet getDemandeSponsorisation(String mail,String mdp){
+        ServiceUser su=new ServiceUser();
+        int id=su.getId(mail, mdp);
+        try {
+             PreparedStatement st=c.prepareStatement("select * from offre where sponsor_id=?");
+             st.setInt(1, id);
+             ResultSet rs=st.executeQuery();
+             return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return null;
+    }
 }
 
