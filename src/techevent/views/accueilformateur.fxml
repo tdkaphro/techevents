@@ -11,15 +11,12 @@
    <children>
       <ImageView fitHeight="557.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../views/images/formateur.jpg" />
+            <Image url="@../images/formateur.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="145.0" fitWidth="142.0" layoutX="189.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton layoutX="100.0" layoutY="334.0" onAction="#MesClubs" prefHeight="127.0" prefWidth="150.0" />
-      <JFXButton layoutX="288.0" layoutY="335.0" onAction="#MesFormations" prefHeight="120.0" prefWidth="150.0" text=" " />
-      <JFXButton layoutX="499.0" layoutY="332.0" onAction="#MesEvenements" prefHeight="127.0" prefWidth="114.0" text=" " />
-      <JFXButton layoutX="679.0" layoutY="335.0" onAction="#MesProjets" prefHeight="120.0" prefWidth="142.0" text=" " />
-      <Label fx:id="role" layoutX="201.0" layoutY="239.0" prefHeight="25.0" prefWidth="80.0" text="Formateur">
+      <JFXButton layoutX="281.0" layoutY="335.0" onAction="#MesFormations" prefHeight="120.0" prefWidth="150.0" text=" " />
+      <Label fx:id="role" layoutX="201.0" layoutY="244.0" prefHeight="25.0" prefWidth="80.0" text="Formateur">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -39,11 +36,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="domaine" layoutX="513.0" layoutY="157.0" prefHeight="25.0" prefWidth="114.0">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
       <Label fx:id="telephone" layoutX="472.0" layoutY="481.0" prefHeight="25.0" prefWidth="114.0">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -54,5 +46,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <ImageView fx:id="img" fitHeight="145.0" fitWidth="142.0" layoutX="189.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

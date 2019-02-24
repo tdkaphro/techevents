@@ -31,18 +31,17 @@ public class ServiceUser{
         return false;
     }
     
-    public String TypeUser(String email,String mdp){
+    public ResultSet TypeUser(String email,String mdp){
           try {
              PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
              st.setString(1, email);
              st.setString(2, mdp);
              ResultSet rs=st.executeQuery();
-             rs.beforeFirst();
-             if(rs.next()){return rs.getString(2);}
+             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return "null";
+            return null;
     }
     
     public String getNom(String email,String mdp){

@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,13 +65,16 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void SeConnecter(ActionEvent event) throws IOException {
+    private void SeConnecter(ActionEvent event) throws IOException, SQLException {
         ServiceUser su = new ServiceUser();
         String type;
+        int id ;
         String user = t1.getText();
         String mdp = t2.getText();
         if (su.Login(user, mdp)) {
-            type = su.TypeUser(user, mdp);
+            ResultSet  rs = su.TypeUser(user, mdp);
+            type = rs.getString("Dtype");
+            id = rs.getInt("id");
             if (type.equals("Sponsor")) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilsponsor.fxml"));
                 try {
@@ -92,14 +97,17 @@ public class LoginController implements Initializable {
 
             }
             if (type.equals("Formateur")) {
-                  label.getScene().getWindow().hide();  
-                  Stage prStage =new Stage(); 
-                  Parent root = FXMLLoader.load(getClass().getResource("accueilformateur.fxml"));
-                  Scene scene = new Scene(root);
-                  prStage.setScene(scene);
-                  prStage.setResizable(false);
-                  prStage.show();
-            
+                FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueilformateur.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueilformateurController mc = loader.getController();
+                mc.initData(id);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
 
             }
             if (type.equals("Enseignant")) {

@@ -20,7 +20,7 @@ import techevent.utils.connexionbd;
 
 /**
  *
- * @author Hannachi
+ * @author theboy
  */
 public class ServiceFormateur {
 
@@ -65,18 +65,23 @@ public class ServiceFormateur {
         }
     }
 
-    public void afficherFormateur() {
+    public Formateur afficherFormateur(int id) {
         Statement st;
         try {
             st = c.createStatement();
-            String req = "select * from user where DTYPE='sponsor'";
+            String req = "select * from user where id = "+id;
             ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                System.out.println("sponsor nom : " + rs.getString(6) + " / prenom : " + rs.getString(8) + " / numero de telephone : " + rs.getLong(7) + " / domaine : " + rs.getString(15) + " / date de naissance : " + rs.getString(3) + " / email : " + rs.getString(4));
-            }
+            rs.next();
+            Formateur f = new Formateur();
+            f.setNom(rs.getString("nom"));
+            f.setPrenom(rs.getString("prenom"));
+            f.setEmail(rs.getString("email"));
+            f.setNumerotelephone(Integer.parseInt(rs.getString("NUMEROTELEPHONE")));
+            f.setPicture(rs.getString("PICTURE"));
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     public void supprimerFormateur(Formateur f) {
