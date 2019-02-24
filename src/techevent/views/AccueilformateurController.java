@@ -23,7 +23,7 @@ import techevent.services.ServiceUser;
  *
  * @author Taboubi
  */
-public class AccueilformateurController implements Initializable {
+public class AccueilformateurController  {
 
     @FXML
     private Label role;
@@ -40,30 +40,7 @@ public class AccueilformateurController implements Initializable {
     @FXML
     private Label mail1;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
-            ServiceUser su=new ServiceUser();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
-            Parent root = loader.load();
-            LoginController irc = loader.getController();
-            String mail=irc.mail();
-            String mdp=irc.mdp();
-            nom.setText(su.getNom(mail, mdp));
-            prenom.setText(su.getPrenom(mail, mdp));
-            datenaiss.setText(su.getDateNaissance(mail, mdp));
-            domaine.setText(su.getDomaine(mail, mdp));
-            mail1.setText(su.getMail(mail, mdp));
-            telephone.setText(su.getNumeroTelephone(mail, mdp));
-            
-            
-       } catch (IOException ex) {
-            Logger.getLogger(AccueilformateurController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }    
+    
 
     @FXML
     private void MesClubs(ActionEvent event) {
@@ -80,5 +57,8 @@ public class AccueilformateurController implements Initializable {
     @FXML
     private void MesProjets(ActionEvent event) {
     }
+
+    
+
     
 }

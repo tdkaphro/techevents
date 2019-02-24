@@ -18,10 +18,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import techevent.services.ServiceUser;
 
 /**
@@ -61,7 +63,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void SeConnecter(ActionEvent event) {
+    private void SeConnecter(ActionEvent event) throws IOException {
         ServiceUser su = new ServiceUser();
         String type;
         String user = t1.getText();
@@ -79,7 +81,7 @@ public class LoginController implements Initializable {
                 }
             }
             if (type.equals("Etudiant")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueiletudiant.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("accueiletudiant.fxml"));
                 try {
                     Parent root = loader.load();
                     AccueiletudiantController ioff = loader.getController();
@@ -90,18 +92,18 @@ public class LoginController implements Initializable {
 
             }
             if (type.equals("Formateur")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilformateur.fxml"));
-                try {
-                    Parent root = loader.load();
-                    AccueilformateurController ioff = loader.getController();
-                    b1.getScene().setRoot(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                  label.getScene().getWindow().hide();  
+                  Stage prStage =new Stage(); 
+                  Parent root = FXMLLoader.load(getClass().getResource("accueilformateur.fxml"));
+                  Scene scene = new Scene(root);
+                  prStage.setScene(scene);
+                  prStage.setResizable(false);
+                  prStage.show();
+            
 
             }
             if (type.equals("Enseignant")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilenseignant.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("accueilenseignant.fxml"));
                 try {
                     Parent root = loader.load();
                     AccueilenseignantController ioff = loader.getController();

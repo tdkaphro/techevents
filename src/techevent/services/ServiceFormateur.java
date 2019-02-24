@@ -28,7 +28,7 @@ public class ServiceFormateur {
 
     public void ajouterFormateur(Formateur f) {
         try {
-            PreparedStatement req = c.prepareStatement("insert into user(DTYPE,DATEDENAISSANCE,EMAIL,MOTDEPASSE,NOM,NUMEROTELEPHONE,PRENOM,DOMAINE,CV)values(?,?,?,?,?,?,?,?,?)");
+            PreparedStatement req = c.prepareStatement("insert into user(DTYPE,DATEDENAISSANCE,EMAIL,motpasse,NOM,NUMEROTELEPHONE,PRENOM,DOMAINE,picture)values(?,?,?,?,?,?,?,?,?)");
             req.setString(1, "Formateur");
             req.setDate(2, f.getDatedenaissance());
             req.setString(3, f.getEmail());
@@ -37,7 +37,8 @@ public class ServiceFormateur {
             req.setLong(6, f.getNumerotelephone());
             req.setString(7, f.getPrenom());
             req.setString(8, f.getDomaine());
-            req.setBlob(9, f.getCv());
+           req.setString(9, f.getPicture());
+
             req.execute();
             ;
         } catch (SQLException ex) {

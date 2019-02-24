@@ -1,10 +1,12 @@
 package techevent.entities;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.sql.Blob;
 import java.sql.Date;
 import java.util.List;
 
 
-public  abstract class User { 
+public  abstract class User  extends RecursiveTreeObject<User> { 
 	
         int id ;
 	String nom ;
@@ -13,6 +15,15 @@ public  abstract class User {
 	private String email;
 	private String motpasse;
 	private long  numerotelephone;
+        private String picture;
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
         
 	public User() {
 		super();

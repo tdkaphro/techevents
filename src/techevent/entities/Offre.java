@@ -10,13 +10,6 @@ public class Offre
 	private int prix ; 
 	private Sponsor sponsor;
 	private Evenement evenement;
-
-        public Offre(int id, int prix, Sponsor sponsor, Evenement evenement) {
-            this.id = id;
-            this.prix = prix;
-            this.sponsor = sponsor;
-            this.evenement = evenement;
-        }
         
 	public Offre() {
 		super();

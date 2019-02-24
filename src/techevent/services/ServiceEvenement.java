@@ -97,17 +97,4 @@ public class ServiceEvenement {
             }
             return null ;
         }
-    public String getNomById(int id){
-           try {
-             PreparedStatement st=C.prepareStatement("select * from evenemenet where id=?");
-             st.setInt(1, id);
-             ResultSet rs=st.executeQuery();
-             rs.beforeFirst();
-             if(rs.next()){return rs.getString(7);}
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            return null;
-    }
 }
-    

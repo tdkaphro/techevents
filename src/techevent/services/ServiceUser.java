@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package techevent.services;
 
 import java.sql.Connection;
@@ -15,9 +10,9 @@ import techevent.utils.connexionbd;
 
 /**
  *
- * @author Hannachi
+ * @author ahmed
  */
-public class ServiceUser {
+public class ServiceUser{
     Connection c=connexionbd.getinstance().getConn();
 
     public boolean Login(String email, String mdp) {
