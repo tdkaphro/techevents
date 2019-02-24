@@ -16,49 +16,56 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import techevent.services.ServiceFormateur;
+import techevent.services.ServiceFormation;
 import techevent.services.ServiceUser;
 
 /**
  * FXML Controller class
  *
- * @author Taboubi
+ * @author theboy
  */
-public class AccueilformateurController  {
+public class AccueilformateurController implements Initializable {
 
     @FXML
     private Label role;
+
     @FXML
     private Label nom;
+
     @FXML
     private Label prenom;
+
     @FXML
     private Label datenaiss;
-    @FXML
-    private Label domaine;
+
     @FXML
     private Label telephone;
+
     @FXML
     private Label mail1;
 
     
 
     @FXML
-    private void MesClubs(ActionEvent event) {
-    }
-
+    private ImageView img;
     @FXML
-    private void MesFormations(ActionEvent event) {
+    private int id1;
+    void MesFormations(ActionEvent event) {
+         
     }
 
-    @FXML
-    private void MesEvenements(ActionEvent event) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ServiceFormateur sf = new ServiceFormateur();
+        sf.afficherFormateur(id1);
     }
 
-    @FXML
-    private void MesProjets(ActionEvent event) {
-    }
+    void initData(int id) {
+        id1=id;    
+                }
 
-    
+   
 
-    
+
 }
