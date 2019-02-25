@@ -139,7 +139,7 @@ public class ServiceFormation {
         if(domaine!=null){
         try {
           
-            PreparedStatement req = C.prepareStatement("select * from formation where domaine=? and ?>=datedebut");
+            PreparedStatement req = C.prepareStatement("select * from formation where domaine=? and ?>=datedebut and CURDATE()<datedebut");
             req.setString(1, domaine);
             req.setString(2, date);
 
@@ -153,7 +153,7 @@ public class ServiceFormation {
         }else{
               try {
           
-            PreparedStatement req = C.prepareStatement("select * from formation where domaine is not null and ?>=datedebut");
+            PreparedStatement req = C.prepareStatement("select * from formation where domaine is not null and ?>=datedebut and CURDATE()<datedebut");
             req.setString(1, date);
 
             ResultSet rs = req.executeQuery();
@@ -168,11 +168,10 @@ public class ServiceFormation {
 
     public ResultSet filtrer2(String date, int a) {
         try {
-            PreparedStatement req = C.prepareStatement("select * from formation where datedebut-CURRENT_DATE+?>? and formateur_id=? and confirme=? ");
+            PreparedStatement req = C.prepareStatement("select * from formation where ?>=datedebut and CURDATE()<datedebut and formateur_id=? and confirme=? ");
             req.setString(1, date);
-            req.setString(2, date);
-            req.setInt(3, a);
-            req.setInt(4, 0);
+            req.setInt(2, a);
+            req.setInt(3, 0);
             ResultSet rs = req.executeQuery();
             return rs;
         } catch (SQLException e) {
@@ -183,11 +182,10 @@ public class ServiceFormation {
 
     public ResultSet filtrer3(String date, int a) {
         try {
-            PreparedStatement req = C.prepareStatement("select * from formation where datedebut-CURRENT_DATE+?>? and formateur_id=? and confirme=? ");
+            PreparedStatement req = C.prepareStatement("select * from formation where ?>=datedebut and CURDATE()<datedebut and formateur_id=? and confirme=? ");
             req.setString(1, date);
-            req.setString(2, date);
-            req.setInt(3, a);
-            req.setInt(4, 1);
+            req.setInt(2, a);
+            req.setInt(3, 1);
             ResultSet rs = req.executeQuery();
             return rs;
         } catch (SQLException e) {
@@ -255,6 +253,19 @@ public class ServiceFormation {
     public int nombredinscri(int a) throws SQLException {
         try {
             PreparedStatement req = C.prepareStatement("select count(*) as total from user_formation where mesformations_ID =?");
+            req.setInt(1, a);
+            ResultSet rs = req.executeQuery();
+            rs.next();
+            int k = rs.getInt("total");
+            return k;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    public int nombredeformation(int a) throws SQLException {
+        try {
+            PreparedStatement req = C.prepareStatement("select count(*) as total from formation where formateur_id =? and confirme=0");
             req.setInt(1, a);
             ResultSet rs = req.executeQuery();
             rs.next();

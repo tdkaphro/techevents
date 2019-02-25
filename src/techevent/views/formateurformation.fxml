@@ -21,7 +21,6 @@
             <Image url="@../images/3.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="nompresident" layoutX="170.0" layoutY="469.0" prefHeight="17.0" prefWidth="56.0" text="Label" />
       <ImageView fitHeight="124.0" fitWidth="125.0" layoutX="73.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton fx:id="b1" buttonType="RAISED" layoutX="1054.0" layoutY="634.0" onAction="#inscrievt" prefHeight="42.0" prefWidth="198.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="  " textFill="#f5f5f5">
          <font>
@@ -162,5 +161,11 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <ImageView fitHeight="42.0" fitWidth="102.0" layoutX="19.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RETOUR.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="retour" layoutX="14.0" layoutY="14.0" onAction="#retourevt" prefHeight="42.0" prefWidth="52.0" text=" " />
    </children>
 </AnchorPane>

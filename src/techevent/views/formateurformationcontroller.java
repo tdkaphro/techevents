@@ -13,18 +13,24 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -32,6 +38,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.services.ServiceFormation;
@@ -80,8 +92,28 @@ public class formateurformationcontroller implements Initializable  {
    private Label nbrinscri;
     @FXML
    private Label certifie;
+    @FXML
+   private JFXButton retour;
+    int idf;
+    
    ObservableList<String> list = FXCollections.observableArrayList("demande de formation","formation accepter");
-   ObservableList<String> list2 = FXCollections.observableArrayList("1jour","1semaine","1mois");
+   ObservableList<String> list2 = FXCollections.observableArrayList("1jour","1semaine","1mois","tout");
+    
+      @FXML
+    void retourevt(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader();
+                nbrplace.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueilformateur.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueilformateurController mc = loader.getController();
+                mc.initData(idf);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+    }
+
          @FXML
          void trievt(ActionEvent event) {
          List<Formation> lf = new ArrayList<Formation>();
@@ -89,16 +121,18 @@ public class formateurformationcontroller implements Initializable  {
          String dateee=null;
          String formation="*";
          if(datee.getValue()=="1jour"){
-         dateee = "1";
+         dateee= String.valueOf(LocalDate.now().plusDays(1));
          }
          if(datee.getValue()=="1semaine"){
-         dateee = "7";
-         }
+         dateee= String.valueOf(LocalDate.now().plusDays(7));         }
          if(datee.getValue()=="1mois"){
-         dateee = "30";
+         dateee= String.valueOf(LocalDate.now().plusDays(30));
          }
-         if(datee.getValue()=="choisir date"){
-         dateee = "1000";
+         if(datee.getSelectionModel().isEmpty()){
+         dateee= String.valueOf(LocalDate.now().plusDays(1000));
+         }
+         if(datee.getValue()=="tout"){
+         dateee= String.valueOf(LocalDate.now().plusDays(1000));
          }
          if(prfr.getValue()=="demande de formation"){
          formation = "1";
@@ -106,20 +140,23 @@ public class formateurformationcontroller implements Initializable  {
          if( prfr.getValue()=="formation accepter"){
          formation = "2";
          }
+          if( prfr.getSelectionModel().isEmpty()){
+         formation = "1";
+         }
          ResultSet rs = null;
          ServiceFormation sf = new ServiceFormation();
-         if(formation!="1"){
-         rs = sf.filtrer3(dateee,1);
-         b1.setVisible(false);
-         b14.setLayoutY(634);
-         b14.setPrefHeight(95);
-         }
-         else{
-         rs = sf.filtrer2(dateee,1);  
+         if(formation=="1"){
+         rs = sf.filtrer2(dateee,idf);
          b1.setVisible(true);
          b14.setLayoutY(684);
          b14.setPrefHeight(42);
          b1.setText("accepter");
+         }
+         else{
+         rs = sf.filtrer3(dateee,idf);     
+         b1.setVisible(false);
+         b14.setLayoutY(634);
+         b14.setPrefHeight(95);
          }
          try{
             while (rs.next()) {
@@ -179,10 +216,57 @@ public class formateurformationcontroller implements Initializable  {
          
         }   else {
                            sf.confirmer(tableau.getSelectionModel().getSelectedItem().getId());
+                           Alert alert = new Alert(AlertType.INFORMATION);
+                             alert.setTitle("Information Dialog");
+                             alert.setHeaderText(null);
+                             alert.setContentText("formation accepter");
+                             alert.showAndWait();
                            tableau.refresh();
+                         
                             }        }
        
     }
+     private static void notifier( int idf) {
+        Platform.runLater(() -> {
+                    Stage owner = new Stage(StageStyle.TRANSPARENT);
+                    StackPane root = new StackPane();
+                    root.setStyle("-fx-background-color: TRANSPARENT");
+                    Scene scene = new Scene(root, 1, 1);
+                    scene.setFill(Color.TRANSPARENT);
+                    owner.setScene(scene);
+                    owner.setWidth(1);
+                    owner.setHeight(1);
+                    owner.toBack();
+                    owner.show();
+                    ServiceFormation sf = new ServiceFormation();
+                    int hh=0;
+                    System.out.println(idf);
+            try {
+                hh =sf.nombredeformation(idf);
+            } catch (SQLException ex) {
+                Logger.getLogger(formateurformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            Notifications a = Notifications.create()
+                .title("notification de demande")
+                .text("vous avez "+String.valueOf(hh)+" nouveaux demande de formation   ")
+                .graphic(null)
+       
+                .hideAfter(Duration.seconds(1000))
+                .position(Pos.BOTTOM_RIGHT)
+                 .onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            owner.hide();
+                        }
+                    });
+                a.darkStyle();
+                a.showInformation();
+                    
+                }
+        );
+    }
+   
        protected void configureMap() {
         MapOptions mapOptions = new MapOptions();
         mapOptions.center(new LatLong(35.6558688, 9.3910852))
@@ -241,6 +325,7 @@ public class formateurformationcontroller implements Initializable  {
      } catch (IOException ex) {
          Logger.getLogger(inscriformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
      }
+     
     }
      public void remplirTab() throws IOException {
         tableau.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -288,5 +373,10 @@ public class formateurformationcontroller implements Initializable  {
                  }
             }
         });
+    }
+
+    void initData(int idf) {
+        this.idf=idf;
+        notifier(idf);
     }
 }

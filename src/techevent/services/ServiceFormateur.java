@@ -78,6 +78,8 @@ public class ServiceFormateur {
             f.setEmail(rs.getString("email"));
             f.setNumerotelephone(Integer.parseInt(rs.getString("NUMEROTELEPHONE")));
             f.setPicture(rs.getString("PICTURE"));
+            f.setDatedenaissance(rs.getDate("DATEDENAISSANCE"));
+            return f;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }

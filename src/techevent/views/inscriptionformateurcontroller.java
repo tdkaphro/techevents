@@ -15,15 +15,20 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import techevent.entities.Formateur;
@@ -62,7 +67,8 @@ public class inscriptionformateurcontroller {
     private ImageView img;
 File file ;
     @FXML
-    void ajouter(ActionEvent event) {
+    void ajouter(ActionEvent event) throws IOException {
+     
        Formateur form = new Formateur();
        form.setNom(nom.getText());
        form.setPrenom(nom.getText());
@@ -73,10 +79,19 @@ File file ;
        form.setDatedenaissance(Date.valueOf(datedenaissance.getValue()));
        form.setNumerotelephone(Integer.parseInt(numtel.getText()));
        ServiceFormateur sf = new ServiceFormateur();
-       if(form.getNom()==null||form.getPrenom()==null){
+       
        sf.ajouterFormateur(form);
+         FXMLLoader loader = new FXMLLoader();
+         img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("login.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
        }
-    }
+    
 
     @FXML
     void choisirimage(ActionEvent event) {

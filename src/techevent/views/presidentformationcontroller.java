@@ -263,15 +263,7 @@ public class presidentformationcontroller implements Initializable {
                 }
         );
     }
-    public void notification(){
-         Notifications a = Notifications.create()
-                .title("aa")
-                .text("ahmed")
-                .graphic(null)
-                .position(Pos.BOTTOM_RIGHT);
-                
-                a.showInformation();
-    }
+   
     public void remplirTab() throws IOException {
         tableau.setOnMousePressed(new EventHandler<MouseEvent>() {
 

@@ -68,13 +68,14 @@ public class LoginController implements Initializable {
     private void SeConnecter(ActionEvent event) throws IOException, SQLException {
         ServiceUser su = new ServiceUser();
         String type;
-        int id ;
+        int idf ;
         String user = t1.getText();
         String mdp = t2.getText();
         if (su.Login(user, mdp)) {
             ResultSet  rs = su.TypeUser(user, mdp);
+            rs.next();
             type = rs.getString("Dtype");
-            id = rs.getInt("id");
+            idf = rs.getInt("id");
             if (type.equals("Sponsor")) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilsponsor.fxml"));
                 try {
@@ -104,7 +105,7 @@ public class LoginController implements Initializable {
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 AccueilformateurController mc = loader.getController();
-                mc.initData(id);
+                mc.initData(idf);
                 prStage.setScene(scene);
                 prStage.setResizable(false);
                 prStage.show();
@@ -145,7 +146,16 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void Sinscrire(ActionEvent event) {
+    private void Sinscrire(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("creercompte.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
 }
