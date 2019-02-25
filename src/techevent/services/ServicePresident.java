@@ -76,5 +76,5 @@ public class ServicePresident {
             Logger.getLogger(ServicePresident.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
+    

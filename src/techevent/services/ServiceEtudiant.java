@@ -34,7 +34,7 @@ public class ServiceEtudiant {
 
         PreparedStatement pt;
         try {
-            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?,   where id=?");
+            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?   where id=?");
             pt.setString(1, e.getNom());
             pt.setString(2, e.getPrenom());
             pt.setString(3, e.getEmail());
@@ -60,24 +60,8 @@ public class ServiceEtudiant {
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
-    public boolean Login(String email, String mdp) {
-
-        try {
-            PreparedStatement pt = c.prepareStatement("select motpasse from user where email=?");
-            pt.setString(1, email);
-            ResultSet rs = pt.executeQuery();
-            if (rs.getCursorName() == mdp) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
+    
     public void SupprimerEtudiant(Etudiant e) {
         try {
             PreparedStatement pt = c.prepareStatement("delete from user where id=?");

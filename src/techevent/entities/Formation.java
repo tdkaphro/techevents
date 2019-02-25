@@ -9,7 +9,7 @@ public class Formation
 
 	private int id ;
 	private String nom ; 
-	private String club;
+	private Club club;
 	private String domaine;
 	private String description;
 	private Date datedebut;
@@ -21,6 +21,50 @@ public class Formation
 	private boolean certification;
         private Formateur formateur;
         private Universite universiteduformation;
+        private double lon;
+        private double lat;
+        private boolean confirme;
+        private String c; 
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
+    public String getC() {
+        return c;
+    }
+
+    public void setC(String c) {
+        this.c = c;
+    }
+
+    public boolean isConfirme() {
+        return confirme;
+    }
+
+    public void setConfirme(boolean confirme) {
+        this.confirme = confirme;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
         
 	public Formation() {
 		super();
@@ -37,12 +81,7 @@ public class Formation
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getClub() {
-		return club;
-	}
-	public void setClub(String club) {
-		this.club = club;
-	}
+
 	public String getDomaine() {
 		return domaine;
 	}

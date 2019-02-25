@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package techevent.services;
 
 import java.sql.Connection;
@@ -16,11 +11,10 @@ import techevent.utils.connexionbd;
 
 /**
  *
- * @author Taboubi
+ * @author ahmed
  */
-public class ServiceUser {
-
-    Connection c = connexionbd.getinstance().getConn();
+public class ServiceUser{
+    Connection c=connexionbd.getinstance().getConn();
 
     public boolean Login(String email, String mdp) {
 
@@ -37,198 +31,176 @@ public class ServiceUser {
         }
         return false;
     }
-
-    public String TypeUser(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(2);
-            }
+    
+    public ResultSet TypeUser(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return null;
     }
-
-    public String getNom(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(6);
-            }
+    
+    public String getNom(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(6);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getPrenom(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(8);
-            }
+    
+    public String getPrenom(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(8);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getDateNaissance(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getDate(3).toString();
-            }
+    
+    public String getDateNaissance(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getDate(3).toString();}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getMail(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(3);
-            }
+    
+    public String getMail(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(3);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getNumeroTelephone(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(7);
-            }
+    
+    public String getNumeroTelephone(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(7);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getEntreprise(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(18);
-            }
+    
+    public String getEntreprise(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(18);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getClasse(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(12);
-            }
+    
+    public String getClasse(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(12);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getRole(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(17);
-            }
+    
+    public String getRole(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(17);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getDomaine(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(15);
-            }
+    
+    public String getDomaine(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(15);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public String getDepartement(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getString(10);
-            }
+    
+    public String getDepartement(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getString(10);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "null";
+            return "null";
     }
-
-    public int getId(String email, String mdp) {
-        try {
-            PreparedStatement st = c.prepareStatement("select * from user where email=? and motpasse=?");
-            st.setString(1, email);
-            st.setString(2, mdp);
-            ResultSet rs = st.executeQuery();
-            rs.beforeFirst();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
+    
+    public int getId(String email,String mdp){
+          try {
+             PreparedStatement st=c.prepareStatement("select * from user where email=? and motpasse=?");
+             st.setString(1, email);
+             st.setString(2, mdp);
+             ResultSet rs=st.executeQuery();
+             rs.beforeFirst();
+             if(rs.next()){return rs.getInt(1);}
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+            return 0;
     }
+
+
+  
 
     public String getNomById(int id) {
         try {

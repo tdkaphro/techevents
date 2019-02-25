@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueilformateurController">
+   <children>
+      <ImageView fitHeight="557.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/formateur.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="145.0" fitWidth="142.0" layoutX="189.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="formation" layoutX="281.0" layoutY="335.0" onAction="#MesFormations" prefHeight="120.0" prefWidth="150.0" text=" " />
+      <Label fx:id="role" layoutX="201.0" layoutY="244.0" prefHeight="25.0" prefWidth="80.0" text="Formateur">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nom" layoutX="472.0" layoutY="100.0" prefHeight="25.0" prefWidth="66.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="prenom" layoutX="646.0" layoutY="100.0" prefHeight="25.0" prefWidth="87.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="datenaiss" layoutX="592.0" layoutY="132.0" prefHeight="25.0" prefWidth="114.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="telephone" layoutX="472.0" layoutY="481.0" prefHeight="25.0" prefWidth="114.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="mail1" layoutX="184.0" layoutY="481.0" prefHeight="26.0" prefWidth="181.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="img" fitHeight="145.0" fitWidth="142.0" layoutX="189.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="deco" buttonType="RAISED" layoutX="822.0" layoutY="24.0" onAction="#decoevt" prefHeight="50.0" prefWidth="49.0" ripplerFill="#e51616" text="   ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="57.0" fitWidth="49.0" layoutX="822.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logouy.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

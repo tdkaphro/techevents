@@ -76,5 +76,4 @@ public class ServiceResponsable {
             Logger.getLogger(ServiceResponsable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
