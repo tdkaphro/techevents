@@ -39,12 +39,13 @@ public class ServiceProjet {
     }
     public void ajouterprojetpourenseignant(int en, Projet p){
          try{
-         PreparedStatement st = (PreparedStatement) c.prepareStatement("insert into projet (description,domaine,etat,nom,club_id,enseignant_id)values(?,?,?,?,?,?)");
+         PreparedStatement st = (PreparedStatement) c.prepareStatement("insert into projet (description,domaine,etat,nom,enseignant_id,Media)values(?,?,?,?,?,?)");
          st.setString(1,p.getDescription());
          st.setString(2,p.getDomaine());
-         st.setBoolean(3, false);
+         st.setBoolean(3,p.isEtat());
          st.setString(4,p.getNom());
          st.setInt(5,en);
+         st.setString(6,p.getMedia());
          st.execute();
          
         }
@@ -108,4 +109,20 @@ public class ServiceProjet {
             }
             return null ;
         }
+     public int nombreenseignant(int a) throws SQLException{
+          try{
+            PreparedStatement req =c.prepareStatement("select count(*) as total from projet where enseignant_ID =?");
+            req.setInt(1,a);
+            ResultSet rs = req.executeQuery();
+            rs.next();
+            int k = rs.getInt("total");
+            return k; 
+            }
+             
+  
+            catch(SQLException e){
+                System.out.println(e);
+            }
+          return 0;
+}
 }

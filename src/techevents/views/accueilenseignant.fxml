@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="534.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevents.views.AccueilenseignantController">
+   <children>
+      <ImageView fitHeight="557.0" fitWidth="900.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../views/images/Enseignant.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="135.0" fitWidth="138.0" layoutX="192.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="btnlogout" fitHeight="36.0" fitWidth="38.0" layoutX="826.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../views/images/logout.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnclub" layoutX="104.0" layoutY="330.0" onAction="#MesClubs" prefHeight="124.0" prefWidth="145.0" />
+      <JFXButton fx:id="btnformation" layoutX="280.0" layoutY="335.0" onAction="#MesFormations" prefHeight="124.0" prefWidth="163.0" text=" " />
+      <JFXButton fx:id="btnevenement" layoutX="495.0" layoutY="330.0" onAction="#MesEvenements" prefHeight="124.0" prefWidth="121.0" text=" " />
+      <JFXButton fx:id="btnprojet" layoutX="676.0" layoutY="323.0" onAction="#MesProjets" prefHeight="135.0" prefWidth="138.0" text=" " />
+      <JFXButton fx:id="b1" buttonType="RAISED" layoutX="639.0" layoutY="202.0" onAction="#ModifierProfil" prefHeight="25.0" prefWidth="100.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Editer Profil" textFill="#f5f5f5" />
+      <Label fx:id="role" layoutX="194.0" layoutY="244.0" prefHeight="25.0" prefWidth="111.0" text="Enseignant">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nom" layoutX="465.0" layoutY="99.0" prefHeight="25.0" prefWidth="87.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="prenom" layoutX="645.0" layoutY="99.0" prefHeight="25.0" prefWidth="100.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="datenaiss" layoutX="588.0" layoutY="124.0" prefHeight="25.0" prefWidth="145.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="departement" layoutX="552.0" layoutY="155.0" prefHeight="25.0" prefWidth="152.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="telephone" layoutX="465.0" layoutY="480.0" prefHeight="25.0" prefWidth="152.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="mail1" layoutX="185.0" layoutY="480.0" prefHeight="25.0" prefWidth="152.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
