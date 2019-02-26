@@ -65,6 +65,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -130,7 +131,7 @@ public class presidentformationcontroller implements Initializable {
 
     @FXML
     private TableColumn<Formation, String> etat;
-     @FXML
+    @FXML
     private TableColumn<Formation, String> confirmer;
     @FXML
     private JFXButton btnmap;
@@ -144,7 +145,6 @@ public class presidentformationcontroller implements Initializable {
     public Marker marker = null;
 
     List<Formation> lf = new ArrayList<Formation>();
-                    
 
     public void initData() throws SQLException {
 
@@ -158,7 +158,7 @@ public class presidentformationcontroller implements Initializable {
                 .zoom(8);
 
         map = mapid.createMap(mapOptions, false);
-        
+
     }
 
     @Override
@@ -175,9 +175,9 @@ public class presidentformationcontroller implements Initializable {
                 f.setNom(rs.getString("nom"));
                 f.setDomaine(rs.getString("domaine"));
                 f.setC("null");
-                if(rs.getBoolean("confirme")==true){
+                if (rs.getBoolean("confirme") == true) {
                     f.setC("oui");
-                }else{
+                } else {
                     f.setC("non");
                 }
                 f.setDescription(sf.formateurdeformation(rs.getInt("FORMATEUR_ID")));
@@ -208,11 +208,11 @@ public class presidentformationcontroller implements Initializable {
         tableau.setItems(listObAbn);
         try {
             remplirTab();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(presidentformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
-       // notification();
+        // notification();
         notifier("aa", "aa");
     }
 
@@ -225,84 +225,146 @@ public class presidentformationcontroller implements Initializable {
     void ajouteevt(ActionEvent event) throws IOException {
         tableau.getScene().getWindow().hide();
         Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ajouterformation.fxml"));
         Scene scene = new Scene(root);
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
-
     }
- private static void notifier(String pTitle, String pMessage) {
+
+    @FXML
+    void modifevt(ActionEvent event) throws IOException, SQLException {
+        if(tableau.getSelectionModel().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("selectioner le formation que vous voulez modifier!!!");
+            alert.showAndWait();
+        }else{
+                FXMLLoader loader = new FXMLLoader();
+                tableau.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("modifierformation.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ServiceFormation sf = new ServiceFormation();
+                ResultSet rs =sf.afficherformation(tableau.getSelectionModel().getSelectedItem().getId());
+                rs.next();
+                modifierformationcontroller mc = loader.getController();
+                int id = rs.getInt("id");
+                String nom =  rs.getString("nom");
+                double prix =rs.getDouble("prix");
+                String description = rs.getString("description");
+                int capaciter = rs.getInt("CAPACITE");
+                int voulmehoraire = rs.getInt("VOLUMEHORAIRE");
+                java.sql.Date datedebut = rs.getDate("datedebut");
+                java.sql.Date datefinn = rs.getDate("datedefin");
+                Double lat = rs.getDouble("lat");
+                Double lon = rs.getDouble("lon");
+                Boolean certifie = rs.getBoolean("CERTIFICATION");
+                String domaine = rs.getString("domaine");
+                ResultSet rsf=sf.formateurdeformation2(rs.getInt("FORMATEUR_ID"));
+                rsf.next();
+                int  idformateur = rsf.getInt("id");
+                String nomformateur = rsf.getString("nom");
+                String prenomformateur =  rsf.getString("prenom");
+                mc.initData(id,nom,prix,description,capaciter,voulmehoraire,datedebut,datefinn,lat,lon,certifie,domaine,idformateur,nomformateur,prenomformateur);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+        }
+    }
+
+    @FXML
+    void suppevt(ActionEvent event) throws IOException {
+           if(tableau.getSelectionModel().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("selectioner le formation que vous voulez supprimer!!!");
+            alert.showAndWait();
+        }else{
+        tableau.getScene().getWindow().hide();  
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("supprimerformation.fxml"));
+       	    Parent root = loader.load();
+       	    Scene scene = new Scene(root);
+       	    supprimerformationcontroller mc = loader.getController();
+       	    mc.initData(tableau.getSelectionModel().getSelectedItem().getId());
+       	    Stage prStage = new Stage();
+       	    prStage.setScene(scene);
+       	    prStage.setResizable(false);
+       	    prStage.show();
+    }}
+    private static void notifier(String pTitle, String pMessage) {
         Platform.runLater(() -> {
-                    Stage owner = new Stage(StageStyle.TRANSPARENT);
-                    StackPane root = new StackPane();
-                    root.setStyle("-fx-background-color: TRANSPARENT");
-                    Scene scene = new Scene(root, 1, 1);
-                    scene.setFill(Color.TRANSPARENT);
-                    owner.setScene(scene);
-                    owner.setWidth(1);
-                    owner.setHeight(1);
-                    owner.toBack();
-                    owner.show();
+            Stage owner = new Stage(StageStyle.TRANSPARENT);
+            StackPane root = new StackPane();
+            root.setStyle("-fx-background-color: TRANSPARENT");
+            Scene scene = new Scene(root, 1, 1);
+            scene.setFill(Color.TRANSPARENT);
+            owner.setScene(scene);
+            owner.setWidth(1);
+            owner.setHeight(1);
+            owner.toBack();
+            owner.show();
             Notifications a = Notifications.create()
-                .title("aa")
-                .text("ahmed")
-                .graphic(null)
-       
-                .hideAfter(Duration.seconds(1000))
-                .position(Pos.BOTTOM_RIGHT)
-                 .onAction(new EventHandler<ActionEvent>() {
+                    .title("aa")
+                    .text("ahmed")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(1000))
+                    .position(Pos.BOTTOM_RIGHT)
+                    .onAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             owner.hide();
                         }
                     });
-                a.darkStyle();
-                a.showInformation();
-                    
-                }
+            a.darkStyle();
+            a.showInformation();
+
+        }
         );
     }
-   
+
     public void remplirTab() throws IOException {
         tableau.setOnMousePressed(new EventHandler<MouseEvent>() {
 
             @Override
             public void handle(MouseEvent event) {
-                    ServiceFormation sf = new ServiceFormation();
-                    double lon = 0;
-                    double lat = 0;
-                   
+                ServiceFormation sf = new ServiceFormation();
+                double lon = 0;
+                double lat = 0;
+
                 try {
-                        ResultSet rs = sf.afficherformation(tableau.getSelectionModel().getSelectedItem().getId());
-                        rs.next();
-                        lon = rs.getDouble("lon");
-                        lat = rs.getDouble("lat");
-                        descriptionid.setText(rs.getString("description"));
-                        descriptionid.setEditable(false);
-                        
+                    ResultSet rs = sf.afficherformation(tableau.getSelectionModel().getSelectedItem().getId());
+                    rs.next();
+                    lon = rs.getDouble("lon");
+                    lat = rs.getDouble("lat");
+                    descriptionid.setText(rs.getString("description"));
+                    descriptionid.setEditable(false);
+
                 } catch (SQLException ex) {
                     Logger.getLogger(presidentformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                  MapOptions mapOptions = new MapOptions();
+                MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(lat, lon))
-                .mapType(MapTypeIdEnum.ROADMAP)
-                .zoom(10);
-
-        map = mapid.createMap(mapOptions, false);
-                 MarkerOptions markerOptions = new MarkerOptions();
-         markerOptions.position( new LatLong(lat, lon) )
-                .visible(Boolean.TRUE)
-                .title("My Marker");
-         if (marker==null){
-         marker = new Marker( markerOptions );
-         map.addMarker(marker);
-         }else{
-             map.removeMarker(marker);
-             marker = new Marker( markerOptions );
-         map.addMarker(marker);
-                 }
+                mapOptions.center(new LatLong(lat, lon))
+                        .mapType(MapTypeIdEnum.ROADMAP)
+                        .zoom(10);
+                map = mapid.createMap(mapOptions, false);
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(new LatLong(lat, lon))
+                        .visible(Boolean.TRUE)
+                        .title("My Marker");
+                if (marker == null) {
+                    marker = new Marker(markerOptions);
+                    map.addMarker(marker);
+                } else {
+                    map.removeMarker(marker);
+                    marker = new Marker(markerOptions);
+                    map.addMarker(marker);
+                }
             }
         });
     }

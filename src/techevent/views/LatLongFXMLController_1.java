@@ -27,7 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-public class LatLongFXMLController implements Initializable {
+public class LatLongFXMLController_1 implements Initializable {
 
      @FXML
     private Button  locate;
@@ -89,11 +89,11 @@ public class LatLongFXMLController implements Initializable {
      void locateevt(ActionEvent event) throws IOException, SQLException {
     locate.getScene().getWindow().hide();
    FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("ajouterformation.fxml"));
+            loader.setLocation(getClass().getResource("modifierformation.fxml"));
        	    Parent root = loader.load();
        	    Scene scene = new Scene(root);
-       	    ajouterformationcontroller mc = loader.getController();
-       	    mc.initData(lat,lon,nom1,prix1,capaciter1,volume1,datedebut1,datedefin1,domaine1,certified1,formateur1);
+       	    modifierformationcontroller mc = loader.getController();
+       	    mc.initData(lat,lon,nom1,prix1,capaciter1,volume1,datedebut1,datedefin1,domaine1,certified1,formateur1,description1);
        	    Stage prStage = new Stage();
        	    prStage.setScene(scene);
        	    prStage.setResizable(false);
@@ -110,7 +110,7 @@ public class LatLongFXMLController implements Initializable {
         domaine1 = domaine;
         certified1 = certified;
         formateur1 = formateur;
-        description1 = description;
+        description1 =description;
         
     }
 

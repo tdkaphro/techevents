@@ -47,15 +47,11 @@
          </font>
       </Label>
       <ImageView fx:id="img" fitHeight="145.0" fitWidth="142.0" layoutX="189.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton fx:id="deco" buttonType="RAISED" layoutX="822.0" layoutY="24.0" onAction="#decoevt" prefHeight="50.0" prefWidth="49.0" ripplerFill="#e51616" text="   ">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </JFXButton>
-      <ImageView fitHeight="57.0" fitWidth="49.0" layoutX="822.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="57.0" fitWidth="49.0" layoutX="817.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logouy.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="deco" layoutX="817.0" layoutY="23.0" onAction="#decoevt" prefHeight="58.0" prefWidth="49.0" text=" " />
    </children>
 </AnchorPane>

@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,7 +93,6 @@ public class AccueilformateurController implements Initializable {
         file = new File(f.getPicture());
         Image image = new Image(file.toURI().toString(),142,145,false,false);
         img.setImage(image);
-        
                 }
     @FXML
     void decoevt(ActionEvent event) throws IOException {
@@ -105,6 +105,14 @@ public class AccueilformateurController implements Initializable {
                 prStage.setScene(scene);
                 prStage.setResizable(false);
                 prStage.show();
+    }
+
+    void initData(int aInt, String string, double aDouble, String string0, int aInt0, int aInt1, Date date, Date date0, double aDouble0, double aDouble1, boolean aBoolean) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void initData(int aInt, String string, double aDouble, String string0, int aInt0, int aInt1, Date date, Date date0, double aDouble0, double aDouble1, boolean aBoolean, String string1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

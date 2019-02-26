@@ -31,7 +31,7 @@ import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.services.ServiceFormation;
 import java.util.*;
-public class ajouterformationcontroller implements Initializable {
+public class modifierformationcontroller implements Initializable {
 
     
     @FXML
@@ -118,7 +118,7 @@ public class ajouterformationcontroller implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
-                alert.setContentText("formation ajoutee avec succes!!");
+                alert.setContentText("formation modifier avec succes!!");
                 alert.showAndWait();
                  Formation a = new Formation();
     a.setNom(nomid.getText());
@@ -150,7 +150,6 @@ public class ajouterformationcontroller implements Initializable {
     prStage.setResizable(false);
     prStage.show();
             }
-   
     }      
     @FXML
     void choisirevt(ActionEvent event) throws IOException {
@@ -173,17 +172,17 @@ public class ajouterformationcontroller implements Initializable {
     FXMLLoader loader = new FXMLLoader();
     ajouter.getScene().getWindow().hide();  
     Stage prStage =new Stage(); 
-    loader.setLocation(getClass().getResource("Scene.fxml"));
+    loader.setLocation(getClass().getResource("Scene_1.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
-    LatLongFXMLController mc = loader.getController();
+    LatLongFXMLController_1 mc = loader.getController();
     mc.initData(nom,prix,capaciter,volume,datedebut,datedefin,domaine,description,certified,formateur);
     prStage.setScene(scene);
     prStage.setResizable(false);
     prStage.show();
         
     }
- void initData(double lat, double lon, String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, boolean certified, String formateur) throws SQLException {
+ void initData(double lat, double lon, String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, boolean certified, String formateur,String description) throws SQLException {
         lat1 = lat; 
         lon1 = lon;
         nom1=nom;
@@ -195,7 +194,8 @@ public class ajouterformationcontroller implements Initializable {
         domaine1 = domaine;
         certified1 = certified;
         formateur1 = formateur;
-          nomid.setText(nom1);
+        description1 = description;;
+        nomid.setText(nom1);
     prixid.setText(prix1);
     capaciterid.setText(capaciter1);
     volumeid.setText(volume1);
@@ -238,6 +238,47 @@ public class ajouterformationcontroller implements Initializable {
         cbformateur.setItems(listf);
        
     }
+
+    
+    void initData(int id, String nom, double prix, String description, int capaciter, int voulmehoraire, Date datedebut, Date datefinn, Double lat, Double lon, Boolean certifie, String domaine, int idformateur, String nomformateur, String prenomformateur) throws SQLException {
+   
+        lat1 = lat; 
+        lon1 = lon;
+        nom1=nom;
+        prix1 = String.valueOf(prix);
+        capaciter1 = String.valueOf(capaciter);
+        volume1= String.valueOf(voulmehoraire) ;
+        datedebut1 = datedebut.toLocalDate();
+        datedefin1 = datefinn.toLocalDate();
+        domaine1 = domaine;
+        certified1 = certifie;
+        formateur1 = String.valueOf(idformateur)+"."+nomformateur+" "+prenomformateur;
+        description1 = description;
+          nomid.setText(nom1);
+    prixid.setText(prix1);
+    capaciterid.setText(capaciter1);
+    volumeid.setText(volume1);
+    datedeb.setValue(datedebut1);
+    datefin.setValue(datedefin1);
+    cbdomaine.setValue(domaine1);
+    descriptionid.setText(description1);
+     ServiceFormation sf = new ServiceFormation();
+        ObservableList<String> listf = FXCollections.observableArrayList();
+        ResultSet rs = sf.formateurpardomaine(domaine1);
+        while (rs.next()){
+            listf.add(rs.getInt("id")+"."+rs.getString("nom")+" "+rs.getString("prenom"));
+        }
+        cbformateur.setItems(listf);
+       
+    
+    cbformateur.setValue(formateur1);
+    if(certified1 == true){
+        certifieid.setSelected(true);
+    }
+    }
+
+    
+   
 
  
 }
