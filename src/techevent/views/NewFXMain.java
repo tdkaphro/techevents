@@ -6,8 +6,7 @@
 package techevent.views;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -18,36 +17,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import javafx.stage.StageStyle;
+import techevent.entities.Offre;
+import techevent.services.ServiceClub;
+import techevent.services.ServiceEvenement;
+import techevent.services.ServiceOffre;
+import techevent.services.ServiceUser;
 
 /**
  *
  * @author Taboubi
  */
 public class NewFXMain extends Application {
-    
+
     @Override
-    public void start(Stage primaryStage) {
-       try {
-            Parent root =FXMLLoader.load(getClass().getResource("presidentformation.fxml"));
-            Scene scene = new Scene(root);
-            
-            // primaryStage.setTitle("Hello World!");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void start(Stage primaryStage) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("offresponsor.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
-        //ServiceUser su=new ServiceUser();
-        //System.out.println(su.Login("sysyysy", "xx"));
-        //System.out.println(su.TypeUser("sysyysy", "xx"));
-        
     }
+
 }

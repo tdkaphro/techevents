@@ -6,6 +6,8 @@
 package techevent.services;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import techevent.entities.Evenement;
 import techevent.entities.*;
 import java.util.logging.Level;
@@ -97,4 +99,103 @@ public class ServiceEvenement {
             }
             return null ;
         }
+    public void EvenementSponsorise(int id){
+         try {
+            PreparedStatement pt= C.prepareStatement("update evenement set ETATDEFINANCEMENT = ? where id=?");
+            pt.setBoolean(1, true);
+            pt.setInt(2, id);
+            pt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+
+    public ArrayList<Integer> getEvenementIdByClubId(int id) {
+        ArrayList<Integer> l=new ArrayList<Integer>();
+        try {
+            PreparedStatement st = C.prepareStatement("select * from evenement where club_id=?");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            rs.beforeFirst();
+            while (rs.next()) {
+                l.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
+    
+    public ArrayList<String> getEvenementNomIdByPresidentId(int id)  {
+        ServiceClub sc=new ServiceClub();
+        ServiceEvenement se=new ServiceEvenement();
+        ServiceUser su=new ServiceUser();
+        int club=sc.getIdClubbyPresidentId(id);
+        ArrayList<Integer> l=se.getEvenementIdByClubId(club);
+        ArrayList<String> l2=new  ArrayList<String>();
+        for(int a:l){
+            try {
+                PreparedStatement st=C.prepareStatement("select * from evenement where id=?");
+                st.setInt(1, a);
+                ResultSet rs=st.executeQuery();
+                rs.beforeFirst();
+                if(rs.next()){
+                    l2.add(rs.getString(7));
+                }   } catch (SQLException ex) {
+                Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return l2;
+    }
+
+    public int getIdbyNom(String value) {
+        try {
+            PreparedStatement st = C.prepareStatement("select * from evenement where nom=?");
+            st.setString(1, value);
+            ResultSet rs = st.executeQuery();
+            rs.beforeFirst();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public ArrayList<String> getAllEvenementNonSponsorise() {
+        ArrayList<String> l=new ArrayList<String>();
+        try {
+            PreparedStatement st = C.prepareStatement("select * from evenement where etatdefinancement=?");
+            st.setBoolean(1, false);
+            ResultSet rs = st.executeQuery();
+            rs.beforeFirst();
+            while(rs.next()) {
+                l.add(rs.getString(7));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
+    
+    public String getNombyId (int id){
+        try {
+            PreparedStatement st = C.prepareStatement("select * from evenement where id=?");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            rs.beforeFirst();
+            if (rs.next()) {
+                return rs.getString(7);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
 }
