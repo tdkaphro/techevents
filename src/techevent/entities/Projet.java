@@ -19,6 +19,7 @@ public class Projet {
 	private String nom ; 
 	private String domaine;
 	private String description;
+	private String media;
 	private boolean etat;
 	private Club club;
 	private Sponsor sponsor;
@@ -27,6 +28,8 @@ public class Projet {
         public Projet() {
         }
 
+     
+
          public int getId() {
             return id;
         }
@@ -34,6 +37,14 @@ public class Projet {
         public void setId(int id) {
             this.id = id;
         }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    public String getMedia() {
+        return media;
+    }
         
         public String getNom() {
             return nom;

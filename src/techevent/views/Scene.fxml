@@ -7,6 +7,6 @@
 <AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.LatLongFXMLController">
     <children>
       <GoogleMapView fx:id="googleMapView" prefHeight="572.0" prefWidth="656.0" />
-      <JFXButton fx:id="locate" layoutX="-1.0" layoutY="572.0" onAction="#locateevt" prefHeight="71.0" prefWidth="656.0" text="Selectionner" />
+      <JFXButton fx:id="locate" layoutX="-1.0" layoutY="572.0" onAction="#locateevt" prefHeight="71.0" prefWidth="656.0" text="selectionner" />
     </children>
 </AnchorPane>

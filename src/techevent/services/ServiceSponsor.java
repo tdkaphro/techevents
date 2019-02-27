@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package techevent.services;
 
 import java.sql.Connection;
@@ -84,5 +79,22 @@ public class ServiceSponsor {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Sponsor getSponsorById(int id){
+        Sponsor s;
+        try {
+             PreparedStatement st=c.prepareStatement("select * from user where dtype='sponsor'");
+             ResultSet rs=st.executeQuery();
+             rs.getObject(id);
+             s=(Sponsor) rs;
+             return s;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceSponsor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
+    
+    
 
 }
