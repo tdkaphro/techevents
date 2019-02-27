@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import techevent.entities.User;
 import techevent.utils.connexionbd;
 
 /**
@@ -34,5 +35,20 @@ public class ServiceUser {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public User getUserbyId(int id) throws SQLException{
+        User u=new User() {
+};      PreparedStatement pt=c.prepareStatement("select * from user where ID=?");
+         pt.setInt(1, id);
+         ResultSet rs=pt.executeQuery();
+         if(rs.next()){
+             u.setNom(rs.getString(6));
+             u.setPrenom(rs.getString(9));
+             u.setEmail(rs.getString(4));
+             u.setNumerotelephone(rs.getLong(7));
+             u.setClasse(rs.getString(13));
+         }
+        return u;
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="731.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AcceuilevenmntController">
+   <children>
+      <ImageView fitHeight="746.0" fitWidth="1224.0">
+         <image>
+            <Image url="@../../images/acceuilPresidentEven.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="nombredesevenement" layoutX="302.0" layoutY="642.0" prefHeight="24.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="nombresdesrespon" layoutX="310.0" layoutY="611.0" prefHeight="24.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="nombredesmembres" layoutX="282.0" layoutY="585.0" prefHeight="24.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="nomclub" layoutX="253.0" layoutY="521.0" prefHeight="41.0" prefWidth="98.0" text="Label">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="nomprésident" layoutX="102.0" layoutY="455.0" prefHeight="26.0" prefWidth="148.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></Label>
+      <JFXButton fx:id="ajoutEven" layoutX="765.0" layoutY="529.0" onAction="#ajouterEven" onMouseClicked="#ajouter" prefHeight="51.0" prefWidth="216.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Ajouter événement" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="989.0" layoutY="594.0" onAction="#annulerEvenement" onMouseClicked="#ajouter" prefHeight="51.0" prefWidth="216.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Annuler événement" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="modifierEenement" layoutX="987.0" layoutY="528.0" onAction="#modifieEvenement" onMouseClicked="#ajouter" prefHeight="51.0" prefWidth="216.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Modifier événement" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="172.0" fitWidth="171.0" layoutX="102.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="624.0" layoutY="14.0" text="La liste de mes événements" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="desc" layoutX="372.0" layoutY="511.0" text="Description" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="descidd" layoutX="370.0" layoutY="553.0" prefHeight="179.0" prefWidth="389.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></JFXTextArea>
+      <JFXButton fx:id="sponsorid" layoutX="983.0" layoutY="19.0" onAction="#Sponsorisation" onMouseClicked="#ajouter" prefHeight="41.0" prefWidth="216.0" ripplerFill="WHITE" style="-fx-background-color: #b1bcce;" text="État de sponsorisation" textAlignment="CENTER" textFill="#ee3939">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="tableau" layoutX="372.0" layoutY="66.0" prefHeight="447.0" prefWidth="830.0">
+        <columns>
+          <TableColumn fx:id="nomidd" prefWidth="135.0" text="Nom" />
+            <TableColumn fx:id="dateidd" minWidth="0.0" prefWidth="151.0" text="Date" />
+            <TableColumn fx:id="étatfinanciéreid" prefWidth="157.0" text="État Financiére">
+               <columns>
+                  <TableColumn fx:id="payantidd" prefWidth="75.0" text="Payant" />
+                  <TableColumn fx:id="prixid" prefWidth="75.0" text="Prix" />
+               </columns></TableColumn>
+            <TableColumn fx:id="typeidd" prefWidth="147.0" text="Type" />
+            <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="Id" />
+            <TableColumn fx:id="localid" prefWidth="133.0" text="Localisation" />
+            <TableColumn fx:id="capaciteid" prefWidth="113.0" text="Capacite" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="ReporterEven" layoutX="765.0" layoutY="594.0" onAction="#ReporterEvenement" onMouseClicked="#ajouter" prefHeight="51.0" prefWidth="216.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Reporter événement" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="listparciipant" layoutX="876.0" layoutY="660.0" onAction="#listedesparticipants" onMouseClicked="#ajouter" prefHeight="51.0" prefWidth="216.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Liste des participants" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

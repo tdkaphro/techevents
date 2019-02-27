@@ -13,7 +13,17 @@ public  abstract class User {
 	private String email;
 	private String motpasse;
 	private long  numerotelephone;
+        String classe;
         
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+                
 	public User() {
 		super();
 	}

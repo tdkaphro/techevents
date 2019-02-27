@@ -106,4 +106,13 @@ public class ServiceClub {
             Logger.getLogger(ServiceClub.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void NombredesMembre(){
+        
+    }
+    
+    public void NombreDesresponsable(){
+        
+    }
+    
 }
