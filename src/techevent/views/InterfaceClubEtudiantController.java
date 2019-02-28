@@ -36,6 +36,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import static jdk.nashorn.internal.runtime.Debug.id;
 import techevent.entities.Club;
 import techevent.services.ServiceClub;
@@ -192,6 +193,11 @@ public class InterfaceClubEtudiantController implements Initializable {
             InterfaceCréerClubController irc = loader.getController();
             irc.initData(idf,file);
             boutoncréerclub.getScene().setRoot(root);
+            Scene scene = new Scene(root);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
             }
         } catch (IOException ex) {
             Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,6 +310,11 @@ public class InterfaceClubEtudiantController implements Initializable {
             AccueiletudiantController irc = loader.getController();
             irc.initData(idf);
             boutonretour.getScene().setRoot(root);
+              Scene scene = new Scene(root);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
         } catch (IOException ex) {
             Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
