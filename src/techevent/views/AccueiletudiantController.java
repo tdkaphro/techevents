@@ -61,7 +61,7 @@ public class AccueiletudiantController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
          try {
             ServiceUser su=new ServiceUser();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
             String mail=irc.mail();
