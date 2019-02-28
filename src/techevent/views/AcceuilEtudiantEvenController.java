@@ -136,7 +136,7 @@ public class AcceuilEtudiantEvenController implements Initializable {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
+              //  e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
                 e.setDescription(rs.getString("DESCRIPTION"));
                 e.setLocalisation(rs.getString("LOCALISATION"));
                 e.setFinance1(rs.getString("PAYANT"));
@@ -284,7 +284,7 @@ public class AcceuilEtudiantEvenController implements Initializable {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
+                //e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
                 e.setDescription(rs.getString("DESCRIPTION"));
                 e.setLocalisation(rs.getString("LOCALISATION"));
                 e.setFinance1(rs.getString("PAYANT"));
