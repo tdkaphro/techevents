@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="534.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueilenseignantController">
+<AnchorPane id="AnchorPane" fx:id="creer" prefHeight="534.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueilenseignantController">
    <children>
       <ImageView fitHeight="557.0" fitWidth="900.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../views/images/Enseignant.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="135.0" fitWidth="138.0" layoutX="192.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="img" fitHeight="135.0" fitWidth="138.0" layoutX="192.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="btnlogout" fitHeight="36.0" fitWidth="38.0" layoutX="826.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../views/images/logout.png" />
+            <Image url="@../../views/images/logouy.png" />
          </image>
       </ImageView>
       <JFXButton fx:id="btnclub" layoutX="104.0" layoutY="330.0" onAction="#MesClubs" prefHeight="124.0" prefWidth="145.0" />
@@ -60,5 +60,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <JFXButton layoutX="818.0" layoutY="480.0" onAction="#logout" prefHeight="25.0" prefWidth="48.0" text=" " />
    </children>
 </AnchorPane>

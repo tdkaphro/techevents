@@ -36,6 +36,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -45,12 +46,15 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import techevent.entities.Enseignant;
 import techevent.entities.Projet;
@@ -105,7 +109,10 @@ public class ListeprojetenseignantController implements Initializable {
     public static int prog;
     @FXML
     private JFXButton even;
-
+    @FXML
+    private ImageView img;
+int idf;
+File file;
     /**
      * Initializes the controller class.
      */
@@ -136,9 +143,9 @@ public class ListeprojetenseignantController implements Initializable {
                 p.setProgress(rs.getInt("progress"));
                 pf.add(p);
             }
-            int x = sp.countenseign(1);
-            int c = sp.nombresprojet(0);
-            int b = sp.countmembre(1);
+            int x = sp.countenseign(idf);
+            int c = sp.nombresprojet(idf);
+            int b = sp.countmembre(idf);
             String x2 = String.valueOf(x);
             String x3 = String.valueOf(c);
             String x4 = String.valueOf(b);
@@ -226,15 +233,7 @@ public class ListeprojetenseignantController implements Initializable {
                 MediaPlayer mediaPlayer = new MediaPlayer(new Media(this.getClass().getResource(Media_url).toExternalForm()));
                 mediaPlayer.setAutoPlay(true);
                 mediaview.setMediaPlayer(mediaPlayer);
-                Media myvedio = null;
-                try {
-                    myvedio = new Media(new File(rs.getString("Media"))
-                            .toURI().toURL().toExternalForm());
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListeprojetenseignantController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(ListeprojetenseignantController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                 
 //            System.out.println(myvedio.getDuration());
                 btnmodifier.setVisible(true);
                 supprimer.setVisible(true);
@@ -251,16 +250,24 @@ public class ListeprojetenseignantController implements Initializable {
     private void modifierprojet(ActionEvent event) throws IOException {
         prog=tableau.getSelectionModel().getSelectedItem().getProgress();
         id=tableau.getSelectionModel().getSelectedItem().getId();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("modifierprojet.fxml"));
-        Parent root=loader.load();
-        supprimer.getScene().setRoot(root);
+       FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("modifierprojet.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ModifierprojetController en = loader.getController();
+                en.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
     @FXML
     private void mesprojets() {
         Enseignant en = new Enseignant();
         ServiceProjet sp = new ServiceProjet();
-        ResultSet rs = sp.afficherProjetsparenseignant(1);
+        ResultSet rs = sp.afficherProjetsparenseignant(sp.getEnsIdbyProjetId(idf));
         List<Projet> pf = new ArrayList<Projet>();
         try {
 
@@ -340,13 +347,22 @@ public class ListeprojetenseignantController implements Initializable {
 
     @FXML
     private void creerprojet(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("creerprojet.fxml"));
-        this.creer.getChildren().setAll(pane);
+               FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("creerprojet.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                CreerprojetController en = loader.getController();
+                en.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
     @FXML
     private void supprimerprojet(ActionEvent event) throws IOException {
-        showConfirmation("Voulez vous vrament supprimer ce projet?");
+        showConfirmation("Voulez vous vraiment supprimer ce projet?");
 
     }
 
@@ -370,14 +386,58 @@ public class ListeprojetenseignantController implements Initializable {
     @FXML
     private void ajoutermembre(ActionEvent event) throws IOException {
         id=tableau.getSelectionModel().getSelectedItem().getId();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("Ajoutermembre.fxml"));
-        Parent root=loader.load();
-        supprimer.getScene().setRoot(root);
+        FXMLLoader loader = new FXMLLoader();
+                creer.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("Ajoutermembre.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AjoutermembreController l = loader.getController();
+                System.out.println(idf);
+                l.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
         
     }
        @FXML
     void lancerevt(ActionEvent event) throws IOException {
-               AnchorPane pane = FXMLLoader.load(getClass().getResource("AjouterEvenement.fxml"));
+              FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("AjouterEvenementProjet.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AjouterEvenementProjetController en = loader.getController();
+                en.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+    }
+    void initData(int idf, File file) {
+        this.idf=idf;
+        this.file=file;
+        Image image = new Image(file.toURI().toString(),142,145,false,false);
+        img.setImage(image);
+     }
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueilenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueilenseignantController en = loader.getController();
+                en.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("login.fxml"));
         this.creer.getChildren().setAll(pane);
     }
 

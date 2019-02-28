@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,8 +68,6 @@ public class ListeprojetetudiantController implements Initializable {
     @FXML
     private Label nbrmem;
     @FXML
-    private Button accepter;
-    @FXML
     private Label nbrpr;
     @FXML
     private TableView<Projet> tableau;
@@ -87,8 +87,11 @@ public class ListeprojetetudiantController implements Initializable {
     private TableColumn<Projet, String> domaine;
     @FXML
     private ImageView img;
+    @FXML
     private MediaView mediaview;
     int idf ;
+    @FXML
+    private TableColumn<?, ?> progress3;
     /**
      * Initializes the controller class.
      */
@@ -275,12 +278,19 @@ notifrejoindre.showAndDismiss(Duration.seconds(5));
             alert.setContentText("choisir le projet que vous voulez le joindre");
             alert.showAndWait();
       }else{
-          sp.accepterinvitation(2,tableau.getSelectionModel().getSelectedItem().getId());
-          System.out.println(tableau.getSelectionModel().getSelectedItem().getId());
-
-        }
+          sp.accepterinvitation(idf,tableau.getSelectionModel().getSelectedItem().getId());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("vous devez réussir ce test pour nous rejoundre");
+            alert.showAndWait();
+            Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+        //QUIZZZZ
+        
+        }}
      
-    
+      
     }
           @FXML
     void retourevt(ActionEvent event) throws IOException {

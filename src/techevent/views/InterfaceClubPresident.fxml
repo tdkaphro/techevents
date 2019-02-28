@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="452.0" fitWidth="765.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/PresidentClub.jpg" />
+            <Image url="@images/PresidentClub.jpg" />
          </image>
       </ImageView>
       <Button fx:id="boutonmodifierclub" layoutX="591.0" layoutY="319.0" mnemonicParsing="false" onAction="#modifierclub" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #042a68;" text="Modifier club" textFill="#f7f7f7">
@@ -45,7 +45,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ImageView fx:id="utilisateurphoto" fitHeight="105.0" fitWidth="105.0" layoutX="90.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="90.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="106.0" layoutY="344.0" prefHeight="17.0" prefWidth="75.0" text="  President">
          <font>
             <Font name="System Bold" size="15.0" />

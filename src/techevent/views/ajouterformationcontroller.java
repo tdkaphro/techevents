@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -32,9 +31,6 @@ import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.services.ServiceFormation;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import techevent.services.ServiceClub;
 public class ajouterformationcontroller implements Initializable {
 
     
@@ -87,13 +83,7 @@ public class ajouterformationcontroller implements Initializable {
               
        ObservableList<String> list = FXCollections.observableArrayList("web","reseau","mobile","genieciville","mécanique","electrique");
 
-         
-    int idf; 
-    File file ; 
-    String a1;
-    String a2; 
-    String a3 ; 
-    String a4 ; 
+     
     @FXML
     void ajouterevt(ActionEvent event) throws IOException {
 	java.util.Date date = new java.util.Date();
@@ -151,23 +141,14 @@ public class ajouterformationcontroller implements Initializable {
     ServiceFormation sf = new ServiceFormation();
     a.setLon(lon1);
     a.setLat(lat1);
-    ServiceClub sc = new ServiceClub();
-            try {
-                sf.ajouterformationdeclub(a, sc.getMonClubId(idf), e);
-            } catch (SQLException ex) {
-                Logger.getLogger(ajouterformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           choisir.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("presidentformation.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            presidentformationcontroller mc = loader.getController(); 
-            mc.initData(idf,file,a1,a2,a3,a4);
-            Stage prStage = new Stage();
-            prStage.setScene(scene);
-            prStage.setResizable(false);
-            prStage.show();
+    sf.ajouterformationdeclub(a, 2, e);
+    ajouter.getScene().getWindow().hide();  
+    Stage prStage =new Stage(); 
+    Parent root = FXMLLoader.load(getClass().getResource("presidentformation.fxml"));
+    Scene scene = new Scene(root);
+    prStage.setScene(scene);
+    prStage.setResizable(false);
+    prStage.show();
             }
    
     }      
@@ -256,15 +237,6 @@ public class ajouterformationcontroller implements Initializable {
         }
         cbformateur.setItems(listf);
        
-    }
-
-    void initData(int idf, File file, String a1, String a2, String a3, String a4) {
-        this.idf=idf;
-        this.file=file;
-        this.a1=a1;
-        this.a2=a2;
-        this.a3=a3;
-        this.a4=a4;
     }
 
  

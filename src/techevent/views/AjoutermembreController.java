@@ -7,6 +7,7 @@ package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -18,11 +19,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import techevent.entities.Enseignant;
 import techevent.entities.Projet;
 import techevent.entities.User;
@@ -45,7 +48,8 @@ public class AjoutermembreController implements Initializable {
     private ListView<String> listemembre;
     @FXML
     private AnchorPane cre;
-
+File file;
+int idf1;
     /**
      * Initializes the controller class.
      */
@@ -62,7 +66,9 @@ public class AjoutermembreController implements Initializable {
     }
 
     @FXML
-    private void creerprojet(ActionEvent event) {
+    private void creerprojet(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("listeprojetenseignant.fxml"));
+        this.cre.getChildren().setAll(pane); 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Succes");
         alert.setHeaderText(null);
@@ -77,21 +83,26 @@ public class AjoutermembreController implements Initializable {
         String email1= email.getText();
         int b = sp.getIdbyMail(email.getText());
         System.out.println(b);
-    //    if (email1.matches("^[A-Za-z0-9_.]+[@][A-Za-z.]+$")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("listeprojetenseignant.fxml"));
-            Parent root = loader.load();
+      //if (email1.matches("^[A-Za-z0-9_.]+[@][A-Za-z.]+$")) {
+              FXMLLoader loader = new FXMLLoader();
+                cre.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ListeprojetenseignantController l = loader.getController();
+                 l.initData(idf1,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
             ListeprojetenseignantController irc = loader.getController();
             listemembre.getItems().addAll(email1);
-            System.out.println(email.getText());
-            sp.ajoutermembre(irc.id, b, sp.getEnsIdbyProjetId(irc.id));
-            System.out.println(irc.id);
-            System.out.println(sp.getIdbyMail(email.getText()));
-             this.email.clear();
-            System.out.println(sp.getEnsIdbyProjetId(irc.id));
-  //      } else {
-//            showError("email non valide");
+             sp.ajoutermembre(irc.id, b, sp.getEnsIdbyProjetId(irc.id));
+               this.email.clear();
+    //  } else {
+        //    showError("email non valide");
 
-  //      }
+        //}
 
     }
 
@@ -109,5 +120,10 @@ public class AjoutermembreController implements Initializable {
     private void annuler(ActionEvent event) throws IOException {
  AnchorPane pane = FXMLLoader.load(getClass().getResource("listeprojetenseignant.fxml"));
         this.cre.getChildren().setAll(pane);         
+    }
+
+    void initData(int idf, File file) {
+     idf=idf1;
+        this.file=file;
     }
 }

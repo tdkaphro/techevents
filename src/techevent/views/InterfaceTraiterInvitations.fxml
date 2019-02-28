@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="460.0" fitWidth="765.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/presidenttraiterinvi.jpg" />
+            <Image url="@images/presidenttraiterinvi.jpg" />
          </image>
       </ImageView>
       <Button fx:id="boutonaccepter" layoutX="584.0" layoutY="263.0" mnemonicParsing="false" onAction="#accepter" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: #042a68;" text="Accepter invitation" textFill="#f7f7f7">

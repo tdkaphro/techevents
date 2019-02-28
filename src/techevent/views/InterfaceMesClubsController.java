@@ -135,7 +135,7 @@ public class InterfaceMesClubsController implements Initializable {
     }
 
     @FXML
-    private void retour(ActionEvent event) {
+    private void retour(ActionEvent event) throws SQLException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceClubEtudiant.fxml"));
             Parent root;

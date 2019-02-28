@@ -66,12 +66,12 @@ public class OffriroffreController implements Initializable {
         try {
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail =irc.mail1;
-            String mdp =irc.mdp1;
+            String mail =irc.mail();
+            String mdp =irc.mdp();
             Offre f = new Offre();
             int p = Integer.valueOf(prix.getText());
             f.setPrix(p);
-            so.OffrirOffre(f, se.getIdbyNom(evenement.getValue()),su.getId(mail, mdp));
+            so.OffrirOffre(f, se.getIdbyNom(evenement.getValue()),1);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes");
             alert.setHeaderText(null);
