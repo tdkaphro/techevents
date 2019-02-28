@@ -66,8 +66,8 @@ public class OffriroffreController implements Initializable {
         try {
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail =irc.mail();
-            String mdp =irc.mdp();
+            String mail =irc.mail1;
+            String mdp =irc.mdp1;
             Offre f = new Offre();
             int p = Integer.valueOf(prix.getText());
             f.setPrix(p);

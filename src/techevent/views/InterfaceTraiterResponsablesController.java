@@ -71,22 +71,7 @@ public class InterfaceTraiterResponsablesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            ServiceClub sc=new ServiceClub();
-            List<Responsable> list = sc.afficherResponsables(idf);
-            ObservableList<Responsable> obslist = FXCollections.observableArrayList(list);
-            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-            classe.setCellValueFactory(new PropertyValueFactory<>("classe"));
-            telephone.setCellValueFactory(new PropertyValueFactory<>("numerotelephone"));
-            Email.setCellValueFactory(new PropertyValueFactory<>("email"));
-            Responsabilite.setCellValueFactory(new PropertyValueFactory<>("responsabilite"));
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            table.setItems(obslist);
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceTraiterResponsablesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }    
 
     @FXML
@@ -181,8 +166,19 @@ public class InterfaceTraiterResponsablesController implements Initializable {
         }       
     }
 
-    void initData(int idf, File file) {
+    void initData(int idf, File file) throws SQLException{
         this.idf=idf;
         this.file=file;
+         ServiceClub sc=new ServiceClub();
+            List<Responsable> list = sc.afficherResponsables(idf);
+            ObservableList<Responsable> obslist = FXCollections.observableArrayList(list);
+            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+            classe.setCellValueFactory(new PropertyValueFactory<>("classe"));
+            telephone.setCellValueFactory(new PropertyValueFactory<>("numerotelephone"));
+            Email.setCellValueFactory(new PropertyValueFactory<>("email"));
+            Responsabilite.setCellValueFactory(new PropertyValueFactory<>("responsabilite"));
+            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            table.setItems(obslist);
     }
 }

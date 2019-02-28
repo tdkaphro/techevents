@@ -92,32 +92,10 @@ public class InterfaceTraiterMembresController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
+        
             // TODO
             comboboxrésponsbilité.setItems(responsabilité);
-            ServiceClub sc=new ServiceClub();
-            List<Etudiant> list = sc.AfficherMembres(idf);
-            ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
-            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-            classe.setCellValueFactory(new PropertyValueFactory<>("classe"));
-            téléphone.setCellValueFactory(new PropertyValueFactory<>("numerotelephone"));
-            Email.setCellValueFactory(new PropertyValueFactory<>("email"));
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            tablemembres.setItems(obslist);
-            textfieldchercher.textProperty().addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                try {
-                    filterEmail((String) oldValue, (String) newValue);
-                } catch (SQLException ex) {
-                    Logger.getLogger(InterfaceTraiterMembresController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceTraiterMembresController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+   
     }    
 
     @FXML
@@ -236,8 +214,28 @@ public class InterfaceTraiterMembresController implements Initializable {
         }
     }
 
-    void initData(int idf, File file) {
-        this.idf=idf;
-        this.file=file;
+    void initData(int idf, File file) throws SQLException{
+            this.idf=idf;
+            this.file=file;
+            ServiceClub sc=new ServiceClub();
+            List<Etudiant> list = sc.AfficherMembres(idf);
+            ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
+            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+            classe.setCellValueFactory(new PropertyValueFactory<>("classe"));
+            téléphone.setCellValueFactory(new PropertyValueFactory<>("numerotelephone"));
+            Email.setCellValueFactory(new PropertyValueFactory<>("email"));
+            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            tablemembres.setItems(obslist);
+            textfieldchercher.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                try {
+                    filterEmail((String) oldValue, (String) newValue);
+                } catch (SQLException ex) {
+                    Logger.getLogger(InterfaceTraiterMembresController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 }

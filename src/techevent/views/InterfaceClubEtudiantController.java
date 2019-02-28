@@ -36,6 +36,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import static jdk.nashorn.internal.runtime.Debug.id;
 import techevent.entities.Club;
 import techevent.services.ServiceClub;
@@ -192,6 +193,11 @@ public class InterfaceClubEtudiantController implements Initializable {
             InterfaceCréerClubController irc = loader.getController();
             irc.initData(idf,file);
             boutoncréerclub.getScene().setRoot(root);
+            Scene scene = new Scene(root);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
             }
         } catch (IOException ex) {
             Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,15 +310,28 @@ public class InterfaceClubEtudiantController implements Initializable {
             AccueiletudiantController irc = loader.getController();
             irc.initData(idf);
             boutonretour.getScene().setRoot(root);
+            Scene scene = new Scene(root);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
         } catch (IOException ex) {
             Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    void initData(int idf, File file) {
+    void initData(int idf, File file) throws SQLException{
        this.idf=idf; 
        this.file=file;
        Image image = new Image(file.toURI().toString());
        utilisateurphoto.setImage(image);
+       ServiceClub ps=new ServiceClub();
+       List<Club> list = ps.trierClub(idf); // id d'étudiant connecté
+       ObservableList<Club> obslist = FXCollections.observableArrayList(list);
+       colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
+       colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+       colonnedomaine.setCellValueFactory(new PropertyValueFactory<>("domaineduclub"));
+       colonnefraisinscription.setCellValueFactory(new PropertyValueFactory<>("fraisinscription"));
+       tableclub.setItems(obslist);
     }
 }

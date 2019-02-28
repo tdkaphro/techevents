@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
 import com.lynden.gmapsfx.javascript.object.Marker;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -39,12 +40,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sun.font.EAttribute;
+import techevent.entities.Etudiant;
 import techevent.entities.Evenement;
+import techevent.entities.Formateur;
 import techevent.images.ServiceEvenement;
+import techevent.services.ServiceEtudiant;
+import techevent.services.ServiceFormateur;
 
 /**
  * FXML Controller class
@@ -109,6 +115,10 @@ public class AcceuilEtudiantEvenController implements Initializable {
     private Label localid;
     @FXML
     private JFXButton r;
+    int idf;
+    @FXML
+    private ImageView img;
+    File file ;
 
     /**
      * Initializes the controller class.
@@ -136,7 +146,7 @@ public class AcceuilEtudiantEvenController implements Initializable {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
+              //  e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
                 e.setDescription(rs.getString("DESCRIPTION"));
                 e.setLocalisation(rs.getString("LOCALISATION"));
                 e.setFinance1(rs.getString("PAYANT"));
@@ -284,7 +294,7 @@ public class AcceuilEtudiantEvenController implements Initializable {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
+                //e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
                 e.setDescription(rs.getString("DESCRIPTION"));
                 e.setLocalisation(rs.getString("LOCALISATION"));
                 e.setFinance1(rs.getString("PAYANT"));
@@ -406,13 +416,34 @@ public class AcceuilEtudiantEvenController implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-        r.getScene().getWindow().hide();
+     descid.getScene().getWindow().hide();
         Stage prStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("accueiletudiant.fxml"));
         Scene scene = new Scene(root);
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("accueiletudiant.fxml"));
+            root = loader.load();
+            AcceuilevenmntController irc = loader.getController();
+            irc.initData(idf, file);
+            descid.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void initData(int idf, File file) {
+        
+        this.idf=idf;
+        ServiceEtudiant se = new ServiceEtudiant ();
+        Etudiant e = se.afficherEtudiant(idf);
+        nometudiant.setText(e.getNom());         
+        file = new File(e.getPicture());
+        Image image = new Image(file.toURI().toString(),142,145,false,false);
+        img.setImage(image);
+        
     }
 
 }

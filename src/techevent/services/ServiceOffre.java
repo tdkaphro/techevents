@@ -20,6 +20,7 @@ import techevent.entities.Evenement;
 import techevent.entities.Offre;
 import techevent.entities.Sponsor;
 import techevent.utils.connexionbd;
+
 /**
  *
  * @author Taboubi
@@ -57,8 +58,8 @@ public class ServiceOffre {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void ModifierOffreEven(int id,int prix,int even,int spons){
+
+    public void ModifierOffreEven(int id, int prix, int even, int spons) {
         try {
             PreparedStatement st2 = c.prepareStatement("update offre set prix=? , evenement_id=? ,sponsor_id=? where id=?");
             st2.setInt(1, prix);
@@ -69,7 +70,7 @@ public class ServiceOffre {
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public void OffrirOffre(Offre f, int even, int spons) {
@@ -135,7 +136,7 @@ public class ServiceOffre {
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(2);
+                return rs.getInt(3);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +151,7 @@ public class ServiceOffre {
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(3);
+                return rs.getInt(5);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,7 +166,7 @@ public class ServiceOffre {
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(4);
+                return rs.getInt(6);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -186,12 +187,12 @@ public class ServiceOffre {
             while (rs.next()) {
                 Offre f = new Offre();
                 f.setId(rs.getInt(1));
-                f.setPrix(rs.getInt(2));
-                f.setIdeven(rs.getInt(3));
-                f.setIdspon(rs.getInt(4));
-                f.setNomeven(se.getNombyId(rs.getInt(3)));
-                f.setNomspons(su.getNomById(rs.getInt(4)));
-                f.setEtat(rs.getString(5));
+                f.setPrix(rs.getInt(3));
+                f.setIdeven(rs.getInt(5));
+                f.setIdspon(rs.getInt(6));
+                f.setNomeven(se.getNombyId(rs.getInt(5)));
+                f.setNomspons(su.getNomById(rs.getInt(6)));
+                f.setEtat(rs.getString(2));
                 l.add(f);
             }
         } catch (SQLException ex) {
@@ -213,12 +214,12 @@ public class ServiceOffre {
             while (rs.next()) {
                 Offre f = new Offre();
                 f.setId(rs.getInt(1));
-                f.setPrix(rs.getInt(2));
-                f.setIdeven(rs.getInt(3));
-                f.setIdspon(rs.getInt(4));
-                f.setNomeven(se.getNombyId(rs.getInt(3)));
-                f.setNomspons(su.getNomById(rs.getInt(4)));
-                f.setEtat(rs.getString(5));
+                f.setPrix(rs.getInt(3));
+                f.setIdeven(rs.getInt(5));
+                f.setIdspon(rs.getInt(6));
+                f.setNomeven(se.getNombyId(rs.getInt(5)));
+                f.setNomspons(su.getNomById(rs.getInt(6)));
+                f.setEtat(rs.getString(2));
                 l.add(f);
             }
         } catch (SQLException ex) {
@@ -241,12 +242,12 @@ public class ServiceOffre {
                 while (rs.next()) {
                     Offre f = new Offre();
                     f.setId(rs.getInt(1));
-                    f.setPrix(rs.getInt(2));
-                    f.setIdeven(rs.getInt(3));
-                    f.setIdspon(rs.getInt(4));
-                    f.setNomeven(se.getNombyId(rs.getInt(3)));
-                    f.setNomspons(su.getNomById(rs.getInt(4)));
-                    f.setEtat(rs.getString(5));
+                    f.setPrix(rs.getInt(3));
+                    f.setIdeven(rs.getInt(5));
+                    f.setIdspon(rs.getInt(6));
+                    f.setNomeven(se.getNombyId(rs.getInt(5)));
+                    f.setNomspons(su.getNomById(rs.getInt(6)));
+                    f.setEtat(rs.getString(2));
                     l2.add(f);
                 }
             } catch (SQLException ex) {
@@ -269,12 +270,12 @@ public class ServiceOffre {
                 while (rs.next()) {
                     Offre f = new Offre();
                     f.setId(rs.getInt(1));
-                    f.setPrix(rs.getInt(2));
-                    f.setIdeven(rs.getInt(3));
-                    f.setIdspon(rs.getInt(4));
-                    f.setNomeven(se.getNombyId(rs.getInt(3)));
-                    f.setNomspons(su.getNomById(rs.getInt(4)));
-                    f.setEtat(rs.getString(5));
+                    f.setPrix(rs.getInt(3));
+                    f.setIdeven(rs.getInt(5));
+                    f.setIdspon(rs.getInt(6));
+                    f.setNomeven(se.getNombyId(rs.getInt(5)));
+                    f.setNomspons(su.getNomById(rs.getInt(6)));
+                    f.setEtat(rs.getString(2));
                     l2.add(f);
                 }
             } catch (SQLException ex) {
@@ -283,7 +284,7 @@ public class ServiceOffre {
         }
         return l2;
     }
-    
+
     public ArrayList<String> findAllEvenementforEvenement(ArrayList<Integer> l) {
         ArrayList<String> l2 = new ArrayList<String>();
         ServiceEvenement se = new ServiceEvenement();
@@ -294,7 +295,7 @@ public class ServiceOffre {
                 st.setInt(1, a);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
-                    l2.add(rs.getString(7));
+                    l2.add(rs.getString(8));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,37 +303,39 @@ public class ServiceOffre {
         }
         return l2;
     }
-    
-    public ArrayList<String> getAllEvenementforSpons(int id){
-        ServiceEvenement se=new ServiceEvenement();
-        ArrayList<String> l=new ArrayList<String>();
-         try {
-                PreparedStatement st = c.prepareStatement("select * from offre where sponsor_id=? and etat=? ");
-                st.setInt(1, id);
-                st.setString(2, "Valide");
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    l.add(se.getNombyId(rs.getInt(3)));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         return l;
-        }
-    public int getPrixbyNomeven(String s){
-        ServiceEvenement se=new ServiceEvenement();
+
+    public ArrayList<String> getAllEvenementforSpons(int id) {
+        ServiceEvenement se = new ServiceEvenement();
+        ArrayList<String> l = new ArrayList<String>();
         try {
-                PreparedStatement st = c.prepareStatement("select * from offre where evenement_id=?  ");
-                st.setInt(1, se.getIdbyNom(s));
-                ResultSet rs = st.executeQuery();
-                if(rs.next()){
-                return rs.getInt(2);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+            PreparedStatement st = c.prepareStatement("select * from offre where sponsor_id=? and etat=? ");
+            st.setInt(1, id);
+            st.setString(2, "Valide");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                l.add(se.getNombyId(rs.getInt(5)));
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
+
+    public int getPrixbyNomeven(String s) {
+        ServiceEvenement se = new ServiceEvenement();
+        try {
+            PreparedStatement st = c.prepareStatement("select * from offre where evenement_id=?  ");
+            st.setInt(1, se.getIdbyNom(s));
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(3);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return 0;
     }
+
     public ArrayList<String> findAllEvenementforEven(ArrayList<Integer> l) {
         ArrayList<String> l2 = new ArrayList<String>();
         ServiceEvenement se = new ServiceEvenement();
@@ -344,7 +347,7 @@ public class ServiceOffre {
                 st.setString(2, "Valide");
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
-                    l2.add(se.getNombyId(rs.getInt(3)));
+                    l2.add(se.getNombyId(rs.getInt(5)));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -352,34 +355,34 @@ public class ServiceOffre {
         }
         return l2;
     }
-    public void AjouterOffre(Offre f,int even,int spons){
-      Statement st;
+
+    public void AjouterOffre(Offre f, int even, int spons) {
+        Statement st;
         try {
             st = c.createStatement();
-            String req = "insert into offre (prix,evenement_id,sponsor_id) values("+f.getPrix()+","+even+","+spons+")";
+            String req = "insert into offre (prix,evenement_id,sponsor_id) values(" + f.getPrix() + "," + even + "," + spons + ")";
             st.executeUpdate(req);
         } catch (SQLException ex) {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
     }
-    
-    
-    public void modifierOffre(int pr,int id,int even,int spons){
-         PreparedStatement pt;
+
+    public void modifierOffre(int pr, int id, int even, int spons) {
+        PreparedStatement pt;
         try {
             pt = c.prepareStatement("update offre set prix=? ,evenement_id=? ,sponsor_id=? where id=?");
             pt.setInt(1, pr);
-            pt.setInt(2,even);
-            pt.setInt(3,spons);
+            pt.setInt(2, even);
+            pt.setInt(3, spons);
             pt.setInt(4, id);
             pt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public void afficherOffre(){
+
+    public void afficherOffre() {
         Statement st;
         try {
             st = c.createStatement();
@@ -392,23 +395,18 @@ public class ServiceOffre {
             Logger.getLogger(ServiceOffre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   
 
-    
-    
-    public ResultSet getDemandeSponsorisation(String mail,String mdp){
-        ServiceUser su=new ServiceUser();
-        int id=su.getId(mail, mdp);
+    public ResultSet getDemandeSponsorisation(String mail, String mdp) {
+        ServiceUser su = new ServiceUser();
+        int id = su.getId(mail, mdp);
         try {
-             PreparedStatement st=c.prepareStatement("select * from offre where sponsor_id=?");
-             st.setInt(1, id);
-             ResultSet rs=st.executeQuery();
-             return rs;
+            PreparedStatement st = c.prepareStatement("select * from offre where sponsor_id=?");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            return rs;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return null;
+        return null;
     }
 }
-

@@ -60,9 +60,7 @@ public class InterfaceEmailController implements Initializable {
             root = loader.load();
             InterfaceSendController irc = loader.getController();
             InterfaceSendController irc2 = loader.getController();
-            irc.initdata1(presidentemail.getText());
-            irc.initData2(sujet.getText());
-            irc.initData3(continu.getText());
+            irc.initdata1(presidentemail.getText(),sujet.getText(),continu.getText());
             irc2.initData(idf,file);
             boutonsend.getScene().setRoot(root);
         } catch (IOException ex) {

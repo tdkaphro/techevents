@@ -27,13 +27,13 @@
          </font>
       </Button>
       <Button fx:id="boutonretour" layoutX="686.0" layoutY="413.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
-      <TableView fx:id="tableinvitations" layoutX="11.0" layoutY="111.0" prefHeight="335.0" prefWidth="546.0">
+      <TableView fx:id="tableinvitations" layoutX="11.0" layoutY="111.0" prefHeight="335.0" prefWidth="503.0">
          <columns>
             <TableColumn fx:id="nom" prefWidth="70.0" text="Nom" />
             <TableColumn fx:id="prenom" text="Prenom" />
-            <TableColumn fx:id="classe" prefWidth="74.0" text="Classe" />
-            <TableColumn fx:id="Email" prefWidth="134.0" text="Email" />
-            <TableColumn fx:id="téléphone" prefWidth="173.0" text="Téléphone" />
+            <TableColumn fx:id="classe" prefWidth="83.0" text="Classe" />
+            <TableColumn fx:id="Email" prefWidth="135.0" text="Email" />
+            <TableColumn fx:id="téléphone" prefWidth="163.0" text="Téléphone" />
             <TableColumn fx:id="id" minWidth="6.0" prefWidth="26.0" text="id" />
          </columns>
          <padding>
