@@ -19,7 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 
 /**
  *

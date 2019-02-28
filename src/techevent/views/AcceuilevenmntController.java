@@ -39,7 +39,7 @@ import javax.swing.JOptionPane;
 import techevent.entities.Club;
 import techevent.entities.Evenement;
 import techevent.entities.President;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 
 /**
  * FXML Controller class

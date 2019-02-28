@@ -44,7 +44,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sun.font.EAttribute;
 import techevent.entities.Evenement;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 
 /**
  * FXML Controller class

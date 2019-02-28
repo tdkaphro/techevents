@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceClubEtudiantController">
+   <children>
+      <ImageView fitHeight="480.0" fitWidth="765.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/etudiantclub.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableclub" layoutX="224.0" layoutY="183.0" prefHeight="263.0" prefWidth="372.0">
+        <columns>
+          <TableColumn fx:id="colonneid" minWidth="0.0" prefWidth="0.0" text="Id_Club" />
+            <TableColumn fx:id="colonnenom" prefWidth="129.0" text="Nom" />
+            <TableColumn fx:id="colonnedomaine" maxWidth="231.0" minWidth="1.0" prefWidth="102.0" text="Domaine" />
+            <TableColumn fx:id="colonnefraisinscription" minWidth="20.0" prefWidth="140.0" text="Frais d'inscription" />
+        </columns>
+      </TableView>
+      <Label layoutX="224.0" layoutY="108.0" prefHeight="45.0" prefWidth="156.0" text="Choisir domaine">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="comboboxdomaine" focusColor="#141414" layoutX="380.0" layoutY="118.0" onAction="#affichage" prefHeight="25.0" prefWidth="181.0" style="-jfx-focus-color: #f1efef;">
+         <unFocusColor>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#f5f2f200" />
+                  <Stop color="#222121" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </unFocusColor>
+      </JFXComboBox>
+      <Label fx:id="nombresdesclub" layoutX="159.0" layoutY="366.0" text="0" />
+      <Label layoutX="90.0" layoutY="282.0" prefHeight="17.0" prefWidth="73.0" text="Etudiant">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Button fx:id="boutonrejoindreclub" layoutX="616.0" layoutY="315.0" mnemonicParsing="false" onAction="#rejoindreclub" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #042a68;" text="Rejoindre Club" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutoncréerclub" layoutX="616.0" layoutY="365.0" mnemonicParsing="false" onAction="#creerclub" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #042a68;" text="Créer Club" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutonsinformerclub" layoutX="616.0" layoutY="262.0" mnemonicParsing="false" onAction="#sinformerclub" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #042a68;" text="S'informer" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="utilisateurphoto" fitHeight="109.0" fitWidth="105.0" layoutX="66.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="boutonmonclub" layoutX="24.0" layoutY="400.0" mnemonicParsing="false" onAction="#monclub" prefHeight="30.0" prefWidth="149.0" style="-fx-background-color: #42cef4;" text="Réserver Président" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutonmesclub" layoutX="24.0" layoutY="365.0" mnemonicParsing="false" onAction="#mesclub" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #42cef4;" text="Mes clubs" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutonretour" layoutX="697.0" layoutY="416.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+   </children>
+</AnchorPane>

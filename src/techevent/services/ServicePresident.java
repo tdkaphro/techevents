@@ -26,7 +26,7 @@ public class ServicePresident {
         Statement st;
         try {
             st = c.createStatement();
-            String req="insert into user (nom,dtype,prenom,datedenaissance,email,motpasse,numerotelephone,classe,responsabilite,club_id) values('"+e.getNom()+"','etudiant','"+e.getPrenom()+"','"+e.getDatedenaissance()+"','"+e.getEmail()+"','"+e.getMotpasse()+"',"+e.getNumerotelephone()+",'"+e.getClasse()+"','president','"+e.getClub().getId()+"')";
+            String req="insert into user (nom,dtype,prenom,datedenaissance,email,motpasse,numerotelephone,classe,responsabilite,MONCLUB_ID) values('"+e.getNom()+"','etudiant','"+e.getPrenom()+"','"+e.getDatedenaissance()+"','"+e.getEmail()+"','"+e.getMotpasse()+"',"+e.getNumerotelephone()+",'"+e.getClasse()+"','president','"+e.getMonclub().getId()+"')";
             st.executeUpdate(req);
         } catch (SQLException ex) {
             Logger.getLogger(ServicePresident.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,14 +37,14 @@ public class ServicePresident {
        
             PreparedStatement pt;
         try {
-            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?,club_id=?   where id=?");
+            pt = c.prepareStatement("update user set nom=? ,prenom=? ,email=? ,numerotelephone=? ,motpasse=? ,classe=?,MONCLUB_ID=?   where id=?");
             pt.setString(1,e.getNom() );
             pt.setString(2, e.getPrenom());
             pt.setString(3, e.getEmail());
             pt.setLong(4, e.getNumerotelephone());
             pt.setString(5, e.getMotpasse());
             pt.setString(6, e.getClasse());
-            pt.setInt(7,e.getClub().getId());
+            pt.setInt(7,e.getMonclub().getId());
             pt.setInt(8, id);
             pt.executeUpdate();
         } catch (SQLException ex) {
@@ -52,20 +52,25 @@ public class ServicePresident {
         }
     }
      
-     public void AfficherPresident(){
-      Statement st;
+     public ResultSet AfficherPresident(){
+     Statement st;
         try {
             st = c.createStatement();
             String req="select * from user where role='president'";
             ResultSet rs=st.executeQuery(req);
-            while(rs.next()){
-                System.out.println("president num : "+rs.getInt(1)+" / nom : "+rs.getString(6)+" / prenom : "+rs.getString(8)+" / date de naissance : "+rs.getString(3)+" / email : "+rs.getString(4)+" / classe : "+rs.getString(12)+" / Club : "+rs.getString(13));
-            }
+            return rs;
         } catch (SQLException ex) {
             Logger.getLogger(ServicePresident.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }  
-        
-    }
+     }
+     
+     public ResultSet afficherInfoPersonne(int e) throws SQLException{
+        PreparedStatement ps=c.prepareStatement("select * from user where ID=?");
+        ps.setInt(1,e);   
+        ResultSet rs= ps.executeQuery();
+        return rs;
+     }
      
     public void SupprimerPresident(President e){
         try {
