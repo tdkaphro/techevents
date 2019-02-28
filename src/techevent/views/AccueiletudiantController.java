@@ -112,13 +112,17 @@ File file ;
 
     @FXML
     private void projet(ActionEvent event) throws IOException {
-        b1.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("AcceuilEtudiantEven.fxml"));
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();
+           FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetetudiant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ListeprojetetudiantController mc = loader.getController();
+                mc.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
     void initData(int idf) {

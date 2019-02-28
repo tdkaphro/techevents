@@ -140,42 +140,23 @@ public class ServiceProjet {
             }
             return null ;
         }
-      public ArrayList<Projet> afficherProjetparinvit(int en) throws SQLException{
-          ArrayList<Projet>l2=new ArrayList<>();
-          ArrayList<Integer> l=new ArrayList<>();
-          try{
-            PreparedStatement pt=c.prepareStatement("select * from projet_user where membre_id=? and etat=?");
-            pt.setInt(1, en);
-            pt.setBoolean(2, false);
-            ResultSet rs=pt.executeQuery();
-            while(rs.next()){
-            l.add(rs.getInt(2));
-            }
-            for(int a:l){
-            PreparedStatement pt2=c.prepareStatement("select * from projet where id=? ");
-            pt2.setInt(1, a);
-            ResultSet rs2=pt.executeQuery();
-            if(rs2.next()){
-                Projet p = new Projet();
-               // p.setId(rs2.getInt(1));
-               // p.setNom(rs2.getString(6));
-                p.setDescription(rs2.getString(2));
-                if (rs2.getInt(4) == 1) {
-                    p.setMedia("sponsorisé");
-                } else {
-                    p.setMedia("non sponsorisé");
-                }
-               // p.setProgress(rs2.getInt(7));
-                l2.add(p);
-            }
-          }
-            }
-          
+      public ResultSet afficherProjetparinvit(int en) throws SQLException{
+  
+         try{
+            PreparedStatement req =c.prepareStatement("select * from projet where id = any(select projet_id from projet_user where membre_id=? and etat =0");
+            req.setInt(1,en);
+            ResultSet rs = req.executeQuery();
+           
+            return rs;
+             }
             catch(SQLException e){
                 System.out.println(e);
             }
-            return l2 ;
-        }
+    
+return null;
+}
+        
+      
       
        
      public int getEnsidByProjetId(int pro){
@@ -198,7 +179,7 @@ public class ServiceProjet {
       public boolean getMemidByProjetId(int pro){
           boolean k = false;
          try{
-            PreparedStatement req =c.prepareStatement("select * from projet_user where createurs_ID = ? and etat = ?");
+            PreparedStatement req =c.prepareStatement("select * from projet_user where createurs_ID = ? and etat = 0");
             req.setInt(1,pro);
             ResultSet rs = req.executeQuery();
             rs.next();
