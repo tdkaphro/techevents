@@ -13,6 +13,11 @@ public class Responsable extends Etudiant
 		super();
 	}
 
+        public Responsable(int id, String nom, String prenom, String classe, String email, long numerotelephone,String responsabilite) {
+            super(id, nom, prenom, classe, email, numerotelephone);
+            this.responsabilite = responsabilite;
+        }
+
         public Club getClub() {
             return club;
         }

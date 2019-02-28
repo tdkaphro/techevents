@@ -22,7 +22,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import techevent.services.ServiceClub;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 import techevent.services.ServiceOffre;
 import techevent.services.ServiceUser;
 import techevent.views.AccueilformateurController;

@@ -5,6 +5,7 @@
  */
 package techevent.services;
 
+import techevent.images.ServiceEvenement;
 import java.sql.*;
 import techevent.entities.Evenement;
 import techevent.entities.*;

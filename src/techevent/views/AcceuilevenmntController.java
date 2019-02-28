@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.lynden.gmapsfx.GoogleMapView;
 import java.awt.Component;
 import java.awt.Frame;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -33,13 +34,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import techevent.entities.Club;
+import techevent.entities.Etudiant;
 import techevent.entities.Evenement;
 import techevent.entities.President;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
+import techevent.services.ServiceEtudiant;
 
 /**
  * FXML Controller class
@@ -94,6 +99,11 @@ public class AcceuilevenmntController implements Initializable {
     private JFXButton listparciipant;
     public static int x;
     public static int y;
+    File file;
+    int idf;
+    @FXML
+    private ImageView img;
+    
     /**
      * Initializes the controller class.
      */
@@ -172,6 +182,8 @@ public class AcceuilevenmntController implements Initializable {
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
+        
+       
     }
 
     @FXML
@@ -339,12 +351,52 @@ public class AcceuilevenmntController implements Initializable {
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AcceuilEtudiantEven.fxml"));
+            root = loader.load();
+            AcceuilEtudiantEvenController irc = loader.getController();
+            irc.initData(idf, file);
+            ajoutEven.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
               
           }
         
         
     }
-    
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+        nombredesevenement.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("acceuiletudiant.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("acceuiletudiant.fxml"));
+            root = loader.load();
+            AccueiletudiantController irc = loader.getController();
+            irc.initData(idf, file);
+            ajoutEven.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void initData(int idf, File file) {
+         this.idf = idf;
+        ServiceEtudiant se = new ServiceEtudiant();
+        Etudiant f = se.afficherEtudiant(idf);
+        nomprésident.setText(f.getNom());   
+        file = new File(f.getPicture());
+        Image image = new Image(file.toURI().toString(), 142, 145, false, false);
+        img.setImage(image);
+    }
+
+   
 }
     
     

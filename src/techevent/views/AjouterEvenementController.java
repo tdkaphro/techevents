@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,7 +39,7 @@ import javafx.stage.Stage;
 import jdk.nashorn.internal.ir.BreakNode;
 import techevent.entities.Evenement;
 import techevent.entities.Sponsor;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 
 /**
  * FXML Controller class
@@ -74,6 +77,8 @@ public class AjouterEvenementController implements Initializable {
     private JFXComboBox<String> financeid;
     @FXML
     private JFXTextField capacite;
+    File file;
+    int idf;
 
     /**
      * Initializes the controller class.
@@ -173,6 +178,15 @@ public class AjouterEvenementController implements Initializable {
             descid.getScene().getWindow().hide();
 
         }
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("acceuilevenmnt.fxml"));
+            Parent root = loader.load();
+            AcceuilevenmntController irc = loader.getController();
+            irc.initData(idf, file);
+            dateid.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -194,6 +208,16 @@ public class AjouterEvenementController implements Initializable {
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AcceuilEtudiantEven.fxml"));
+            root = loader.load();
+            AcceuilEtudiantEvenController irc = loader.getController();
+            irc.initData(idf, file);
+            descid.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

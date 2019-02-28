@@ -77,24 +77,30 @@ public class LoginController implements Initializable {
             type = rs.getString("Dtype");
             idf = rs.getInt("id");
             if (type.equals("Sponsor")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/accueilsponsor.fxml"));
-                try {
-                    Parent root = loader.load();
-                    AccueilsponsorController ioff = loader.getController();
-                    b1.getScene().setRoot(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+               FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueilformateur.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueilformateurController mc = loader.getController();
+                mc.initData(idf);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
             }
             if (type.equals("Etudiant")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("accueiletudiant.fxml"));
-                try {
-                    Parent root = loader.load();
-                    AccueiletudiantController ioff = loader.getController();
-                    b1.getScene().setRoot(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+              FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueiletudiant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueiletudiantController mc = loader.getController();
+                mc.initData(idf);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
 
             }
             if (type.equals("Formateur")) {
@@ -112,14 +118,17 @@ public class LoginController implements Initializable {
 
             }
             if (type.equals("Enseignant")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("accueilenseignant.fxml"));
-                try {
-                    Parent root = loader.load();
-                    AccueilenseignantController ioff = loader.getController();
-                    b1.getScene().setRoot(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+               FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueilformateur.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueilformateurController mc = loader.getController();
+                mc.initData(idf);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
 
             }
         } else {

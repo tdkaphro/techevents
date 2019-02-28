@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import techevent.entities.Offre;
 import techevent.services.ServiceClub;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 import techevent.services.ServiceOffre;
 import techevent.services.ServiceUser;
 

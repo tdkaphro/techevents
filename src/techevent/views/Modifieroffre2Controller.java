@@ -25,7 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import techevent.entities.Offre;
 import techevent.services.ServiceClub;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 import techevent.services.ServiceOffre;
 import techevent.services.ServiceUser;
 import techevent.views.LoginController;

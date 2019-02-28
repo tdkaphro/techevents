@@ -39,6 +39,13 @@ public  abstract class User  {
 	public User() {
 		
 	}
+        public User(int id,String nom,String prenom, String email, long numerotelephone) {
+        this.id=id;
+        this.nom = nom;
+        this.prenom=prenom;
+        this.email = email;
+        this.numerotelephone = numerotelephone;
+    }
 	public int getId() {
 		return id;
 	}

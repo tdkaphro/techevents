@@ -15,6 +15,10 @@ public class Etudiant extends User
 	public Etudiant() {
 
 	}
+        public Etudiant(int id,String nom,String prenom,String classe,String email,long numerotelephone){
+            super(id, nom, prenom, email, numerotelephone);
+            this.classe=classe;
+        }
 	public Universite getUniversite() {
 		return universite;
 	}
