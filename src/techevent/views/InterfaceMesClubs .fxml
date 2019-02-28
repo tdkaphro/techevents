@@ -11,9 +11,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceMesClubsController">
    <children>
-      <ImageView fitHeight="460.0" fitWidth="765.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="utilisateurphoto" fitHeight="459.0" fitWidth="765.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/mesclub.jpg" />
+            <Image url="@../images/mesclub.jpg" />
          </image>
       </ImageView>
       <TableView fx:id="tableclub" layoutX="188.0" layoutY="179.0" prefHeight="263.0" prefWidth="321.0">
@@ -51,8 +51,9 @@
       </Label>
       <ImageView fitHeight="30.0" fitWidth="39.0" layoutX="553.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Untitled.png" />
+            <Image url="@../images/Untitled.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="utilisateurphoto" fitHeight="110.0" fitWidth="103.0" layoutX="70.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -19,15 +19,19 @@ public class Etudiant extends User
             super(id, nom, prenom, email, numerotelephone);
             this.classe=classe;
         }
+        
 	public Universite getUniversite() {
 		return universite;
 	}
+        
 	public void setUniversite(Universite universite) {
 		this.universite = universite;
 	}
+        
 	public String getClasse() {
 		return classe;
 	}
+        
 	public void setClasse(String classe) {
 		this.classe = classe;
 	}

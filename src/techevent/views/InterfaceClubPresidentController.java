@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -19,10 +20,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.naming.spi.DirStateFactory;
 import techevent.services.ServiceClub;
@@ -64,42 +71,20 @@ public class InterfaceClubPresidentController implements Initializable {
     private JFXButton boutoninvitation;
     @FXML
     private Label nombresdesresponsable;
-
+    @FXML
+    private ImageView utilisateurphoto;
+    
+    int idf;
+    File file;
+    @FXML
+    private JFXButton boutonstat;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        try {
-            // TODO
-            ServiceClub sc = new ServiceClub();
-            ServiceClub sc2 = new ServiceClub();
-            ServiceClub sc3= new ServiceClub();
-            ServiceClub sc4= new ServiceClub();
-            ServiceClub sc5= new ServiceClub();
-            int nombremembre= sc2.NombreDesMembres(5);
-            int nombreresp=sc3.NombreDesResponsables(5);
-            int nombreeven=sc.NombreDesEvenements(5);
-            int nombrefor=sc.NombreDesFormations(5);
-            int nombreprojets=sc.NombreDesProjets(5);
-            ResultSet rs=sc2.afficherClubParPresident(5);
-            nomclub.setText(rs.getString(6));
-            nombresmembre.setText(Integer.toString(nombremembre));
-            nombresdesresponsable.setText(Integer.toString(nombreresp));
-            nombreevenement.setText(Integer.toString(nombreeven));
-            nombreformation.setText(Integer.toString(nombrefor));
-            nombreprojet.setText(Integer.toString(nombreprojets));
-            int not=sc3.notificationInvitation(5);
-            if(not>0){
-            TrayNotification notifrejoindre= new TrayNotification();
-            String s="Invitation";
-            String s2="Vous avez "+not+" nouvelles invitations";
-            notifrejoindre.setTray(s, s2, NotificationType.INFORMATION);
-            notifrejoindre.showAndDismiss(Duration.seconds(5));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceClubPresidentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }    
 
     @FXML
@@ -109,6 +94,7 @@ public class InterfaceClubPresidentController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceModifierClubController irc = loader.getController();
+            irc.initData(idf,file);
             boutonmodifierclub.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,7 +112,7 @@ public class InterfaceClubPresidentController implements Initializable {
             alert.setContentText("Continez ? ");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-            cl2.SupprimerClub(5); // id etudiant connecté
+            cl2.SupprimerClub(idf); // id etudiant connecté
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Succes");
             alert2.setHeaderText(null);
@@ -136,6 +122,7 @@ public class InterfaceClubPresidentController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubEtudiantController irc = loader.getController();
+            irc.initData(idf, file);
             boutonsupprimerclub.getScene().setRoot(root);
             } else {}    
         } catch (IOException ex) {
@@ -144,12 +131,13 @@ public class InterfaceClubPresidentController implements Initializable {
     }
 
     @FXML
-    private void retour(ActionEvent event) {           
+    private void retour(ActionEvent event) throws SQLException{           
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceClubEtudiant.fxml"));
             Parent root;
             root = loader.load();
             InterfaceClubEtudiantController irc = loader.getController();
+            irc.initData(idf,file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCréerClubController.class.getName()).log(Level.SEVERE, null, ex);
@@ -162,17 +150,33 @@ public class InterfaceClubPresidentController implements Initializable {
     }
 
     @FXML
-    private void ajouterformation(ActionEvent event) {
-        
+    private void ajouterformation(ActionEvent event) throws IOException {
+     
+            nomclub.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController();
+            String a2 = nombreformation.getText();
+            String a1 = nomclub.getText();
+            String a3 = nombresmembre.getText();
+            String a4 = nombresdesresponsable.getText();
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
     }
 
     @FXML
-    private void traitermembre(ActionEvent event) {
+    private void traitermembre(ActionEvent event) throws SQLException{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceTraiterMembres.fxml"));
             Parent root;
             root = loader.load();
             InterfaceTraiterMembresController irc = loader.getController();
+            irc.initData(idf,file);
             boutontraitermembre.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceTraiterMembresController.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,12 +184,13 @@ public class InterfaceClubPresidentController implements Initializable {
     }
 
     @FXML
-    private void traiterresponsables(ActionEvent event) {
+    private void traiterresponsables(ActionEvent event) throws SQLException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceTraiterResponsables.fxml"));
             Parent root;
             root = loader.load();
             InterfaceTraiterResponsablesController irc = loader.getController();
+            irc.initData(idf,file);
             boutonresponsables.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceTraiterResponsablesController.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,9 +204,61 @@ public class InterfaceClubPresidentController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceTraiterInvitationsController irc = loader.getController();
+            irc.initData(idf,file);
             boutoninvitation.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceTraiterInvitationsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void initData(int idf, File file) {
+        this.idf=idf;
+        this.file=file;
+        Image image = new Image(file.toURI().toString());
+        utilisateurphoto.setImage(image);
+        try {
+            // TODO
+            ServiceClub sc = new ServiceClub();
+            ServiceClub sc2 = new ServiceClub();
+            ServiceClub sc3= new ServiceClub();
+            int nombremembre= sc2.NombreDesMembres(idf);
+            int nombreresp=sc3.NombreDesResponsables(idf);
+            int nombreeven=sc.NombreDesEvenements(idf);
+            int nombrefor=sc.NombreDesFormations(idf);
+            int nombreprojets=sc.NombreDesProjets(idf);
+            ResultSet rs=sc2.afficherClubParPresident(idf);
+            nomclub.setText(rs.getString(6));
+            nombresmembre.setText(Integer.toString(nombremembre));
+            nombresdesresponsable.setText(Integer.toString(nombreresp));
+            nombreevenement.setText(Integer.toString(nombreeven));
+            nombreformation.setText(Integer.toString(nombrefor));
+            nombreprojet.setText(Integer.toString(nombreprojets));
+            int not=sc3.notificationInvitation(idf);
+            if(not>0){
+            TrayNotification notifrejoindre= new TrayNotification();
+            String s="Invitation";
+            String s2="Vous avez "+not+" nouvelles invitations";
+            notifrejoindre.setTray(s, s2, NotificationType.INFORMATION);
+            notifrejoindre.showAndDismiss(Duration.seconds(5));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceClubPresidentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void statistique(ActionEvent event) throws SQLException{
+        ServiceClub sc=new ServiceClub();
+        final PieChart chart = new PieChart(); 
+        chart.setTitle("Statistique"); 
+        chart.getData().setAll(new PieChart.Data("Membres",sc.NombreDesMembres(idf)), new PieChart.Data("Responsables", sc.NombreDesResponsables(idf)),  
+                new PieChart.Data("Invitations", sc.notificationInvitation(idf)), new PieChart.Data("Formations",sc.NombreDesFormations(idf)), 
+                new PieChart.Data("Evenements", sc.NombreDesEvenements(idf)), new PieChart.Data("Projets", sc.NombreDesProjets(idf)) 
+        ); 
+        final StackPane root = new StackPane(); 
+        root.getChildren().add(chart); 
+        final Scene scene = new Scene(root, 300, 250); 
+         
+        boutonstat.getScene().setRoot(root);
     }
 }
