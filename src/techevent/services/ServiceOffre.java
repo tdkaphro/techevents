@@ -89,7 +89,7 @@ public class ServiceOffre {
     public void AccepterOffre(int id) {
 
         try {
-            PreparedStatement st = c.prepareStatement("update evenement set etatdefinancement=? where id=?");
+            PreparedStatement st = c.prepareStatement("update evenement set etatdesponsorisation=? where id=?");
             st.setBoolean(1, true);
             st.setInt(2, this.getEvenIdDeOffrebyId(id));
             st.executeUpdate();
@@ -105,7 +105,7 @@ public class ServiceOffre {
     public void RefuserOffre(int id) {
         ServiceEvenement se = new ServiceEvenement();
         try {
-            PreparedStatement st = c.prepareStatement("update evenement set etatdefinancement=? where id=?");
+            PreparedStatement st = c.prepareStatement("update evenement set etatdesponsorisation=? where id=?");
             st.setBoolean(1, false);
             st.setInt(2, this.getEvenIdDeOffrebyId(id));
             st.executeUpdate();
