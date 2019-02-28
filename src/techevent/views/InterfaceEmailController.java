@@ -8,6 +8,7 @@ package techevent.views;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -37,7 +40,9 @@ public class InterfaceEmailController implements Initializable {
     private JFXButton boutonsend;
     @FXML
     private Button boutonretour;
-
+    int idf;
+    File file;
+    
     /**
      * Initializes the controller class.
      */
@@ -55,11 +60,10 @@ public class InterfaceEmailController implements Initializable {
             root = loader.load();
             InterfaceSendController irc = loader.getController();
             InterfaceSendController irc2 = loader.getController();
-            InterfaceSendController irc3 = loader.getController();
-            InterfaceSendController irc4 = loader.getController();
-            irc.initdata(presidentemail.getText());
+            irc.initdata1(presidentemail.getText());
             irc.initData2(sujet.getText());
             irc.initData3(continu.getText());
+            irc2.initData(idf,file);
             boutonsend.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceSendController.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,14 +77,22 @@ public class InterfaceEmailController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceMesClubsController irc = loader.getController();
+            irc.initData(idf,file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceMesClubsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    void initData(String s) {
+    void initData2(String s) {
        presidentemail.setText(s);
+    }
+
+
+
+    void initData(int idf, File file) {
+       this.idf=idf; 
+       this.file=file;
     }
     
 }

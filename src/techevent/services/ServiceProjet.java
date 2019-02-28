@@ -73,6 +73,17 @@ public class ServiceProjet {
             System.out.println(e);
         }
     }
+        public void accepterinvitation(int a,int b){
+        try{
+         PreparedStatement st = c.prepareStatement("update projet_user set etat =1  where membre_id = ? and projet_id=?");
+         st.setInt(1,a);
+         st.setInt(2, b);
+         st.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println(e);
+        }
+    }
     public void ajoutersponsor(Sponsor sp){
         try{
          PreparedStatement st = (PreparedStatement) c.prepareStatement("update projet set sponsor_id = ?, set etat = 1"); 
@@ -143,7 +154,7 @@ public class ServiceProjet {
       public ResultSet afficherProjetparinvit(int en) throws SQLException{
   
          try{
-            PreparedStatement req =c.prepareStatement("select * from projet where id = any(select projet_id from projet_user where membre_id=? and etat =0");
+            PreparedStatement req =c.prepareStatement("select * from projet where id = any(select projet_id from projet_user where membre_id=? and etat =0)");
             req.setInt(1,en);
             ResultSet rs = req.executeQuery();
            
@@ -176,21 +187,20 @@ return null;
           return 0;
 }
  
-      public boolean getMemidByProjetId(int pro){
-          boolean k = false;
+      public int getMemidByProjetId(int pro){
          try{
-            PreparedStatement req =c.prepareStatement("select * from projet_user where createurs_ID = ? and etat = 0");
+            PreparedStatement req =c.prepareStatement("select count(*) as total from projet_user where membre_id = ? and etat = 0");
             req.setInt(1,pro);
             ResultSet rs = req.executeQuery();
             rs.next();
-              k = rs.getBoolean("etat");
+            return rs.getInt("total");
              }
              
   
             catch(SQLException e){
                 System.out.println(e);
             }
-          return k;
+          return 0;
 }
      
      
@@ -229,24 +239,21 @@ return null;
      
      public int getIdbyMail(String mail){
          try{
-            PreparedStatement req =c.prepareStatement("select * from user where email=?");
-            req.setString(1, mail);
+            PreparedStatement req =c.prepareStatement("select id from user where email='"+mail+"'");
+         
             ResultSet rs = req.executeQuery();
-            rs.beforeFirst();
-            while(rs.next()){
-                return rs.getInt(1);
-            }
+            rs.next();
+            return rs.getInt("id");
             }
             catch(SQLException e){
                 System.out.println(e);
             }
-         return 0;
-         
+         return 0;  
      }
      
      public void ajoutermembre(int idp,int ide,int idresp){
          try{
-         PreparedStatement st = (PreparedStatement) c.prepareStatement("insert into projet_user (projet_ID,createurs_ID,membre_id,etat)values(?,?,?,?)");
+         PreparedStatement st =(PreparedStatement)c.prepareStatement("insert into projet_user (projet_ID,createurs_ID,membre_id,etat)values(?,?,?,?)");
          st.setInt(1, idp);
          st.setInt(2, idresp);
          st.setInt(3, ide);

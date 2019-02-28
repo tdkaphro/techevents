@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="466.0" fitWidth="775.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/presidenttraitermembre.jpg" />
+            <Image url="@../images/presidenttraitermembre.jpg" />
          </image>
       </ImageView>
       <TableView fx:id="tablemembres" layoutX="18.0" layoutY="117.0" prefHeight="335.0" prefWidth="522.0">

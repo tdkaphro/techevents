@@ -5,6 +5,7 @@
  */
 package techevent.views;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -56,6 +57,8 @@ public class InterfaceTraiterInvitationsController implements Initializable {
     private TableColumn<Etudiant, String> id;
     @FXML
     private TableView<Etudiant> tableinvitations;
+    int idf;
+    File file;
     
 
     /**
@@ -92,14 +95,14 @@ public class InterfaceTraiterInvitationsController implements Initializable {
             }
         else{
         ServiceClub sc=new ServiceClub();
-        sc.AccepterInvitation(e.getId(), 5);
+        sc.AccepterInvitation(e.getId(), idf);
         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
         alert2.setTitle("Succes");
         alert2.setHeaderText(null);
         alert2.setContentText(e.getNom()+" "+e.getPrenom()+" est devenu membre dans votre club");
         alert2.showAndWait();
         ServiceClub sc2=new ServiceClub();
-        List<Etudiant> list = sc2.AfficherInvitation(5);
+        List<Etudiant> list = sc2.AfficherInvitation(idf);
         ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
         nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -129,7 +132,7 @@ public class InterfaceTraiterInvitationsController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
             ServiceClub sc= new ServiceClub();
-            sc.RefuserInvitation(e.getId(), 5);
+            sc.RefuserInvitation(e.getId(), idf);
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Succes");
             alert2.setHeaderText(null);
@@ -139,7 +142,7 @@ public class InterfaceTraiterInvitationsController implements Initializable {
             else{}
     }
             ServiceClub sc=new ServiceClub();
-            List<Etudiant> list = sc.AfficherInvitation(5);
+            List<Etudiant> list = sc.AfficherInvitation(idf);
             ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -157,9 +160,15 @@ public class InterfaceTraiterInvitationsController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubPresidentController irc = loader.getController();
+            irc.initData(idf, file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceTraiterInvitationsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
+
+    void initData(int idf, File file) {
+     this.idf=idf;
+     this.file=file;    
+    }
 }

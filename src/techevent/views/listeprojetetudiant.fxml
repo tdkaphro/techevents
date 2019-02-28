@@ -12,12 +12,12 @@
 
 <AnchorPane id="AnchorPane" fx:id="creer" prefHeight="541.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.ListeprojetetudiantController">
    <children>
-      <ImageView fitHeight="557.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="557.0" fitWidth="900.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../views/images/EnseignantProjet.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="125.0" fitWidth="125.0" layoutX="73.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="img" fitHeight="125.0" fitWidth="125.0" layoutX="73.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="nbrens" layoutX="209.0" layoutY="427.0" prefHeight="18.0" prefWidth="33.0" textFill="WHITE" />
       <Label fx:id="nbrmem" layoutX="200.0" layoutY="447.0" prefHeight="18.0" prefWidth="33.0" text=" " textFill="WHITE" />
       <Label fx:id="nbrpr" layoutX="185.0" layoutY="468.0" prefHeight="18.0" prefWidth="33.0" text=" " textFill="WHITE" />
@@ -28,17 +28,12 @@
             <TableColumn fx:id="etat" prefWidth="70.0" text="Etat" />
             <TableColumn fx:id="media" prefWidth="121.0" text="Media" visible="false" />
             <TableColumn fx:id="progress" prefWidth="70.0" text="Progress" />
-            <TableColumn fx:id="progress1" prefWidth="70.0" text="id" visible="false" />
-            <TableColumn fx:id="progress2" prefWidth="70.0" text="enseignant_id" visible="false" />
+            <TableColumn fx:id="domaine" prefWidth="70.0" text="domaine" />
+            <TableColumn fx:id="id" prefWidth="70.0" text="id" visible="false" />
             <TableColumn fx:id="progress3" prefWidth="70.0" text="club_id" visible="false" />
         </columns>
       </TableView>
       <MediaView fx:id="mediaview" fitHeight="150.0" fitWidth="150.0" layoutX="730.0" layoutY="14.0" />
-      <ImageView fitHeight="86.0" fitWidth="125.0" layoutX="762.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../views/images/project.png" />
-         </image>
-      </ImageView>
       <Label layoutX="752.0" layoutY="237.0" prefHeight="44.0" prefWidth="107.0" text="Consulter liste " textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font size="16.0" />
@@ -49,6 +44,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <JFXButton layoutX="736.0" layoutY="152.0" onAction="#listedesinvitations" prefHeight="86.0" prefWidth="125.0" text=" " />
+      <JFXButton layoutX="752.0" layoutY="363.0" onAction="#accepterevt" prefHeight="44.0" prefWidth="107.0" text="accepter" />
+      <JFXButton layoutX="743.0" layoutY="151.0" onAction="#listedesinvitations" prefHeight="86.0" prefWidth="125.0" text=" " />
+      <ImageView fitHeight="44.0" fitWidth="59.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RETOUR.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="2.0" layoutY="-3.0" onAction="#retourevt" prefHeight="44.0" prefWidth="44.0" />
    </children>
 </AnchorPane>
