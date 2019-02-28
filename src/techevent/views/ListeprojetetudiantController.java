@@ -13,6 +13,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,6 +36,8 @@ import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import techevent.entities.Enseignant;
 import techevent.entities.Etudiant;
+import techevent.entities.Formateur;
+import techevent.entities.Formation;
 import techevent.entities.Projet;
 import techevent.services.ServiceProjet;
 import tray.notification.NotificationType;
@@ -62,17 +65,17 @@ public class ListeprojetetudiantController implements Initializable {
     @FXML
     private TableColumn<Projet, String> description;
     @FXML
-    private TableColumn<Projet, Boolean> etat;
+    private TableColumn<Projet, String> etat;
     @FXML
     private TableColumn<Projet, String> media;
     @FXML
-    private TableColumn<Projet, Integer> progress;
+    private TableColumn<Projet, String> progress;
     @FXML
-    private TableColumn<Projet, Integer> progress1;
+    private TableColumn<Projet, String> progress1;
     @FXML
-    private TableColumn<Projet, Integer> progress2;
+    private TableColumn<Projet, String> progress2;
     @FXML
-    private TableColumn<Projet, Integer> progress3;
+    private TableColumn<Projet, String> progress3;
     @FXML
     private MediaView mediaview;
       public static int id;
@@ -217,21 +220,37 @@ notifrejoindre.showAndDismiss(Duration.seconds(5));
     @FXML
     private void listedesinvitations(ActionEvent event) throws SQLException {
         ServiceProjet sp = new ServiceProjet();
-        ArrayList<Projet> rs = sp.afficherProjetparinvit(1);
-        ObservableList<Projet> listObAbn = FXCollections.observableArrayList(rs);
-        nomprojet.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        description.setCellValueFactory(new PropertyValueFactory<>("description"));
-        etat.setCellValueFactory(new PropertyValueFactory<>("media"));
-        progress.setCellValueFactory(new PropertyValueFactory<>("progress"));
-
-        tableau.setItems(listObAbn);
-        try {
-            remplirMesprojetsTab();
-        } catch (IOException ex) {
-            Logger.getLogger(ListeprojetenseignantController.class.getName()).log(Level.SEVERE, null, ex);
+          List<Projet> lf = new ArrayList<Projet>();
+          ResultSet rs = sp.afficherProjetparinvit(2);
+           while (rs.next()) {
+               Projet p = new Projet();
+               p.setNom(rs.getString("nom"));
+               p.setDescription(rs.getString("description"));
+               p.setDomaine(rs.getString("domaine"));
+               p.setProgress(rs.getInt("progress"));
+               if(rs.getBoolean("etat")==true){
+               p.setMedia("sponsorisé");
+               }else{
+               p.setMedia("nonsponsorisé");
+               p.setId(rs.getInt("id"));
+               }
+               
+               lf.add(p);
+  
         }
-
+        ObservableList<Projet> listObAbn = FXCollections.observableArrayList(lf);
+        progress1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nomprojet.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        progres.setCellValueFactory(new PropertyValueFactory<>("domaine"));
+        datedebut.setCellValueFactory(new PropertyValueFactory<>("datedebut"));
+        datefin.setCellValueFactory(new PropertyValueFactory<>("datedefin"));
+        nbrheure.setCellValueFactory(new PropertyValueFactory<>("volumehoraire"));
+    
+        tableau.setItems(listObAbn);
     }
+
+    void initData(int idf, File file) {
+     }
     }
                 
 

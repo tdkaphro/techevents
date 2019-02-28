@@ -35,8 +35,8 @@ public class Fx_login extends Application {
         primaryStage.show();
     }
  public static void main(String[] args) throws SQLException {
-        //launch(args);
-        ServiceProjet sp=new ServiceProjet();
-        System.out.println(sp.afficherProjetparinvit(1));
+        launch(args);
+        //ServiceProjet sp=new ServiceProjet();
+        //System.out.println(sp.afficherProjetparinvit(1));
  }
 }
