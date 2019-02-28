@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,7 +79,7 @@ public class AccueiletudiantController implements Initializable {
     }
     
     @FXML
-    private void club(ActionEvent event) throws IOException {
+    private void club(ActionEvent event) throws IOException, SQLException {
                 FXMLLoader loader = new FXMLLoader();
                 img.getScene().getWindow().hide();  
                 Stage prStage =new Stage(); 

@@ -83,8 +83,9 @@ public class ServiceClub {
         ps2.setString(6, rs.getString(6));
         ps2.setLong(7, rs.getLong(7));
         ps2.setString(8, rs.getString(8));
-        ps2.setInt(9, rs.getInt(12));
+        ps2.setString(9, rs.getString(9));
         ps2.setInt(10, rs.getInt(13));
+        ps2.setInt(11, rs.getInt(14));
         ps2.execute();
     }
     
@@ -439,7 +440,7 @@ public class ServiceClub {
        ResultSet rs2= pt2.executeQuery();
        rs2=pt2.executeQuery();
        while(rs2.next()){
-       list.add(new Responsable(rs2.getInt(1),rs2.getString(6),rs2.getString(8),rs2.getString(12),rs2.getString(4),rs2.getLong(7),rs2.getString(17)));
+       list.add(new Responsable(rs2.getInt(1),rs2.getString(6),rs2.getString(9),rs2.getString(13),rs2.getString(4),rs2.getLong(7),rs2.getString(18)));
         }
        return list;
     }

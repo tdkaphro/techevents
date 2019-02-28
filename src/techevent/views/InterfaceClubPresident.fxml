@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="439.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceClubPresidentController">
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceClubPresidentController">
    <children>
-      <ImageView fitHeight="454.0" fitWidth="934.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="452.0" fitWidth="765.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/PresidentClub.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="boutonmodifierclub" layoutX="595.0" layoutY="319.0" mnemonicParsing="false" onAction="#modifierclub" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #042a68;" text="Modifier club" textFill="#f7f7f7">
+      <Button fx:id="boutonmodifierclub" layoutX="591.0" layoutY="319.0" mnemonicParsing="false" onAction="#modifierclub" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #042a68;" text="Modifier club" textFill="#f7f7f7">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -65,5 +65,11 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <ImageView fitHeight="30.0" fitWidth="46.0" layoutX="664.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/stat.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="boutonstat" layoutX="666.0" layoutY="152.0" onAction="#statistique" prefHeight="25.0" prefWidth="45.0" text=" " />
    </children>
 </AnchorPane>
