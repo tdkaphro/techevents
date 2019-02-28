@@ -10,8 +10,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="718.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.inscriformationcontroller">
@@ -34,7 +32,7 @@
          </font>
       </JFXButton>
       <JFXButton layoutX="25.0" layoutY="16.0" prefHeight="25.0" prefWidth="29.0" text=" " />
-      <ImageView fitHeight="180.0" fitWidth="176.0" layoutX="112.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img" fitHeight="180.0" fitWidth="176.0" layoutX="118.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Desktop/pi.png" />
          </image>
@@ -54,42 +52,18 @@
          </font></JFXTextArea>
       <JFXComboBox fx:id="prd" focusColor="#432cc7" layoutX="540.0" layoutY="120.0" onAction="#trievt" prefHeight="26.0" prefWidth="118.0" promptText="choisir domaine" unFocusColor="#0cf21d" />
       <JFXComboBox fx:id="datee" focusColor="#432cc7" layoutX="540.0" layoutY="160.0" onAction="#trievt" prefHeight="26.0" prefWidth="118.0" promptText="choisir date" unFocusColor="#0cf21d" />
-      <Label layoutX="378.0" layoutY="119.0" prefHeight="27.0" prefWidth="153.0" text="filtrer par domaine">
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.2290076244878405" startY="0.24427486739995827">
-               <stops>
-                  <Stop color="#f27a1f" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
+      <Label layoutX="378.0" layoutY="119.0" prefHeight="27.0" prefWidth="153.0" text="filtrer par domaine" textFill="#f2f2f2">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="421.0" layoutY="159.0" prefHeight="27.0" prefWidth="76.0" text="date">
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.2290076244878405" startY="0.24427486739995827">
-               <stops>
-                  <Stop color="#f27a1f" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
+      <Label layoutX="421.0" layoutY="159.0" prefHeight="27.0" prefWidth="76.0" text="date" textFill="#f2f2f2">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
       <JFXComboBox fx:id="prfr" focusColor="#432cc7" layoutX="542.0" layoutY="80.0" onAction="#trievt" prefHeight="26.0" prefWidth="118.0" promptText="tout formation" unFocusColor="#0cf21d" />
-      <Label layoutX="378.0" layoutY="79.0" prefHeight="27.0" prefWidth="162.0" text="filtrer par formation">
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.2290076244878405" startY="0.24427486739995827">
-               <stops>
-                  <Stop color="#f27a1f" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
+      <Label layoutX="378.0" layoutY="79.0" prefHeight="27.0" prefWidth="162.0" text="filtrer par formation" textFill="WHITE">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
@@ -104,96 +78,62 @@
           <TableColumn fx:id="nbrheure" prefWidth="89.60003662109375" text="n°heure" />
         </columns>
       </TableView>
-      <Label layoutX="1055.0" layoutY="92.0" prefHeight="27.0" prefWidth="102.0" text="prix           :">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#3d844a" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label layoutX="1055.0" layoutY="129.0" prefHeight="27.0" prefWidth="102.0" text="formateur :">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#3d844a" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label layoutX="1055.0" layoutY="160.0" prefHeight="27.0" prefWidth="102.0" text="n°place     :">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#3d844a" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label layoutX="1055.0" layoutY="198.0" prefHeight="27.0" prefWidth="102.0" text="n°inscri     :">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#3d844a" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label fx:id="prix" layoutX="1149.0" layoutY="92.0" prefHeight="27.0" prefWidth="102.0" textFill="#fc0000">
+      <Label layoutX="1055.0" layoutY="92.0" prefHeight="27.0" prefWidth="102.0" text="prix           :" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="formateur" layoutX="1149.0" layoutY="129.0" prefHeight="27.0" prefWidth="102.0" textFill="#fc0000">
+      <Label layoutX="1055.0" layoutY="129.0" prefHeight="27.0" prefWidth="102.0" text="formateur :" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="nbrplace" layoutX="1149.0" layoutY="159.0" prefHeight="27.0" prefWidth="102.0" textFill="#fa0000">
+      <Label layoutX="1055.0" layoutY="160.0" prefHeight="27.0" prefWidth="102.0" text="n°place     :" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="nbrinscri" layoutX="1149.0" layoutY="198.0" prefHeight="27.0" prefWidth="102.0" textFill="#fc0000">
+      <Label layoutX="1055.0" layoutY="198.0" prefHeight="27.0" prefWidth="102.0" text="n°inscri     :" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1055.0" layoutY="235.0" prefHeight="27.0" prefWidth="102.0" text="Certifie     :">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#3d844a" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label fx:id="certifie" layoutX="1141.0" layoutY="235.0" prefHeight="27.0" prefWidth="102.0" textFill="#fc0000">
+      <Label fx:id="prix" layoutX="1149.0" layoutY="92.0" prefHeight="27.0" prefWidth="102.0" textFill="#ccadad">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Label fx:id="formateur" layoutX="1149.0" layoutY="129.0" prefHeight="27.0" prefWidth="102.0" textFill="#ccadad">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbrplace" layoutX="1149.0" layoutY="159.0" prefHeight="27.0" prefWidth="102.0" textFill="#ccadad">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbrinscri" layoutX="1149.0" layoutY="198.0" prefHeight="27.0" prefWidth="102.0" textFill="#ccadad">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="1055.0" layoutY="235.0" prefHeight="27.0" prefWidth="102.0" text="Certifie     :" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="certifie" layoutX="1141.0" layoutY="235.0" prefHeight="27.0" prefWidth="102.0" textFill="#ccadad">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="66.0" fitWidth="56.0" layoutX="1215.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RETOUR.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="retour" layoutX="1217.0" layoutY="7.0" onAction="#retourevt" prefHeight="56.0" prefWidth="52.0" text=" " />
       
              
       

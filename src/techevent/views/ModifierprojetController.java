@@ -35,7 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import techevent.entities.Projet;
 import techevent.services.ServiceProjet;
-import techevents.views.ListeprojetenseignantController;
+import techevent.views.ListeprojetenseignantController;
 
 /**
  * FXML Controller class
