@@ -3,6 +3,7 @@ package techevent.views;
 import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,7 @@ public class supprimerformationcontroller {
     String a3 ; 
     String a4 ; 
     @FXML
-    void retourevt(ActionEvent event) throws IOException {
+    void retourevt(ActionEvent event) throws IOException, SQLException {
                     non.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("presidentformation.fxml"));
@@ -41,7 +42,7 @@ public class supprimerformationcontroller {
             prStage.show();
     }
     @FXML
-    void supprimerevt(ActionEvent event) throws IOException {
+    void supprimerevt(ActionEvent event) throws IOException, SQLException {
         ServiceFormation sf = new ServiceFormation();
         sf.supprimerFormation(id1);
             non.getScene().getWindow().hide();

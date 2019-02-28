@@ -18,7 +18,10 @@
             <Image url="@../images/5.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="nomclub" layoutX="248.0" layoutY="544.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Label fx:id="nomclub" layoutX="248.0" layoutY="530.0" prefHeight="46.0" prefWidth="113.0" text="Label">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
       <Label fx:id="nompresident" layoutX="138.0" layoutY="475.0" prefHeight="18.0" prefWidth="102.0" text="President" textFill="#fababa">
          <font>
             <Font size="22.0" />
@@ -48,7 +51,7 @@
          </font>
       </JFXButton>
       <JFXButton layoutX="25.0" layoutY="16.0" prefHeight="25.0" prefWidth="29.0" text=" " />
-      <ImageView fitHeight="180.0" fitWidth="176.0" layoutX="103.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img" fitHeight="180.0" fitWidth="176.0" layoutX="103.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Desktop/pi.png" />
          </image>

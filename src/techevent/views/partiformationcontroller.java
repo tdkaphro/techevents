@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -59,7 +60,7 @@ public class partiformationcontroller implements Initializable {
     @FXML
     private TableView<Etudiant> tab;
     int idf; 
- File file ; 
+    File file ; 
     String a1;
     String a2; 
     String a3 ; 
@@ -69,7 +70,7 @@ public class partiformationcontroller implements Initializable {
     }
     
     @FXML
-    private void back(ActionEvent event) throws IOException {
+    private void back(ActionEvent event) throws IOException, SQLException {
                   backid.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("presidentformation.fxml"));

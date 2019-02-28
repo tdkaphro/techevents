@@ -91,7 +91,7 @@ public class modifierformationcontroller implements Initializable {
     String a3 ; 
     String a4 ; 
     @FXML
-    void ajouterevt(ActionEvent event) throws IOException {
+    void ajouterevt(ActionEvent event) throws IOException, SQLException {
 	java.util.Date date = new java.util.Date();
         int aa = 0;
         if(nomid.getText()==null||prixid.getText()==null||capaciterid.getText()==null||volumeid.getText()==null||datedeb.getValue()==null||datefin.getValue()==null||cbformateur.getSelectionModel().isEmpty()||descriptionid.getText()==null){
