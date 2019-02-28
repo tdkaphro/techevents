@@ -16,12 +16,17 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Date;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -34,7 +39,7 @@ import javax.swing.JFileChooser;
 import techevent.entities.Formateur;
 import techevent.services.ServiceFormateur;
 
-public class inscriptionformateurcontroller {
+public class inscriptionformateurcontroller implements Initializable {
 
     @FXML
     private JFXButton inscrire;
@@ -65,6 +70,8 @@ public class inscriptionformateurcontroller {
 
     @FXML
     private ImageView img;
+           ObservableList<String> list = FXCollections.observableArrayList("web","reseau","mobile","genieciville","mécanique","electrique");
+
 File file ;
     @FXML
     void ajouter(ActionEvent event) throws IOException {
@@ -104,5 +111,10 @@ fileChooserr.getExtensionFilters().add(imageFilter);
 file = fileChooserr.showOpenDialog(img.getScene().getWindow());
 Image image = new Image(file.toURI().toString());
 img.setImage(image);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+            cbdomaine.setItems(list);
     }
 }
