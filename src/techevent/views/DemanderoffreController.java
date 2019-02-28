@@ -58,12 +58,12 @@ public class DemanderoffreController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail1;
-            String mdp = irc.mdp1;
+            String mail = irc.mail();
+            String mdp = irc.mdp();
             List l = su.getAllSponsorNames();
             ObservableList<String> oblist = FXCollections.observableArrayList(l);
             sponsor.setItems(oblist);
-            List l1 = se.getEvenementNomIdByPresidentId(su.getId(mail, mdp));
+            List l1 = se.getEvenementNomIdByPresidentId(2);
             ObservableList<String> oblist1 = FXCollections.observableArrayList(l1);
             evenement.setItems(oblist1);
         } catch (IOException ex) {

@@ -43,7 +43,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <ImageView fx:id="img" fitHeight="171.0" fitWidth="171.0" layoutX="108.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="172.0" fitWidth="171.0" layoutX="102.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="624.0" layoutY="14.0" text="La liste de mes événements" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
@@ -88,6 +88,5 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="14.0" layoutY="20.0" onAction="#retour" />
    </children>
 </AnchorPane>

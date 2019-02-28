@@ -60,7 +60,8 @@ public class Statistiqueoffre2Controller implements Initializable {
             LoginController irc = loader.getController();
             String mail = irc.mail();
             String mdp = irc.mdp();
-            ArrayList<String> l = so.findAllEvenementforEven(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
+            //ArrayList<String> l = so.findAllEvenementforEven(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
+             ArrayList<String> l = so.findAllEvenementforEven(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId("etudiant", "xx"))));
             XYChart.Series set = new XYChart.Series<>();
             for(String s: l){
                 set.getData().add(new XYChart.Data(s, so.getPrixbyNomeven(s)));

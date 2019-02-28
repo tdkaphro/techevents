@@ -215,7 +215,7 @@ public class InterfaceClubPresidentController implements Initializable {
         this.idf=idf;
         this.file=file;
         Image image = new Image(file.toURI().toString());
-       utilisateurphoto.setImage(image);
+        utilisateurphoto.setImage(image);
         try {
             // TODO
             ServiceClub sc = new ServiceClub();

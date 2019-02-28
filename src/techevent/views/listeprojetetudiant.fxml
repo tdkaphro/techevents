@@ -34,23 +34,31 @@
         </columns>
       </TableView>
       <MediaView fx:id="mediaview" fitHeight="150.0" fitWidth="150.0" layoutX="730.0" layoutY="14.0" />
-      <Label layoutX="752.0" layoutY="237.0" prefHeight="44.0" prefWidth="107.0" text="Consulter liste " textAlignment="JUSTIFY" textFill="WHITE">
+      <Label layoutX="752.0" layoutY="271.0" prefHeight="44.0" prefWidth="107.0" text="Consulter liste " textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="752.0" layoutY="281.0" prefHeight="25.0" prefWidth="107.0" text="des invitations" textFill="WHITE">
+      <Label layoutX="752.0" layoutY="308.0" prefHeight="25.0" prefWidth="107.0" text="des invitations" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <JFXButton layoutX="752.0" layoutY="363.0" onAction="#accepterevt" prefHeight="44.0" prefWidth="107.0" text="accepter" />
-      <JFXButton layoutX="743.0" layoutY="151.0" onAction="#listedesinvitations" prefHeight="86.0" prefWidth="125.0" text=" " />
+      <JFXButton layoutX="743.0" layoutY="382.0" onAction="#accepterevt" prefHeight="45.0" prefWidth="125.0" style="-fx-background-color: #7098d8;" text="accepter" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></JFXButton>
       <ImageView fitHeight="44.0" fitWidth="59.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/RETOUR.png" />
          </image>
       </ImageView>
       <JFXButton layoutX="2.0" layoutY="-3.0" onAction="#retourevt" prefHeight="44.0" prefWidth="44.0" />
+      <ImageView fitHeight="109.0" fitWidth="107.0" layoutX="748.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/project.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="752.0" layoutY="175.0" onAction="#listedesinvitations" prefHeight="90.0" prefWidth="94.0" text=" " />
    </children>
 </AnchorPane>

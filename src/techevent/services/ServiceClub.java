@@ -62,7 +62,7 @@ public class ServiceClub {
             pt.setInt(1, e); 
             ResultSet rs=pt.executeQuery();
             rs.next();
-            id=rs.getInt("MONCLUB_ID");
+            id=rs.getInt(1);
             return id;
     } 
     
@@ -74,7 +74,7 @@ public class ServiceClub {
         PreparedStatement ps=c.prepareStatement("delete from user where ID=?");
         ps.setInt(1, e);
         ps.executeUpdate();
-        PreparedStatement ps2=c.prepareStatement("insert into user(ID,DTYPE,DATEDENAISSANCE,EMAIL,MOTPASSE,NOM,NUMEROTELEPHONE,PICTURE,PRENOM,CLASSE,UNIVERSITEETUDIANT_ID)values(?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement ps2=c.prepareStatement("insert into user(ID,DTYPE,DATEDENAISSANCE,EMAIL,MOTPASSE,NOM,NUMEROTELEPHONE,PRENOM,CLASSE,UNIVERSITEETUDIANT_ID)values(?,?,?,?,?,?,?,?,?,?)");
         ps2.setInt(1, rs.getInt(1));
         ps2.setString(2, "Etudiant");
         ps2.setDate(3, rs.getDate(3));
@@ -294,7 +294,7 @@ public class ServiceClub {
        ResultSet rs2= pt2.executeQuery();
        rs2=pt2.executeQuery();
        rs2.next();
-       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(9),rs2.getString(13),rs2.getString(4),rs2.getLong(7)));
+       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(8),rs2.getString(12),rs2.getString(4),rs2.getLong(7)));
         }
        return list;
     }
@@ -342,7 +342,7 @@ public class ServiceClub {
        ResultSet rs2= pt2.executeQuery();
        rs2=pt2.executeQuery();
        rs2.next();
-       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(9),rs2.getString(13),rs2.getString(4),rs2.getLong(7)));
+       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(8),rs2.getString(12),rs2.getString(4),rs2.getLong(7)));
         }
        return list;
     }
@@ -528,18 +528,17 @@ public class ServiceClub {
     
     public int getIdClubbyPresidentId(int id){
         try {
-            PreparedStatement st = c.prepareStatement("select * from user where id=?");
+            PreparedStatement st = c.prepareStatement("select * from club where president_id=?");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(17);
+                return rs.getInt(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
-
 }
  

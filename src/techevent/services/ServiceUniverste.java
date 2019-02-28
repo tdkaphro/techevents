@@ -75,7 +75,7 @@ public class ServiceUniverste {
         pt.setInt(1, e);
         ResultSet rs=pt.executeQuery();
         rs.next();
-        i = rs.getInt(14);
+        i = rs.getInt(13);
         return i;
     }
 }

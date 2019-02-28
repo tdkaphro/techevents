@@ -62,7 +62,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <ImageView fx:id="utilisateurphoto" fitHeight="122.0" fitWidth="109.0" layoutX="62.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="utilisateurphoto" fitHeight="109.0" fitWidth="105.0" layoutX="66.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="boutonmonclub" layoutX="24.0" layoutY="400.0" mnemonicParsing="false" onAction="#monclub" prefHeight="30.0" prefWidth="149.0" style="-fx-background-color: #42cef4;" text="Réserver Président" textFill="#f7f7f7">
          <font>
             <Font name="System Bold" size="14.0" />

@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import techevent.entities.Etudiant;
 import techevent.entities.Formateur;
@@ -53,13 +54,14 @@ public class AccueiletudiantController implements Initializable {
     private Label telephone;
     @FXML
     private Label role;
-    @FXML
-    private Label datenaissance;
     int idf;
     File file;
     @FXML
     private ImageView img;
 
+     @FXML
+    private AnchorPane creer;
+ 
     /**
      * Initializes the controller class.
      */
@@ -151,11 +153,21 @@ public class AccueiletudiantController implements Initializable {
         file = new File(f.getPicture());
         Image image = new Image(file.toURI().toString(), 142, 145, false, false);
         img.setImage(image);
+ 
+                        }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("login.fxml"));
+        this.creer.getChildren().setAll(pane);
+    }
+  void initData(int idf, File file) {
+this.idf = idf;
+this.file = file;
+}
     }
 
-    void initData(int idf, File file) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
-    
-}
+   
+
