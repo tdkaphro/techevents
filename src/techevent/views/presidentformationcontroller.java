@@ -38,6 +38,7 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -417,5 +418,9 @@ public class presidentformationcontroller implements Initializable {
             prStage.setResizable(false);
             prStage.show();
     }
+    }
+
+    void initData(int idf, File file, String a1, String a2, String a3, String a4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

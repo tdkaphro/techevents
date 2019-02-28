@@ -1,4 +1,4 @@
-package techevent.views;
+ package techevent.views;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.event.GMapMouseEvent;
