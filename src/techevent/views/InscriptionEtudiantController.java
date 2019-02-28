@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,17 +29,17 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import techevent.entities.Enseignant;
-import techevent.entities.Sponsor;
+import techevent.entities.Etudiant;
 import techevent.entities.Universite;
 import techevent.services.ServiceEnseignant;
-import techevent.services.ServiceSponsor;
+import techevent.services.ServiceEtudiant;
 
 /**
  * FXML Controller class
  *
  * @author Ciro
  */
-public class InscriptionEnseignantController implements Initializable {
+public class InscriptionEtudiantController implements Initializable {
 
     @FXML
     private JFXTextField nom;
@@ -61,9 +60,9 @@ public class InscriptionEnseignantController implements Initializable {
     @FXML
     private JFXButton inscrire;
     @FXML
-    private JFXComboBox<Universite> université;
+    private JFXComboBox<Universite> universite;
     @FXML
-    private JFXTextField departementid;
+    private JFXTextField classe;
     File file;
     Universite esprit;
     ObservableList<Universite> univer = FXCollections.observableArrayList(esprit);
@@ -73,8 +72,7 @@ public class InscriptionEnseignantController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        université.setItems(univer);
-
+        universite.setItems(univer);
     }
 
     @FXML
@@ -92,7 +90,7 @@ public class InscriptionEnseignantController implements Initializable {
 
     @FXML
     private void ajouter(ActionEvent event) throws IOException {
-        if (nom.getText().equals("") || datedenaissance.getValue() == null || prenom.getText() == null || departementid.getText().equals("") || mail.getText() == null || numtel.getText() == null || motdepasse.getText() == null || université.getValue() == null) {
+        if (nom.getText().equals("") || datedenaissance.getValue() == null || prenom.getText() == null || classe.getText().equals("") || mail.getText() == null || numtel.getText() == null || motdepasse.getText() == null || universite.getValue() == null) {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erreur");
@@ -104,22 +102,23 @@ public class InscriptionEnseignantController implements Initializable {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Erreur");
             alert2.setHeaderText(null);
-            alert2.setContentText("Vous ne pouvez pas choisir une date inférieur");
+            alert2.setContentText("le champ numéro de téléphone doit avoir seulement des numéro");
             alert2.showAndWait();
         } else {
+            Etudiant etudiant = new Etudiant();
+            etudiant.setNom(nom.getText());
+            etudiant.setPrenom(nom.getText());
+            etudiant.setEmail(mail.getText());
+            etudiant.setMotpasse(motdepasse.getText());
 
-            Enseignant enseigant = new Enseignant();
-            enseigant.setNom(nom.getText());
-            enseigant.setPrenom(nom.getText());
-            enseigant.setEmail(mail.getText());
-            enseigant.setMotpasse(motdepasse.getText());
-            enseigant.setDepartement(departementid.getText());
-            enseigant.setUniversiteenseignant(université.getValue());
-            enseigant.setPicture(file.toString());
-            enseigant.setDatedenaissance(Date.valueOf(datedenaissance.getValue()));
-            enseigant.setNumerotelephone(Integer.parseInt(numtel.getText()));
-            ServiceEnseignant se = new ServiceEnseignant();
-            se.ajouterEnseignant(enseigant, 0);
+            //etudiant.getClasse(classe.getText());
+            etudiant.setPicture(file.toString());
+            etudiant.setUniversite(universite.getValue());
+            etudiant.setPicture(file.toString());
+            etudiant.setDatedenaissance(Date.valueOf(datedenaissance.getValue()));
+            etudiant.setNumerotelephone(Integer.parseInt(numtel.getText()));
+            ServiceEtudiant see = new ServiceEtudiant();
+            see.AjouterEtudiant(etudiant);
             FXMLLoader loader = new FXMLLoader();
             img.getScene().getWindow().hide();
             Stage prStage = new Stage();
