@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="projet" prefHeight="514.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.ModifierprojetController">
+   <children>
+      <ImageView fitHeight="521.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../views/images/modifierprojet.jpg" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="nom" layoutX="139.0" layoutY="125.0" prefHeight="26.0" prefWidth="189.0" />
+      <JFXTextArea fx:id="desription" layoutX="134.0" layoutY="177.0" prefHeight="155.0" prefWidth="200.0" />
+      <JFXComboBox fx:id="Domaine" layoutX="144.0" layoutY="368.0" prefHeight="28.0" prefWidth="180.0" promptText="Domaine" />
+      <JFXButton fx:id="importer" buttonType="RAISED" layoutX="514.0" layoutY="147.0" onAction="#importermedia" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #1d4a93;" text="Importer Model" />
+      <JFXCheckBox fx:id="checkspon" layoutX="541.0" layoutY="246.0" prefHeight="18.0" prefWidth="172.0" text="Sponsorisé" />
+      <JFXButton buttonType="RAISED" layoutX="527.0" layoutY="444.0" onAction="#annuler" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #1d4a93;" text="Annuler" />
+      <JFXButton buttonType="RAISED" layoutX="375.0" layoutY="444.0" onAction="#modifierprojetenseignant" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #1d4a93;" text="Enregistrer" />
+      <Label fx:id="cbenseignant" layoutX="408.0" layoutY="183.0" prefHeight="18.0" prefWidth="63.0" text=" " />
+      <JFXListView fx:id="listeview" layoutX="699.0" layoutY="147.0" prefHeight="32.0" prefWidth="161.0" visible="false" />
+      <Label layoutX="37.0" layoutY="138.0" prefHeight="18.0" prefWidth="71.0" text="Nom Projet" />
+      <Label layoutX="37.0" layoutY="184.0" prefHeight="18.0" prefWidth="71.0" text="Description" />
+      <JFXSlider fx:id="slider" blockIncrement="1.0" layoutX="508.0" layoutY="306.0" prefHeight="32.0" prefWidth="180.0" />
+      <Label layoutX="508.0" layoutY="338.0" prefHeight="26.0" prefWidth="180.0" text="Progrés Du Projet" />
+   </children>
+</AnchorPane>
