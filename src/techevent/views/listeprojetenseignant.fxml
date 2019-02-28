@@ -12,7 +12,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="creer" prefHeight="541.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevents.views.ListeprojetenseignantController">
+<AnchorPane id="AnchorPane" fx:id="creer" prefHeight="541.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.ListeprojetenseignantController">
    <children>
       <ImageView fitHeight="557.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>

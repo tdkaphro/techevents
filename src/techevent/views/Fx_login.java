@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package techevents.views;
+package techevent.views;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-  import javafx.stage.Stage;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import techevent.services.ServiceProjet;
   
