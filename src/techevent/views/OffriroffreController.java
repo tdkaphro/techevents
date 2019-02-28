@@ -71,7 +71,7 @@ public class OffriroffreController implements Initializable {
             Offre f = new Offre();
             int p = Integer.valueOf(prix.getText());
             f.setPrix(p);
-            so.OffrirOffre(f, se.getIdbyNom(evenement.getValue()),1);
+            so.OffrirOffre(f, se.getIdbyNom(evenement.getValue()),su.getId(mail, mdp));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes");
             alert.setHeaderText(null);

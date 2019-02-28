@@ -67,8 +67,7 @@ public class Modifieroffre2Controller implements Initializable {
             ServiceClub sc = new ServiceClub();
             ServiceOffre so = new ServiceOffre();
 
-            //ArrayList<String> l2=so.findAllEvenementforEvenement(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
-            ArrayList<String> l2 = so.findAllEvenementforEvenement(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2)));
+            ArrayList<String> l2=so.findAllEvenementforEvenement(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
             ObservableList<String> oblist2 = FXCollections.observableArrayList(l2);
             evenement.setItems(oblist2);
 

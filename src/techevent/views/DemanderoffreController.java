@@ -63,7 +63,7 @@ public class DemanderoffreController implements Initializable {
             List l = su.getAllSponsorNames();
             ObservableList<String> oblist = FXCollections.observableArrayList(l);
             sponsor.setItems(oblist);
-            List l1 = se.getEvenementNomIdByPresidentId(2);
+            List l1 = se.getEvenementNomIdByPresidentId(su.getId(mail, mdp));
             ObservableList<String> oblist1 = FXCollections.observableArrayList(l1);
             evenement.setItems(oblist1);
         } catch (IOException ex) {

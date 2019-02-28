@@ -192,8 +192,7 @@ public class OffreevenementController implements Initializable {
             LoginController irc = loader.getController();
             String mail = irc.mail();
             String mdp = irc.mdp();
-            //ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
-            ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2));
+            ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
             List<Offre> plist = so.findAllDemandeforEvenement(l);
 
             idoffre.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -230,8 +229,7 @@ public class OffreevenementController implements Initializable {
             LoginController irc = loader.getController();
             String mail = irc.mail();
             String mdp = irc.mdp();
-            //ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
-            ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2));
+            ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
             List<Offre> plist = so.findAllOffreforEvenement(l);
 
             idoffre.setCellValueFactory(new PropertyValueFactory<>("id"));
