@@ -93,7 +93,7 @@ public class LoginController implements Initializable {
                 prStage.setResizable(false);
                 prStage.show();
             }
-            if (type.equals("Etudiant")) {
+            if (type.equals("Etudiant")||type.equals("Responsable")||type.equals("President")) {
               FXMLLoader loader = new FXMLLoader();
                 label.getScene().getWindow().hide();  
                 Stage prStage =new Stage(); 
