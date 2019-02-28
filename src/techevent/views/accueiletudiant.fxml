@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="541.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueiletudiantController">
+<AnchorPane id="AnchorPane" fx:id="creer" prefHeight="541.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueiletudiantController">
    <children>
       <ImageView fitHeight="552.0" fitWidth="900.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -16,11 +16,6 @@
       </ImageView>
       <ImageView fx:id="img" fitHeight="141.0" fitWidth="143.0" layoutX="189.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton fx:id="b1" buttonType="RAISED" layoutX="641.0" layoutY="203.0" onAction="#EditProfile" prefHeight="25.0" prefWidth="100.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Editer Profil" textFill="#f5f5f5" />
-      <ImageView fitHeight="32.0" fitWidth="46.0" layoutX="819.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../views/images/logout.png" />
-         </image>
-      </ImageView>
       <Label fx:id="nom" layoutX="475.0" layoutY="101.0" prefHeight="25.0" prefWidth="69.0">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -60,5 +55,11 @@
       <Label fx:id="datenaiss" layoutX="594.0" layoutY="135.0" text="Label" />
       <Label fx:id="classe" layoutX="489.0" layoutY="162.0" text="Label" />
       <Label fx:id="role" layoutX="212.0" layoutY="250.0" text="Label" />
+      <ImageView fitHeight="41.0" fitWidth="52.0" layoutX="816.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../views/images/logouy.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="816.0" layoutY="483.0" onAction="#logout" prefHeight="25.0" prefWidth="46.0" text=" " />
    </children>
 </AnchorPane>

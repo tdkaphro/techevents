@@ -8,16 +8,13 @@ package techevent.views;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,23 +25,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import techevent.entities.Evenement;
-import techevent.entities.Sponsor;
 import techevent.images.ServiceEvenement;
 
 /**
  * FXML Controller class
  *
- * @author Ciro
+ * @author Wael
  */
-public class AjouterEvenementController implements Initializable {
+public class AjouterEvenementProjetController implements Initializable {
 
-    @FXML
+   @FXML
     private JFXTextField nomid;
     @FXML
     private JFXDatePicker dateid;
@@ -85,7 +79,8 @@ public class AjouterEvenementController implements Initializable {
 
     @FXML
     private JFXTextField local;
-
+File file;
+int idf1;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -113,7 +108,7 @@ public class AjouterEvenementController implements Initializable {
         ServiceEvenement se = new ServiceEvenement();
         if (!nomid.getText().equals("") && dateid.getValue() != null && typeid.getValue() != null && !local.getText().equals("")) {
         } else {
-            Alert alert = new Alert(AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
             alert.setContentText("Merci de remplir tous les champs");
@@ -143,14 +138,18 @@ public class AjouterEvenementController implements Initializable {
             se.ajouterevenementdeclub(a, 1);
         }
 
-        descid.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("acceuilevenmnt.fxml"));
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();
-        descid.getScene().getWindow().hide();
+         FXMLLoader loader = new FXMLLoader();
+                descid.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ListeprojetenseignantController l = loader.getController();
+                System.out.println(idf1);
+                l.initData(idf1,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
     @FXML
@@ -163,13 +162,18 @@ public class AjouterEvenementController implements Initializable {
 
     @FXML
     private void retourmenu(ActionEvent event) throws IOException {
-        descriptionid.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("acceuilevenmnt.fxml"));
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();
+         FXMLLoader loader = new FXMLLoader();
+                descid.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ListeprojetenseignantController l = loader.getController();
+                System.out.println(idf1);
+                l.initData(idf1,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
     @FXML
@@ -199,5 +203,10 @@ public class AjouterEvenementController implements Initializable {
         }
     }
 
-     
+
+    void initData(int idf, File file) {
+ idf1=idf;
+ this.file=file;
+    }
+    
 }
