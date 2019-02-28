@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package techevent.images;
+package techevent.services;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -26,18 +26,17 @@ import techevent.entities.Evenement;
 import techevent.entities.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import techevent.services.ServiceClub;
-import techevent.services.ServiceUser;
 import techevent.utils.connexionbd;
 
 /**
  *
  * @author SIDHOM
  */
-
 public class ServiceEvenement {
 
     Connection C = connexionbd.getinstance().getConn();
+    
+    //Ajouter un club avec un type 
 
     public void ajouterevenementdeclub(Evenement e1, int a) {
         try {
@@ -59,7 +58,7 @@ public class ServiceEvenement {
 
         }
     }
-
+// ajouter un club avec un autretype et type=Autre..
     public void ajouterevenementdeclub2(Evenement e1, int a) {
         try {
             PreparedStatement req = C.prepareStatement("insert into evenement(NOM,CLUB_ID,LOCALISATION,DATEORGANISATION,DESCRIPTION,PAYANT,PRIX,SOUSTYPE,CAPACITER,ETATDESPONSORISATION,TYPE) values (?,?,?,?,?,?,?,?,?,?,?)");
@@ -80,7 +79,7 @@ public class ServiceEvenement {
 
         }
     }
-
+//modifier les paramétres d'un événement sans la date d'oganisation
     public void modifierEvenement(Evenement e, int id) {
         try {
             PreparedStatement pt = C.prepareStatement("update evenement set NOM = ?,LOCALISATION = ?,DESCRIPTION = ?,CAPACITER= ?,SOUSTYPE = ?,PRIX = ?,TYPE = ? where id=?");
@@ -98,8 +97,7 @@ public class ServiceEvenement {
             Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //modiifer date
-
+//modifier seulement la date pour reporter un evenement 
     public void modifierEvenement2(Evenement e, int a) throws SQLException {
         PreparedStatement pt = C.prepareStatement("update evenement set DATEORGANISATION = ? where id=?");
         pt.setDate(1, e.getDateorganisation());
@@ -107,8 +105,11 @@ public class ServiceEvenement {
 
         pt.executeUpdate();
 
-    }
+    }  
+        
 
+   
+// annuler un evenement
     public void supprimerEvenement(int id) {
 
         try {
@@ -148,6 +149,7 @@ public class ServiceEvenement {
         return null;
     }
 
+    
     public ResultSet afficherEvenementparClub(int id) throws SQLException {
         Statement st = C.createStatement();
         String req = "select * from evenement where CLUB_ID=" + id;
@@ -156,22 +158,23 @@ public class ServiceEvenement {
 
     }
 
-    public String affichersponsorevenement(int id) throws SQLException {
+   /* public String affichersponsorevenement(int id) throws SQLException {
         Statement st = C.createStatement();
         String req = "select nom from  user where id = any(select sponsor_id from evenement where id = " + id + ")";
         ResultSet rs = st.executeQuery(req);
         rs.next();
         return (rs.getString("nom"));
 
-    }
+    }*/
 
     public ResultSet AfficherparEvenement(int id) throws SQLException {
         Statement st = C.createStatement();
         String req = "select * from evenement where id=" + id;
         ResultSet rs = st.executeQuery(req);
         return rs;
-    }
 
+    }
+//participer à un événements(étudiant)
     public void ajouterEtudiantaEvenement(int et, int evenement) throws SQLException {
 
         PreparedStatement req2 = C.prepareStatement("insert into user_evenement (etudiant_ID,mesevenement_ID) values(?,?)");
@@ -180,9 +183,8 @@ public class ServiceEvenement {
         req2.execute();
 
     }
-
+// afficher les evenements dans 3 semaines
     public ArrayList<Evenement> AffihcerEvenavenir(int id) throws SQLException {
-        //String req = ;
         ArrayList<Evenement> l = new ArrayList<Evenement>();
         ArrayList<Integer> l2 = this.getAllevenForEtud(id);
         for (int a : l2) {
@@ -205,7 +207,7 @@ public class ServiceEvenement {
         }
         return l;
     }
-
+// filtrage par type et etat de financement 
     public ResultSet filtrer(String etatdefinancement, String type) {
         try {
             PreparedStatement req = C.prepareStatement("select * from evenement where PAYANT=? and TYPE =? ");
@@ -220,7 +222,7 @@ public class ServiceEvenement {
         }
         return null;
     }
-
+// nombre des participants dans évenements
     public int nombredeparticipant(int a) throws SQLException {
         int k = 0;
         try {
@@ -360,7 +362,7 @@ public class ServiceEvenement {
                 ResultSet rs = st.executeQuery();
                 rs.beforeFirst();
                 if (rs.next()) {
-                    l2.add(rs.getString(8));
+                    l2.add(rs.getString(7));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
@@ -388,12 +390,12 @@ public class ServiceEvenement {
     public ArrayList<String> getAllEvenementNonSponsorise() {
         ArrayList<String> l = new ArrayList<String>();
         try {
-            PreparedStatement st = C.prepareStatement("select * from evenement where etatdesponsorisation=?");
+            PreparedStatement st = C.prepareStatement("select * from evenement where etatdefinancement=?");
             st.setBoolean(1, false);
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             while (rs.next()) {
-                l.add(rs.getString(8));
+                l.add(rs.getString(7));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
@@ -408,7 +410,7 @@ public class ServiceEvenement {
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getString(8);
+                return rs.getString(7);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);

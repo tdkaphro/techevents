@@ -91,5 +91,6 @@
          </font>
       </Label>
       <JFXButton fx:id="r" layoutX="1183.0" layoutY="24.0" onAction="#retour" text=",jhgj," />
+      <ImageView fx:id="img" fitHeight="174.0" fitWidth="174.0" layoutX="110.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
