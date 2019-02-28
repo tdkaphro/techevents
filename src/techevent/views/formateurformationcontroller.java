@@ -50,6 +50,8 @@ import org.controlsfx.control.Notifications;
 import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.services.ServiceFormation;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 public class formateurformationcontroller implements Initializable {
 
@@ -308,45 +310,7 @@ public class formateurformationcontroller implements Initializable {
 
     }
 
-    private static void notifier(int idf) {
-        Platform.runLater(() -> {
-            Stage owner = new Stage(StageStyle.TRANSPARENT);
-            StackPane root = new StackPane();
-            root.setStyle("-fx-background-color: TRANSPARENT");
-            Scene scene = new Scene(root, 1, 1);
-            scene.setFill(Color.TRANSPARENT);
-            owner.setScene(scene);
-            owner.setWidth(1);
-            owner.setHeight(1);
-            owner.toBack();
-            owner.show();
-            ServiceFormation sf = new ServiceFormation();
-            int hh = 0;
-            System.out.println(idf);
-            try {
-                hh = sf.nombredeformation(idf);
-            } catch (SQLException ex) {
-                Logger.getLogger(formateurformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            Notifications a = Notifications.create()
-                    .title("notification de demande")
-                    .text("vous avez " + String.valueOf(hh) + " nouveaux demande de formation   ")
-                    .graphic(null)
-                    .hideAfter(Duration.seconds(1000))
-                    .position(Pos.BOTTOM_RIGHT)
-                    .onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            owner.hide();
-                        }
-                    });
-            a.darkStyle();
-            a.showInformation();
-
-        }
-        );
-    }
+ 
 
     protected void configureMap() {
         MapOptions mapOptions = new MapOptions();
@@ -416,7 +380,20 @@ public class formateurformationcontroller implements Initializable {
     }
     void initData(int idf) {
         this.idf = idf;
-        notifier(idf);
+   
+        TrayNotification notifrejoindre= new TrayNotification();
+         ServiceFormation sf = new ServiceFormation();
+            int hh = 0;
+            System.out.println(idf);
+            try {
+                hh = sf.nombredeformation(idf);
+            } catch (SQLException ex) {
+                Logger.getLogger(formateurformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+          
+            notifrejoindre.setTray("information", "vouz avez "+String.valueOf(hh)+" nouveaux formation", NotificationType.INFORMATION);
+            notifrejoindre.showAndDismiss(Duration.seconds(5));
     }
         @FXML
     void refuser(ActionEvent event) {
@@ -468,4 +445,19 @@ public class formateurformationcontroller implements Initializable {
 
     }
 }
+       @FXML
+    void consulterorg(ActionEvent event) throws SQLException {
+        ServiceFormation sf = new ServiceFormation();
+        ResultSet rs = sf.afficherformation(tableau.getSelectionModel().getSelectedItem().getId());
+        rs.next();
+        ResultSet rs1 = sf.afficherorganisateur(rs.getInt("CLUB_ID"));
+        while(rs1.next()){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("nom: "+rs1.getString("nom")+" prenom: "+rs1.getString("prenom"));
+        alert.setContentText("numerotelephone: " +rs1.getLong("NUMEROTELEPHONE") +"email :"+ rs1.getString("email"));
+        alert.showAndWait();
+        }
+    }
+      
 }

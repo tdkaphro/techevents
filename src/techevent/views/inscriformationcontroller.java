@@ -337,5 +337,18 @@ alert.showAndWait();
             }
         });
     }
-     
+     @FXML
+      void formateurcon(ActionEvent event) throws SQLException {
+
+        ServiceFormation sf = new ServiceFormation();
+        ResultSet rs = sf.formateurdeformation3(tableau.getSelectionModel().getSelectedItem().getId());
+        System.out.println(tableau.getSelectionModel().getSelectedItem().getId());
+        while(rs.next()){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("nom: "+rs.getString("nom")+" prenom: "+rs.getString("prenom"));
+        alert.setContentText("numerotelephone: " +rs.getLong("NUMEROTELEPHONE") +"email :"+ rs.getString("email"));
+        alert.showAndWait();
+        }
+    }
 }

@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.List;
 
 
-public  abstract class User  extends RecursiveTreeObject<User> { 
+public  abstract class User  { 
 	
         int id ;
 	String nom ;
@@ -37,7 +37,7 @@ public  abstract class User  extends RecursiveTreeObject<User> {
     }
                 
 	public User() {
-		super();
+		
 	}
 	public int getId() {
 		return id;
