@@ -5,7 +5,6 @@
  */
 package techevent.views;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -63,8 +62,6 @@ public class InterfaceTraiterResponsablesController implements Initializable {
     private Button boutonannuler;
     @FXML
     private Button boutonsupprimer;
-    int idf;
-    File file;
 
     /**
      * Initializes the controller class.
@@ -74,7 +71,7 @@ public class InterfaceTraiterResponsablesController implements Initializable {
         try {
             // TODO
             ServiceClub sc=new ServiceClub();
-            List<Responsable> list = sc.afficherResponsables(idf);
+            List<Responsable> list = sc.afficherResponsables(5);
             ObservableList<Responsable> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -96,7 +93,6 @@ public class InterfaceTraiterResponsablesController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubPresidentController irc = loader.getController();
-            irc.initData(idf, file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceTraiterInvitationsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,14 +123,14 @@ public class InterfaceTraiterResponsablesController implements Initializable {
             }
         else{
         ServiceClub sc=new ServiceClub();
-        sc.annulerResponsabilite(idf, r.getId());
+        sc.annulerResponsabilite(5, r.getId());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes");
             alert.setHeaderText(null);
             alert.setContentText(r.getNom()+" "+r.getPrenom()+" est revenu un membre");
             alert.showAndWait();
         ServiceClub sc2=new ServiceClub();
-            List<Responsable> list = sc2.afficherResponsables(idf);
+            List<Responsable> list = sc2.afficherResponsables(5);
             ObservableList<Responsable> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -165,8 +161,8 @@ public class InterfaceTraiterResponsablesController implements Initializable {
             if (result.get() == ButtonType.OK){
             ServiceClub sc=new ServiceClub();
             ServiceClub cs3=new ServiceClub();
-            cs3.supprimerResponsable(idf, r.getId());
-            List<Responsable> list = sc.afficherResponsables(idf);
+            cs3.supprimerResponsable(5, r.getId());
+            List<Responsable> list = sc.afficherResponsables(5);
             ObservableList<Responsable> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -180,9 +176,5 @@ public class InterfaceTraiterResponsablesController implements Initializable {
             else {}
         }       
     }
-
-    void initData(int idf, File file) {
-        this.idf=idf;
-        this.file=file;
-    }
+    
 }

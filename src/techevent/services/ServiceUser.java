@@ -249,7 +249,7 @@ public class ServiceUser {
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(19);
+                return rs.getInt(17);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,7 +265,7 @@ public class ServiceUser {
             ResultSet rs = st.executeQuery();
             while(rs.next()) {
 
-                l.add(rs.getString(1) + " / " + rs.getString(6) +" "+rs.getString(8));
+                l.add(rs.getString(1) + " / " + rs.getString(6) +" "+rs.getString(9));
                 
             }
             return l;

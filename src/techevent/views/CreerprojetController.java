@@ -44,6 +44,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -82,61 +83,32 @@ public class CreerprojetController implements Initializable {
     private JFXListView<String> listeview;
     @FXML
     private AnchorPane projet;
-    
-   
-
+    @FXML
+    private ImageView img;
+   int idf1;
+   File file;
 
     @FXML
     private void ajouterprojetenseignant(ActionEvent event) throws IOException {
-        if (!nom.getText().equals("") && !desription.getText().equals("")){
-     Projet projet = new Projet();
-     projet.setNom(nom.getText());
-     projet.setDescription(desription.getText());
-     List<String> a;
-     a = listeview.getItems();
-     projet.setMedia(a.get(0));
-     projet.setProgress((int) Math.round(slider.getValue()));
-     projet.setDomaine((String) Domaine.getValue());
-     Enseignant en = new Enseignant();
-     en.setId(1);
-     projet.setEnseignant(en);
-     if(!checkspon.isSelected()){
-         projet.setEtat(false);
-     }else{
-         projet.setEtat(true);
-     }
-    Club cl = new Club();
-    cl.setId(1);
-    Sponsor s = new Sponsor();
-    s.setId(1);
+      
+                FXMLLoader loader = new FXMLLoader();
+                slider.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ListeprojetenseignantController l = loader.getController();
+                System.out.println(idf1);
+                l.initData(idf1,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+                
+        }
+        
+        
     
-    ServiceProjet sp = new ServiceProjet();
-   sp.ajouterprojetpourenseignant(1, projet);
-    Group root = new Group();
- ScrollBar sc = new ScrollBar();
- sc.setMin(0);
- sc.setOrientation(Orientation.VERTICAL);
- //set other properties
-  vbox = new VBox();
- vbox.getChildren();
- //add childrens to Vbox and properties
- root.getChildren().addAll(vbox,sc);
-         
-  sc.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                Number old_val, Number new_val) {
-                    vbox.setLayoutY(-new_val.doubleValue());
-
-            }
-        });
-      AnchorPane pane = FXMLLoader.load(getClass().getResource("listeprojetenseignant.fxml"));
-       this.projet.getChildren().setAll(pane);
-            showSuccess("Projet a été créer");
-        }
-        else{
-            showError("Vérifier les champs");
-        }
-    }
+  
  private static void showError( String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
            alert.setContentText(message);
@@ -162,7 +134,7 @@ ObservableList<String> list = FXCollections.observableArrayList("Informatique","
         Domaine.setItems(list);
         slider.setValue(0);
     }    
-
+ 
     @FXML
     private void importermedia(ActionEvent event) {
         FileChooser fc = new FileChooser();
@@ -185,7 +157,12 @@ ObservableList<String> list = FXCollections.observableArrayList("Informatique","
        this.projet.getChildren().setAll(pane);
     }
 
-
+ void initData(int idf,File file) {
+        idf1=idf;
+        this.file=file;
+        
+     
+ }
      
 
     

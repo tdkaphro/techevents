@@ -8,7 +8,6 @@ package techevent.views;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -58,9 +57,6 @@ public class InterfaceModifierClubController implements Initializable {
     private Button boutonannuler;
     @FXML
     private JFXTextField president;
-    int idf;
-    File file;
-    
     /**
      * Initializes the controller class.
      */
@@ -78,16 +74,17 @@ public class InterfaceModifierClubController implements Initializable {
             Logger.getLogger(InterfaceModifierClubController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
     }    
 
     @FXML
-    private void annuler(ActionEvent event) {        
+    private void annuler(ActionEvent event) {
+        
          try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceClubPresident.fxml"));
             Parent root;
             root = loader.load();
             InterfaceClubPresidentController irc = loader.getController();
-            irc.initData(idf, file);
             boutonannuler.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceClubPresidentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +97,7 @@ public class InterfaceModifierClubController implements Initializable {
             ServiceClub cl = new ServiceClub();
             ServiceClub cl2=new ServiceClub();
             if(president.getText().equals("")){
-            cl.ModifierClub(idf , comboboxdomaine.getValue(),nom.getText(), (int) fraisinscription.getValue());
+            cl.ModifierClub(5, comboboxdomaine.getValue(),nom.getText(), (int) fraisinscription.getValue()); // id d'etudiant
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes");
@@ -112,13 +109,12 @@ public class InterfaceModifierClubController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubPresidentController irc = loader.getController();
-            irc.initData(idf, file);
             boutonconfirmer.getScene().setRoot(root);
             
             }
             else {
             ServiceEtudiant se= new ServiceEtudiant();
-            if(! se.testerEmail(idf , president.getText())){
+            if(! se.testerEmail(5, president.getText())){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Adresse Invalide");
@@ -128,8 +124,8 @@ public class InterfaceModifierClubController implements Initializable {
             else{
             ServiceClub cl3=new ServiceClub();
             ServiceClub cl4=new ServiceClub();
-            cl3.ModifierClub(idf, comboboxdomaine.getValue(),nom.getText(), (int) fraisinscription.getValue());
-            cl4.changerPresident(idf, president.getText());
+            cl3.ModifierClub(5, comboboxdomaine.getValue(),nom.getText(), (int) fraisinscription.getValue()); // id d'etudiant
+            cl4.changerPresident(5, president.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes");
             alert.setHeaderText(null);
@@ -140,7 +136,6 @@ public class InterfaceModifierClubController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubEtudiantController irc = loader.getController();
-            irc.initData(idf, file);
             boutonconfirmer.getScene().setRoot(root);
             }     
           }
@@ -148,11 +143,6 @@ public class InterfaceModifierClubController implements Initializable {
             Logger.getLogger(InterfaceCréerClubController.class.getName()).log(Level.SEVERE, null, ex);
         }
       }     
-
-    void initData(int idf, File file) {
-       this.idf=idf;
-       this.file=file;
-         }
     }
     
 

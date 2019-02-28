@@ -19,13 +19,13 @@
             </JFXTextField>
             <ImageView fitHeight="68.0" fitWidth="128.0" layoutX="350.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="319.8888854980469">
                <image>
-                  <Image url="@../images/gmail.png" />
+                  <Image url="@images/gmail.png" />
                </image>
             </ImageView>
             <JFXTextField fx:id="adresseemail" layoutX="216.0" layoutY="239.0" prefHeight="35.0" prefWidth="355.0" promptText="Adresse e-mail" />
             <ImageView fitHeight="35.0" fitWidth="200.0" layoutX="306.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/connexion.png" />
+                  <Image url="@images/connexion.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="boutonconnexion" layoutX="305.0" layoutY="325.0" onAction="#connexion" prefHeight="25.0" prefWidth="200.0" text=" " />

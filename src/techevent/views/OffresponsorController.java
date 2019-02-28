@@ -176,7 +176,7 @@ public class OffresponsorController implements Initializable {
             String mdp = irc.mdp1;
             int id = su.getId(mail, mdp);
 
-            List<Offre> plist = so.findAllOffreforSponseur(su.getId(mail, mdp));
+            List<Offre> plist = so.findAllOffreforSponseur(id);
 
             idoffre.setCellValueFactory(new PropertyValueFactory<>("id"));
             prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
@@ -212,7 +212,7 @@ public class OffresponsorController implements Initializable {
             String mdp = irc.mdp1;
             int id = su.getId(mail, mdp);
 
-            List<Offre> plist = so.findAllDemandeforSponseur(su.getId(mail, mdp));
+            List<Offre> plist = so.findAllDemandeforSponseur(id);
 
             idoffre.setCellValueFactory(new PropertyValueFactory<>("id"));
             prix.setCellValueFactory(new PropertyValueFactory<>("prix"));

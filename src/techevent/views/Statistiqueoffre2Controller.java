@@ -58,8 +58,8 @@ public class Statistiqueoffre2Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail();
-            String mdp = irc.mdp();
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
             ArrayList<String> l = so.findAllEvenementforEven(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
             XYChart.Series set = new XYChart.Series<>();
             for(String s: l){

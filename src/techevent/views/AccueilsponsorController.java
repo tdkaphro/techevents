@@ -55,7 +55,6 @@ public class AccueilsponsorController implements Initializable {
             LoginController irc = loader.getController();
             String mail=irc.mail1;
             String mdp=irc.mdp1;
-            System.out.println(mail+mdp);
             nom.setText(su.getNom(mail, mdp));
             prenom.setText(su.getPrenom(mail, mdp));
             datenaiss.setText(su.getDateNaissance(mail, mdp));
