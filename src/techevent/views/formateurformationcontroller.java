@@ -41,6 +41,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -104,7 +106,10 @@ public class formateurformationcontroller implements Initializable {
     private Label certifie;
     @FXML
     private JFXButton retour;
+    @FXML
+    private ImageView img;
     int idf;
+    File file;
     String dateee;
 
     ObservableList<String> list = FXCollections.observableArrayList("demande de formation", "formation accepter");
@@ -379,9 +384,10 @@ public class formateurformationcontroller implements Initializable {
             }
         });
     }
-    void initData(int idf) {
+    void initData(int idf,File file) {
         this.idf = idf;
-   
+   Image image = new Image(file.toURI().toString(),142,145,false,false);
+        img.setImage(image);
         TrayNotification notifrejoindre= new TrayNotification();
          ServiceFormation sf = new ServiceFormation();
             int hh = 0;

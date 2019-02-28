@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,6 +36,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.ir.BreakNode;
 import techevent.entities.Evenement;
 import techevent.entities.Sponsor;
 import techevent.images.ServiceEvenement;
@@ -73,11 +77,12 @@ public class AjouterEvenementController implements Initializable {
     private JFXComboBox<String> financeid;
     @FXML
     private JFXTextField capacite;
+    File file;
+    int idf;
 
     /**
      * Initializes the controller class.
      */
-    //API MAP
     // List des domaines
     ObservableList<String> list = FXCollections.observableArrayList("Physiques/Sportives", "Culturelles", "Gala", "Communautaires", "Autre..");
     // liste etat finnance
@@ -111,50 +116,83 @@ public class AjouterEvenementController implements Initializable {
     @FXML
     private void ajouter(ActionEvent event) throws IOException {
         ServiceEvenement se = new ServiceEvenement();
-        if (!nomid.getText().equals("") && dateid.getValue() != null && typeid.getValue() != null && !local.getText().equals("")) {
-        } else {
+        if (nomid.getText().equals("") || dateid.getValue() == null || typeid.getValue() == null || local.getText().equals("") || capacite.getText() == null || typeid.getValue() == null) {
+
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
             alert.setContentText("Merci de remplir tous les champs");
             alert.showAndWait();
-        }
-        
-        Evenement a = new Evenement();
+        } else if (dateid.getValue().toEpochDay() - LocalDate.now().toEpochDay() < 0) {
 
-        a.setNom(nomid.getText());
-        a.setEtatdefinancement(financeid.getValue());
-        a.setLocalisation(local.getText());
-        a.setDateorganisation(Date.valueOf(dateid.getValue()));
-        a.setCapacite(Integer.parseInt(capacite.getText()));
-        a.setType(typeid.getValue());
-        a.setDescription(descriptionid.getText());
+            Alert alert2 = new Alert(AlertType.INFORMATION);
+            alert2.setTitle("Erreur");
+            alert2.setHeaderText(null);
+            alert2.setContentText("Vous ne pouvez pas choisir une date inférieur");
+            alert2.showAndWait();
+        } else if (LocalDate.now().toEpochDay() < dateid.getValue().toEpochDay()) {
 
-        if (financeid.getValue().equals("Payant")) {
-            a.setPrix(prixid.getValue());
-        }
+            Alert alert3 = new Alert(AlertType.INFORMATION);
+            alert3.setTitle("Erreur");
+            alert3.setHeaderText(null);
+            alert3.setContentText("Vous ne pouvez pas choisir une date supérieur 1 mois");
+            alert3.showAndWait();
 
-        if (a.getType().equals("Autre..")) {
-            a.setSoustypeautre(autretypeid.getText());
-            a.setType(autretypeid.getText());
-            se.ajouterevenementdeclub2(a, 1);
+        } else if (capacite.getText().matches("[0-9]+")) {
+            Alert alert3 = new Alert(AlertType.INFORMATION);
+            alert3.setTitle("Erreur");
+            alert3.setHeaderText(null);
+            alert3.setContentText("Le champ capacite doit avoir seulement des nombres entiers");
+            alert3.showAndWait();
         } else {
+            Evenement a = new Evenement();
+
+            a.setNom(nomid.getText());
+            a.setEtatdefinancement(financeid.getValue());
+            a.setLocalisation(local.getText());
+            a.setDateorganisation(Date.valueOf(dateid.getValue()));
+            a.setCapacite(Integer.parseInt(capacite.getText()));
             a.setType(typeid.getValue());
-            se.ajouterevenementdeclub(a, 1);
+            a.setDescription(descriptionid.getText());
+
+            if (financeid.getValue().equals("Payant")) {
+                a.setPrix(prixid.getValue());
+            }
+
+            if (a.getType().equals("Autre..")) {
+                a.setSoustypeautre(autretypeid.getText());
+                a.setType(autretypeid.getText());
+                se.ajouterevenementdeclub2(a, 1);
+            } else {
+                a.setType(typeid.getValue());
+                se.ajouterevenementdeclub(a, 1);
+            }
+
+            descid.getScene().getWindow().hide();
+            Stage prStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("acceuilevenmnt.fxml"));
+            Scene scene = new Scene(root);
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
+            descid.getScene().getWindow().hide();
+
+        }
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("acceuilevenmnt.fxml"));
+            Parent root = loader.load();
+            AcceuilevenmntController irc = loader.getController();
+            irc.initData(idf, file);
+            dateid.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        descid.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("acceuilevenmnt.fxml"));
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();
-        descid.getScene().getWindow().hide();
     }
 
     @FXML
-    private void passerautre(ActionEvent event) {
+    private void passerautre(ActionEvent event
+    ) {
         if (typeid.getValue().equals("Autre..")) {
             autretypeid.setDisable(false);
         }
@@ -170,11 +208,22 @@ public class AjouterEvenementController implements Initializable {
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AcceuilEtudiantEven.fxml"));
+            root = loader.load();
+            AcceuilEtudiantEvenController irc = loader.getController();
+            irc.initData(idf, file);
+            descid.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    private void reset(ActionEvent event) {
-        
+    private void reset(ActionEvent event
+    ) {
+
         nomid.clear();
         descriptionid.clear();
         autretypeid.clear();
@@ -183,14 +232,12 @@ public class AjouterEvenementController implements Initializable {
         capacite.clear();
         local.clear();
         prixid.setValue(0);
-        
-        
-        
 
     }
 
     @FXML
-    private void pay(ActionEvent event) {
+    private void pay(ActionEvent event
+    ) {
         if (financeid.getValue().equals("Payant")) {
             prixid.setDisable(false);
         }
@@ -199,4 +246,5 @@ public class AjouterEvenementController implements Initializable {
         }
     }
 
+     
 }

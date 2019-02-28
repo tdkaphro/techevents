@@ -5,7 +5,6 @@
  */
 package techevent.views;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -29,8 +28,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import techevent.entities.Club;
 import techevent.entities.Etudiant;
 import techevent.services.ServiceClub;
@@ -58,10 +55,6 @@ public class InterfaceMesClubsController implements Initializable {
     private Button boutonretour;
     @FXML
     private Label mesclub;
-    @FXML
-    private ImageView utilisateurphoto;
-    int idf;
-    File file;
 
     /**
      * Initializes the controller class.
@@ -72,9 +65,9 @@ public class InterfaceMesClubsController implements Initializable {
             // TODO
             ServiceClub sc = new ServiceClub();
             ServiceClub sc2 = new ServiceClub();
-            int n=sc.mesclub(idf);
+            int n=sc.mesclub(5);
             mesclub.setText(Integer.toString(n));
-            List<Club> list = sc2.clubspersonel(idf);
+            List<Club> list = sc2.clubspersonel(5); // id d'étudiant connecté
             ObservableList<Club> obslist = FXCollections.observableArrayList(list);
             colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
             colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -103,11 +96,9 @@ public class InterfaceMesClubsController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceEmail.fxml"));
             Parent root;
             root = loader.load();
-            InterfaceEmailController irc2 = loader.getController();     
-            InterfaceEmailController irc = loader.getController();
+            InterfaceEmailController irc = loader.getController();     
             String s=rs.getString(4);
-            irc.initData(idf,file);
-            irc2.initData2(rs.getString(4));
+            irc.initData(rs.getString(4));
             boutonscontacter.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceEmailController.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,18 +125,20 @@ public class InterfaceMesClubsController implements Initializable {
             if (result.get() == ButtonType.OK){
             ServiceClub sc=new ServiceClub();
             ServiceClub sc2= new ServiceClub();
-            sc.quitterclub(idf, c.getId());
+            sc.quitterclub(5, c.getId());
             ServiceClub sc3 = new ServiceClub();
-            int n=sc3.mesclub(idf);
+            int n=sc3.mesclub(5);
             mesclub.setText(Integer.toString(n));
-            List<Club> list = sc2.clubspersonel(idf);
+            List<Club> list = sc2.clubspersonel(5); // id d'étudiant connecté
             ObservableList<Club> obslist = FXCollections.observableArrayList(list);
             colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
             colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             colonnedomaine.setCellValueFactory(new PropertyValueFactory<>("domaineduclub"));
             tableclub.setItems(obslist);
+            
             }
         }
+        
     }
 
     @FXML
@@ -155,17 +148,10 @@ public class InterfaceMesClubsController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubEtudiantController irc = loader.getController();
-            irc.initData(idf,file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCréerClubController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    void initData(int idf, File file) {
-       this.idf=idf; 
-       this.file=file;
-       Image image = new Image(file.toURI().toString());
-       utilisateurphoto.setImage(image);
-    }
+    
 }

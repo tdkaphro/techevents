@@ -121,11 +121,11 @@ public class LoginController implements Initializable {
                FXMLLoader loader = new FXMLLoader();
                 label.getScene().getWindow().hide();  
                 Stage prStage =new Stage(); 
-                loader.setLocation(getClass().getResource("accueilformateur.fxml"));
+                loader.setLocation(getClass().getResource("accueilenseignant.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
-                AccueilformateurController mc = loader.getController();
-                mc.initData(idf);
+                AccueilenseignantController en = loader.getController();
+                en.initData(idf);
                 prStage.setScene(scene);
                 prStage.setResizable(false);
                 prStage.show();

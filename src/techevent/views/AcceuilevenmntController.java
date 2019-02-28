@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.lynden.gmapsfx.GoogleMapView;
 import java.awt.Component;
 import java.awt.Frame;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -343,6 +344,10 @@ public class AcceuilevenmntController implements Initializable {
           }
         
         
+    }
+
+    void initData(int idf, File file) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

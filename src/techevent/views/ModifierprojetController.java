@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -26,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
@@ -33,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import techevent.entities.Projet;
 import techevent.services.ServiceProjet;
 import techevent.views.ListeprojetenseignantController;
@@ -62,7 +65,8 @@ public class ModifierprojetController implements Initializable {
     private Label cbenseignant;
     @FXML
     private JFXListView<Projet> listeview;
-
+File file;
+int idf1;
 
     /**
      * Initializes the controller class.
@@ -74,8 +78,7 @@ public class ModifierprojetController implements Initializable {
             ObservableList<String> oblist = FXCollections.observableArrayList(sp.getAllDomaine());
             Domaine.setItems(oblist);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("listeprojetenseignant.fxml"));
-            Parent root = loader.load();
-            ListeprojetenseignantController irc = loader.getController();
+             ListeprojetenseignantController irc = loader.getController();
 
             ResultSet rs = sp.afficherProjetsparenseignant2(sp.getEnsidByProjetId(irc.id));
             nom.setText(rs.getString("nom"));
@@ -87,9 +90,7 @@ public class ModifierprojetController implements Initializable {
                 checkspon.setSelected(false);
             }
             slider.setValue(irc.prog);
-        } catch (IOException ex) {
-            Logger.getLogger(ModifierprojetController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        }  catch (SQLException ex) {
             Logger.getLogger(ModifierprojetController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -100,15 +101,28 @@ public class ModifierprojetController implements Initializable {
 
     @FXML
     private void annuler(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("listeprojetenseignant.fxml"));
-        Parent root=loader.load();
-        nom.getScene().setRoot(root);
+         FXMLLoader loader = new FXMLLoader();
+                slider.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                ListeprojetenseignantController l = loader.getController();
+                System.out.println(idf1);
+                l.initData(idf1,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
     @FXML
     private void modifierprojetenseignant(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("listeprojetenseignant.fxml"));
-        Parent root = loader.load();
+       FXMLLoader loader = new FXMLLoader();
+                slider.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("listeprojetenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
         ListeprojetenseignantController irc = loader.getController();
         ServiceProjet sp = new ServiceProjet();
         Projet p = new Projet();
@@ -120,6 +134,15 @@ public class ModifierprojetController implements Initializable {
         p.setEtat(checkspon.isSelected());
         p.setProgress((int) Math.round(slider.getValue()));
         sp.modifierprojet(p);
+        irc.initData(idf1,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+    }
+
+    void initData(int idf, File file) {
+idf1 = idf;
+this.file = file;
     }
 
 

@@ -8,7 +8,6 @@ package techevent.views;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSlider;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,7 +35,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import techevent.entities.Club;
 import techevent.services.ServiceClub;
-
 
 /**
  * FXML Controller class
@@ -66,8 +64,6 @@ public class InterfaceCréerClubController implements Initializable {
     private Button boutoncréer;
     @FXML
     private JFXDatePicker datedecreation;
-    int idf;
-    File file;
    
 
     /**
@@ -85,7 +81,6 @@ public class InterfaceCréerClubController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubEtudiantController irc = loader.getController();
-            irc.initData(idf, file);
             boutonannuler.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCréerClubController.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,9 +98,9 @@ public class InterfaceCréerClubController implements Initializable {
             alert.showAndWait();
             }
             else{
-            
+            // Besoin de l'id d'utilisateur
             ServiceClub ps = new ServiceClub();
-            ps.AjouterClub(new Club(textfilednom.getText(), datedecreation.getValue().toString(), comboboxdomaine.getValue(), (int) fraisinscription.getValue()),idf);
+            ps.AjouterClub(new Club(textfilednom.getText(), datedecreation.getValue().toString(), comboboxdomaine.getValue(), (int) fraisinscription.getValue()),5);
             
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Succes");
@@ -117,16 +112,10 @@ public class InterfaceCréerClubController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubEtudiantController irc = loader.getController();
-            irc.initData(idf, file);
             boutoncréer.getScene().setRoot(root);
             }
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCréerClubController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    void initData(int idf, File file) {
-        this.idf=idf;
-        this.file=file;
     }
 }

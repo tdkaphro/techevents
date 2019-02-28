@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import techevent.entities.Etudiant;
 import techevent.entities.Formateur;
@@ -35,7 +36,7 @@ import techevent.services.ServiceUser;
  * @author theboy
  */
 public class AccueiletudiantController implements Initializable {
-
+    
     @FXML
     private JFXButton b1;
     @FXML
@@ -52,33 +53,30 @@ public class AccueiletudiantController implements Initializable {
     private Label telephone;
     @FXML
     private Label role;
-    @FXML
-    private Label datenaissance;
     int idf;
-     @FXML
+    File file;
+    @FXML
     private ImageView img;
-File file ;
+
+     @FXML
+    private AnchorPane creer;
+ 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
- 
-
+        
     }    
-
+    
     @FXML
     private void EditProfile(ActionEvent event) {
     }
-
-
-
-
+    
     private void mesevenements(ActionEvent event) throws IOException {
-       
+        
     }
-
-
+    
     @FXML
     private void club(ActionEvent event) throws IOException {
                 FXMLLoader loader = new FXMLLoader();
@@ -94,50 +92,54 @@ File file ;
                 prStage.show();
         
     }
-
+    
     @FXML
     private void formation(ActionEvent event) throws IOException {
-                FXMLLoader loader = new FXMLLoader();
-                img.getScene().getWindow().hide();  
-                Stage prStage =new Stage(); 
-                loader.setLocation(getClass().getResource("inscriformation.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                inscriformationcontroller mc = loader.getController();
-                mc.initData(idf,file);
-                prStage.setScene(scene);
-                prStage.setResizable(false);
-                prStage.show();
-    }
-
-    @FXML
-    private void evenement(ActionEvent event) throws IOException {
-         b1.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("AcceuilEtudiantEven.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        img.getScene().getWindow().hide();        
+        Stage prStage = new Stage();        
+        loader.setLocation(getClass().getResource("inscriformation.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
+        inscriformationcontroller mc = loader.getController();
+        mc.initData(idf, file);
         prStage.setScene(scene);
         prStage.setResizable(false);
         prStage.show();
     }
-
+    
+    @FXML
+    private void evenement(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        img.getScene().getWindow().hide();        
+        Stage prStage = new Stage();        
+        loader.setLocation(getClass().getResource("AcceuilEtudiantEven.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        AcceuilEtudiantEvenController mc = loader.getController();
+        mc.initData(idf, file);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
+    }
+    
     @FXML
     private void projet(ActionEvent event) throws IOException {
-           FXMLLoader loader = new FXMLLoader();
-                img.getScene().getWindow().hide();  
-                Stage prStage =new Stage(); 
-                loader.setLocation(getClass().getResource("listeprojetetudiant.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                ListeprojetetudiantController mc = loader.getController();
-                mc.initData(idf,file);
-                prStage.setScene(scene);
-                prStage.setResizable(false);
-                prStage.show();
+        FXMLLoader loader = new FXMLLoader();
+        img.getScene().getWindow().hide();        
+        Stage prStage = new Stage();        
+        loader.setLocation(getClass().getResource("listeprojetetudiant.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        ListeprojetetudiantController mc = loader.getController();
+        mc.initData(idf, file);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
-
+    
     void initData(int idf) {
-        this.idf=idf;
+        this.idf = idf;
         ServiceEtudiant sf = new ServiceEtudiant();
         Etudiant f = sf.afficherEtudiant(idf);
         nom.setText(f.getNom());
@@ -146,11 +148,25 @@ File file ;
         mail1.setText(f.getEmail());
         telephone.setText(String.valueOf(f.getNumerotelephone()));
         classe.setText(f.getClasse());
-        role.setText("etudiant");
+        role.setText("Etudiant");
         file = new File(f.getPicture());
-        Image image = new Image(file.toURI().toString(),142,145,false,false);
+        Image image = new Image(file.toURI().toString(), 142, 145, false, false);
         img.setImage(image);
+ 
                         }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("login.fxml"));
+        this.creer.getChildren().setAll(pane);
     }
+  void initData(int idf, File file) {
+this.idf = idf;
+this.file = file;
+}
+    }
+
+   
     
+   
 

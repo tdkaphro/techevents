@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import techevent.entities.Enseignant;
+import techevent.entities.Etudiant;
 import techevent.entities.Sponsor;
 
 /**
@@ -61,19 +62,28 @@ public class ServiceEnseignant {
         }
     }
     
-    public void afficherEnseignant() {
+   public Enseignant afficherEnseignant(int id) {
         Statement st;
         try {
             st = c.createStatement();
-            String req = "select * from user where DTYPE='sponsor'";
+            String req = "select * from user where id = "+id;
             ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                System.out.println("sponsor nom : " + rs.getString(6) + " / prenom : " + rs.getString(8) + " / numero de telephone : " + rs.getLong(7) + " / universite : " + rs.getObject(11) + " / departement : " + rs.getString(10) + " / date de naissance : " + rs.getString(3) + " / email : " + rs.getString(4));
-            }
+            rs.next();
+            Enseignant e = new Enseignant();
+            e.setNom(rs.getString("nom"));
+            e.setPrenom(rs.getString("prenom"));
+            e.setEmail(rs.getString("email"));
+            e.setNumerotelephone(Integer.parseInt(rs.getString("NUMEROTELEPHONE")));
+            e.setPicture(rs.getString("PICTURE"));
+            e.setDatedenaissance(rs.getDate("DATEDENAISSANCE"));
+            e.setClasse(rs.getString("departement"));
+            return e;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
+    
     
     public void supprimerEnseignant(Enseignant e) {
         try {

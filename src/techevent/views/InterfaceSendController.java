@@ -7,7 +7,6 @@ package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import techevent.utils.SendMail;
-
 
 /**
  * FXML Controller class
@@ -41,8 +39,6 @@ public class InterfaceSendController implements Initializable {
     private String presidentemail;
     private String sujet;
     private String continu;
-    int idf;
-    File file;
     
     /**
      * Initializes the controller class.
@@ -68,14 +64,13 @@ public class InterfaceSendController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceMesClubsController irc = loader.getController();
-            irc.initData(idf, file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceMesClubsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    void initdata1(String text) {
+    void initdata(String text) {
        presidentemail=text;
     }
 
@@ -86,9 +81,5 @@ public class InterfaceSendController implements Initializable {
     void initData3(String text) {
         continu=text;
     }
-
-    void initData(int idf, File file) {
-        this.idf=idf;
-        this.file=file;
-    }
+    
 }

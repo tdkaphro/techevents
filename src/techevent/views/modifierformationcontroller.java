@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -73,8 +74,7 @@ public class modifierformationcontroller implements Initializable {
     private JFXComboBox<String> cbformateur;
       @FXML
     private Label nbrchar;
-
-    String nom1; String prix1; String capaciter1; String volume1; LocalDate datedebut1; LocalDate datedefin1; String domaine1; String description1; boolean certified1;String formateur1;
+    int id ; String nom1; String prix1; String capaciter1; String volume1; LocalDate datedebut1; LocalDate datedefin1; String domaine1; String description1; boolean certified1;String formateur1;
 
     
             public double lat1=0;
@@ -83,7 +83,13 @@ public class modifierformationcontroller implements Initializable {
               
        ObservableList<String> list = FXCollections.observableArrayList("web","reseau","mobile","genieciville","mécanique","electrique");
 
-     
+              
+    int idf; 
+    File file ; 
+    String a1;
+    String a2; 
+    String a3 ; 
+    String a4 ; 
     @FXML
     void ajouterevt(ActionEvent event) throws IOException {
 	java.util.Date date = new java.util.Date();
@@ -121,6 +127,7 @@ public class modifierformationcontroller implements Initializable {
                 alert.setContentText("formation modifier avec succes!!");
                 alert.showAndWait();
                  Formation a = new Formation();
+     a.setId(id);
     a.setNom(nomid.getText());
     a.setPrix(Double.parseDouble(prixid.getText()));
     a.setCapacite(Integer.parseInt(capaciterid.getText()));
@@ -141,14 +148,18 @@ public class modifierformationcontroller implements Initializable {
     ServiceFormation sf = new ServiceFormation();
     a.setLon(lon1);
     a.setLat(lat1);
-    sf.ajouterformationdeclub(a, 2, e);
+    sf.modifierformation(a, e);
     ajouter.getScene().getWindow().hide();  
-    Stage prStage =new Stage(); 
-    Parent root = FXMLLoader.load(getClass().getResource("presidentformation.fxml"));
-    Scene scene = new Scene(root);
-    prStage.setScene(scene);
-    prStage.setResizable(false);
-    prStage.show();
+      FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController(); 
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
             }
     }      
     @FXML
@@ -176,13 +187,19 @@ public class modifierformationcontroller implements Initializable {
     Parent root = loader.load();
     Scene scene = new Scene(root);
     LatLongFXMLController_1 mc = loader.getController();
-    mc.initData(nom,prix,capaciter,volume,datedebut,datedefin,domaine,description,certified,formateur);
+    mc.initData(nom,prix,capaciter,volume,datedebut,datedefin,domaine,description,certified,formateur,idf,file,a1,a2,a3,a4);
     prStage.setScene(scene);
     prStage.setResizable(false);
     prStage.show();
         
     }
- void initData(double lat, double lon, String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, boolean certified, String formateur,String description) throws SQLException {
+ void initData(double lat, double lon, String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, boolean certified, String formateur,String description,int idf, File file, String a1, String a2, String a3, String a4) throws SQLException {
+        this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4; 
         lat1 = lat; 
         lon1 = lon;
         nom1=nom;
@@ -240,12 +257,13 @@ public class modifierformationcontroller implements Initializable {
     }
 
     
-    void initData(int id, String nom, double prix, String description, int capaciter, int voulmehoraire, Date datedebut, Date datefinn, Double lat, Double lon, Boolean certifie, String domaine, int idformateur, String nomformateur, String prenomformateur) throws SQLException {
-   
+    void initData(int id, String nom, double prix, String description, int capaciter, int voulmehoraire, Date datedebut, Date datefinn, Double lat, Double lon, Boolean certifie, String domaine, int idformateur, String nomformateur, String prenomformateur,int idf, File file, String a1, String a2, String a3, String a4) throws SQLException {
+        this.id=id;
         lat1 = lat; 
         lon1 = lon;
         nom1=nom;
         prix1 = String.valueOf(prix);
+        prix1 = prix1.substring(0,prix1.length()-2);
         capaciter1 = String.valueOf(capaciter);
         volume1= String.valueOf(voulmehoraire) ;
         datedebut1 = datedebut.toLocalDate();
@@ -275,6 +293,26 @@ public class modifierformationcontroller implements Initializable {
     if(certified1 == true){
         certifieid.setSelected(true);
     }
+      this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
+    }
+     @FXML
+    void retourevt(ActionEvent event) throws SQLException, IOException {
+          choisir.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController(); 
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
     }
 
     
