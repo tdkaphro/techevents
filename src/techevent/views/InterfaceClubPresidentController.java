@@ -20,12 +20,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.naming.spi.DirStateFactory;
 import techevent.services.ServiceClub;
@@ -78,36 +80,7 @@ public class InterfaceClubPresidentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        try {
-            // TODO
-            ServiceClub sc = new ServiceClub();
-            ServiceClub sc2 = new ServiceClub();
-            ServiceClub sc3= new ServiceClub();
-            ServiceClub sc4= new ServiceClub();
-            ServiceClub sc5= new ServiceClub();
-            int nombremembre= sc2.NombreDesMembres(idf);
-            int nombreresp=sc3.NombreDesResponsables(idf);
-            int nombreeven=sc.NombreDesEvenements(idf);
-            int nombrefor=sc.NombreDesFormations(idf);
-            int nombreprojets=sc.NombreDesProjets(idf);
-            ResultSet rs=sc2.afficherClubParPresident(idf);
-            nomclub.setText(rs.getString(6));
-            nombresmembre.setText(Integer.toString(nombremembre));
-            nombresdesresponsable.setText(Integer.toString(nombreresp));
-            nombreevenement.setText(Integer.toString(nombreeven));
-            nombreformation.setText(Integer.toString(nombrefor));
-            nombreprojet.setText(Integer.toString(nombreprojets));
-            int not=sc3.notificationInvitation(idf);
-            if(not>0){
-            TrayNotification notifrejoindre= new TrayNotification();
-            String s="Invitation";
-            String s2="Vous avez "+not+" nouvelles invitations";
-            notifrejoindre.setTray(s, s2, NotificationType.INFORMATION);
-            notifrejoindre.showAndDismiss(Duration.seconds(5));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceClubPresidentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }    
 
     @FXML
@@ -173,17 +146,23 @@ public class InterfaceClubPresidentController implements Initializable {
     }
 
     @FXML
-    private void ajouterformation(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("presidentformation.fxml"));
-            Parent root;
-            root = loader.load();
-            presidentformationcontroller irc = loader.getController();
-            irc.initData(idf, file, nombreformation.getText(), nombresdesresponsable.getText(), nombresmembre.getText(),nombreevenement);
-            boutonretour.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceCréerClubController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void ajouterformation(ActionEvent event) throws IOException {
+     
+            nomclub.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController();
+            String a2 = nombreformation.getText();
+            String a1 = nomclub.getText();
+            String a3 = nombresmembre.getText();
+            String a4 = nombresdesresponsable.getText();
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
     }
 
     @FXML
@@ -233,5 +212,33 @@ public class InterfaceClubPresidentController implements Initializable {
         this.file=file;
         Image image = new Image(file.toURI().toString());
        utilisateurphoto.setImage(image);
+        try {
+            // TODO
+            ServiceClub sc = new ServiceClub();
+            ServiceClub sc2 = new ServiceClub();
+            ServiceClub sc3= new ServiceClub();
+            int nombremembre= sc2.NombreDesMembres(idf);
+            int nombreresp=sc3.NombreDesResponsables(idf);
+            int nombreeven=sc.NombreDesEvenements(idf);
+            int nombrefor=sc.NombreDesFormations(idf);
+            int nombreprojets=sc.NombreDesProjets(idf);
+            ResultSet rs=sc2.afficherClubParPresident(idf);
+            nomclub.setText(rs.getString(6));
+            nombresmembre.setText(Integer.toString(nombremembre));
+            nombresdesresponsable.setText(Integer.toString(nombreresp));
+            nombreevenement.setText(Integer.toString(nombreeven));
+            nombreformation.setText(Integer.toString(nombrefor));
+            nombreprojet.setText(Integer.toString(nombreprojets));
+            int not=sc3.notificationInvitation(idf);
+            if(not>0){
+            TrayNotification notifrejoindre= new TrayNotification();
+            String s="Invitation";
+            String s2="Vous avez "+not+" nouvelles invitations";
+            notifrejoindre.setTray(s, s2, NotificationType.INFORMATION);
+            notifrejoindre.showAndDismiss(Duration.seconds(5));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceClubPresidentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
