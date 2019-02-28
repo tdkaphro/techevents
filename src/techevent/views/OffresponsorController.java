@@ -172,8 +172,8 @@ public class OffresponsorController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail();
-            String mdp = irc.mdp();
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
             int id = su.getId(mail, mdp);
 
             List<Offre> plist = so.findAllOffreforSponseur(su.getId(mail, mdp));
@@ -208,8 +208,8 @@ public class OffresponsorController implements Initializable {
             Parent root = loader.load();
             LoginController irc = loader.getController();
 
-            String mail = irc.mail();
-            String mdp = irc.mdp();
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
             int id = su.getId(mail, mdp);
 
             List<Offre> plist = so.findAllDemandeforSponseur(su.getId(mail, mdp));

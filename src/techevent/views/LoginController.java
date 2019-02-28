@@ -52,6 +52,8 @@ public class LoginController implements Initializable {
         return t1.getText();
     }
     
+    public static String mail1;
+    public static String mdp1;
     public String mdp (){
         return t2.getText();
     }
@@ -69,6 +71,8 @@ public class LoginController implements Initializable {
         ServiceUser su = new ServiceUser();
         String type;
         int idf ;
+        mail1=t1.getText();
+        mdp1=t2.getText();
         String user = t1.getText();
         String mdp = t2.getText();
         if (su.Login(user, mdp)) {
@@ -80,11 +84,11 @@ public class LoginController implements Initializable {
                FXMLLoader loader = new FXMLLoader();
                 label.getScene().getWindow().hide();  
                 Stage prStage =new Stage(); 
-                loader.setLocation(getClass().getResource("accueilformateur.fxml"));
+                loader.setLocation(getClass().getResource("accueilsponsor.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
-                AccueilformateurController mc = loader.getController();
-                mc.initData(idf);
+                AccueilsponsorController mc = loader.getController();
+                //mc.initData(idf);
                 prStage.setScene(scene);
                 prStage.setResizable(false);
                 prStage.show();
