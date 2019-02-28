@@ -7,6 +7,7 @@ package techevent.views;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.Provider;
@@ -70,7 +71,8 @@ public class InterfaceTraiterMembresController implements Initializable {
     private TableColumn<Etudiant, String> id;
     @FXML
     private JFXTextField textfieldchercher;
-    
+    int idf;
+    File file;
    
     ObservableList<String> responsabilité = FXCollections.observableArrayList(
             "Vice President",
@@ -94,7 +96,7 @@ public class InterfaceTraiterMembresController implements Initializable {
             // TODO
             comboboxrésponsbilité.setItems(responsabilité);
             ServiceClub sc=new ServiceClub();
-            List<Etudiant> list = sc.AfficherMembres(5);
+            List<Etudiant> list = sc.AfficherMembres(idf);
             ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -125,6 +127,7 @@ public class InterfaceTraiterMembresController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceClubPresidentController irc = loader.getController();
+            irc.initData(idf, file);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(InterfaceTraiterInvitationsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +153,7 @@ public class InterfaceTraiterMembresController implements Initializable {
             if (result.get() == ButtonType.OK){
             ServiceClub sc=new ServiceClub();
             ServiceClub cs3=new ServiceClub();
-            cs3.supprimerMembre(5, e.getId());
+            cs3.supprimerMembre(idf , e.getId());
             List<Etudiant> list = sc.AfficherMembres(5);
             ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -177,14 +180,14 @@ public class InterfaceTraiterMembresController implements Initializable {
         }
         else{
             ServiceClub sc = new ServiceClub();
-            sc.affecterResponsabilité(5, e.getId(),comboboxrésponsbilité.getValue());
+            sc.affecterResponsabilité(idf, e.getId(),comboboxrésponsbilité.getValue());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes");
             alert.setHeaderText(null);
             alert.setContentText(e.getNom()+" "+e.getPrenom()+" est devenu "+comboboxrésponsbilité.getValue());
             alert.showAndWait();
             ServiceClub sc3=new ServiceClub();
-            List<Etudiant> list = sc3.AfficherMembres(5);
+            List<Etudiant> list = sc3.AfficherMembres(idf);
             ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
             nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -228,9 +231,13 @@ public class InterfaceTraiterMembresController implements Initializable {
                 if (filtertitre.toUpperCase().contains(newValue)) {
                     filteredList.add(e);
                 }
-
             }
             tablemembres.setItems(filteredList);
         }
+    }
+
+    void initData(int idf, File file) {
+        this.idf=idf;
+        this.file=file;
     }
 }

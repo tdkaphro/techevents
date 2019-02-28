@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXComboBox;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static jdk.nashorn.internal.runtime.Debug.id;
 import techevent.entities.Club;
@@ -71,6 +73,9 @@ public class InterfaceClubEtudiantController implements Initializable {
     @FXML
     private ImageView utilisateurphoto;
     
+    int idf;
+    File file;
+    
     @FXML
     private JFXComboBox<String> comboboxdomaine;
     ObservableList<String> domaine = FXCollections.observableArrayList(
@@ -101,7 +106,7 @@ public class InterfaceClubEtudiantController implements Initializable {
     @FXML
     private void monclub(ActionEvent event) throws SQLException{
             ServiceClub cs = new ServiceClub();
-            int monclubid=cs.getMonClubId(5); // id d'étudiant connecté
+            int monclubid=cs.getMonClubId(idf); // id d'étudiant connecté
             
             ServiceClub cs2 = new ServiceClub();    
             if(monclubid==0)
@@ -113,7 +118,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             alert.showAndWait();
             }
             else {
-                    if(!cs.etatduclub(5)) { // id d'étudiant connecté
+                if(!cs.etatduclub(idf)) { // id d'étudiant connecté
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Merci de patienter");
             alert.setHeaderText("Votre demande n'est pas encore traitée");
@@ -121,7 +126,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
             ServiceClub cs3=new ServiceClub();
-            cs3.SupprimerClub(4); // id d'étudiant connecté
+            cs3.SupprimerClub(idf); // id d'étudiant connecté
             } else {}
                    }
                     else{
@@ -130,6 +135,7 @@ public class InterfaceClubEtudiantController implements Initializable {
                             Parent root;
                             root = loader.load();
                             InterfaceClubPresidentController irc = loader.getController();
+                            irc.initData(idf,file);
                             boutoncréerclub.getScene().setRoot(root);
                         } catch (IOException ex) {
                             Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,7 +177,7 @@ public class InterfaceClubEtudiantController implements Initializable {
     private void creerclub(ActionEvent event) throws SQLException {
         try {
             ServiceClub ps=new ServiceClub();
-            int test=ps.getMonClubId(5); // id d'étudiant connecté
+            int test=ps.getMonClubId(idf); // id d'étudiant connecté
             if(test!=0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
@@ -184,6 +190,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             Parent root;
             root = loader.load();
             InterfaceCréerClubController irc = loader.getController();
+            irc.initData(idf,file);
             boutoncréerclub.getScene().setRoot(root);
             }
         } catch (IOException ex) {
@@ -198,7 +205,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             String s;
             s=comboboxdomaine.getValue();
             if(s.equals("Tous")){
-            List<Club> list = ps.trierClub(5); // id d'étudiant connecté
+            List<Club> list = ps.trierClub(idf); // id d'étudiant connecté
             ObservableList<Club> obslist = FXCollections.observableArrayList(list);
             colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
             colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -207,7 +214,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             tableclub.setItems(obslist);
             }
             else{
-            List<Club> list2 = ps.trierClubParDomaine(5,s); // id d'étudiant connecté
+            List<Club> list2 = ps.trierClubParDomaine(idf,s); // id d'étudiant connecté
             ObservableList<Club> obslist2 = FXCollections.observableArrayList(list2);
             colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
             colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -235,14 +242,14 @@ public class InterfaceClubEtudiantController implements Initializable {
             alert.setContentText("Aucun club est selectionné");
             alert.showAndWait();
             }
-        else if(sc3.verifierMembre(4, cl.getId()))
+        else if(sc3.verifierMembre(idf, cl.getId()))
             {
             Alert alert5 = new Alert(Alert.AlertType.INFORMATION);
             alert5.setTitle("Merci");
             alert5.setHeaderText(null);
             alert5.setContentText("Vous étes déja membre  ");
             alert5.showAndWait();}
-        else if(sc2.verifierInvitation(4, cl.getId())==1){ // id d'étudiant connecté
+        else if(sc2.verifierInvitation(idf, cl.getId())==1){ // id d'étudiant connecté
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Merci de patienter");
             alert.setHeaderText("Votre demande de rejoindre "+cl.getNom()+" n'est pas encore traitée");
@@ -250,11 +257,11 @@ public class InterfaceClubEtudiantController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
             ServiceClub cs3=new ServiceClub();
-            cs3.AnnulerInvitation(4,cl.getId()); // id d'étudiant connecté
+            cs3.AnnulerInvitation(idf ,cl.getId()); // id d'étudiant connecté
             } 
         }
             else{
-            sc.DemandeDeRejoindre(4, cl.getId()); // id d'étudiant connecté
+            sc.DemandeDeRejoindre(idf , cl.getId()); // id d'étudiant connecté
             Alert alert6 = new Alert(Alert.AlertType.INFORMATION);
             alert6.setTitle("Merci");
             alert6.setHeaderText(null);
@@ -263,12 +270,10 @@ public class InterfaceClubEtudiantController implements Initializable {
             }
         }
     
-
-
     @FXML
     private void mesclub(ActionEvent event) throws SQLException {
         ServiceClub sc= new ServiceClub();
-        int n=sc.mesclub(5);
+        int n=sc.mesclub(idf);
         if(n==0)
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -283,6 +288,7 @@ public class InterfaceClubEtudiantController implements Initializable {
                 Parent root;
                 root = loader.load();
                 InterfaceMesClubsController irc = loader.getController();
+                irc.initData(idf,file);
                 boutonmesclub.getScene().setRoot(root);
             } catch (IOException ex) {
                 Logger.getLogger(InterfaceMesClubsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -292,13 +298,21 @@ public class InterfaceClubEtudiantController implements Initializable {
     @FXML
     private void retour(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceCréerClub.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueiletudiant.fxml"));
             Parent root;
             root = loader.load();
-            InterfaceCréerClubController irc = loader.getController();
+            AccueiletudiantController irc = loader.getController();
+            irc.initData(idf);
             boutonretour.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void initData(int idf, File file) {
+       this.idf=idf; 
+       this.file=file;
+       Image image = new Image(file.toURI().toString());
+       utilisateurphoto.setImage(image);
     }
 }

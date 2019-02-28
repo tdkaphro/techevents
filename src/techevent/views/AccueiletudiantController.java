@@ -81,6 +81,17 @@ File file ;
 
     @FXML
     private void club(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("InterfaceClubEtudiant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                InterfaceClubEtudiantController mc = loader.getController();
+                mc.initData(idf,file);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
         
     }
 
