@@ -375,5 +375,10 @@ public class ListeprojetenseignantController implements Initializable {
         supprimer.getScene().setRoot(root);
         
     }
+       @FXML
+    void lancerevt(ActionEvent event) throws IOException {
+               AnchorPane pane = FXMLLoader.load(getClass().getResource("AjouterEvenement.fxml"));
+        this.creer.getChildren().setAll(pane);
+    }
 
 }

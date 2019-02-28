@@ -74,22 +74,24 @@ public class AjoutermembreController implements Initializable {
     @FXML
     private void ajoutermembre(ActionEvent event) throws IOException {
         ServiceProjet sp = new ServiceProjet();
-        String email = this.email.getText();
-
-        if (email.matches("^[A-Za-z0-9_.]+[@][A-Za-z.]+$")) {
+        String email1= email.getText();
+        int b = sp.getIdbyMail(email.getText());
+        System.out.println(b);
+    //    if (email1.matches("^[A-Za-z0-9_.]+[@][A-Za-z.]+$")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("listeprojetenseignant.fxml"));
             Parent root = loader.load();
             ListeprojetenseignantController irc = loader.getController();
-            listemembre.getItems().addAll(email);
-            this.email.clear();
-            sp.ajoutermembre(irc.id, sp.getIdbyMail(email), sp.getEnsIdbyProjetId(irc.id));
+            listemembre.getItems().addAll(email1);
+            System.out.println(email.getText());
+            sp.ajoutermembre(irc.id, b, sp.getEnsIdbyProjetId(irc.id));
             System.out.println(irc.id);
-            System.out.println(sp.getIdbyMail(email));
+            System.out.println(sp.getIdbyMail(email.getText()));
+             this.email.clear();
             System.out.println(sp.getEnsIdbyProjetId(irc.id));
-        } else {
-            showError("email non valide");
+  //      } else {
+//            showError("email non valide");
 
-        }
+  //      }
 
     }
 

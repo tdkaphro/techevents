@@ -32,8 +32,7 @@ public class NewFXMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("presidentformation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("accueiletudiant.fxml"));
         Scene scene = new Scene(root);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
