@@ -21,11 +21,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import techevent.entities.Offre;
 import techevent.services.ServiceClub;
 import techevent.services.ServiceEvenement;
@@ -280,7 +282,14 @@ public class OffreevenementController implements Initializable {
     }
 
     @FXML
-    private void Retour(ActionEvent event) {
+    private void Retour(ActionEvent event) throws IOException {
+         accept.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("acceuilevenmnt.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
 
     @FXML

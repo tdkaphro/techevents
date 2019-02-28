@@ -113,7 +113,6 @@ public class AcceuilevenmntController implements Initializable {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setSoustypeautre(ev.affichersponsorevenement(rs.getInt("id")));
                 e.setDescription(rs.getString("DESCRIPTION"));
                // e.setEtatdefinancement(rs.getString("PAYANT"));
                e.setDateorganisation(rs.getDate("dateorganisation"));
@@ -176,7 +175,16 @@ public class AcceuilevenmntController implements Initializable {
     }
 
     @FXML
-    private void Sponsorisation(ActionEvent event) {
+    private void Sponsorisation(ActionEvent event) throws IOException {
+         desc.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("offreevenement.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
+    
+        
     }
 
     @FXML

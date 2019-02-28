@@ -15,7 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import techevent.services.ServiceUser;
 
 /**
@@ -48,7 +50,7 @@ public class AccueilsponsorController implements Initializable {
             
         try {
             ServiceUser su=new ServiceUser();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
             String mail=irc.mail();
@@ -67,20 +69,30 @@ public class AccueilsponsorController implements Initializable {
             
     }    
 
+
+  
+
     @FXML
-    private void ListeClub(ActionEvent event) {
+    private void club(ActionEvent event) {
     }
 
     @FXML
-    private void ListeFormations(ActionEvent event) {
+    private void formation(ActionEvent event) {
     }
 
     @FXML
-    private void ListeEvenements(ActionEvent event) {
+    private void evenement(ActionEvent event) throws IOException {
+         telephone.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("offresponsor.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
 
     @FXML
-    private void ListeProjets(ActionEvent event) {
+    private void projet(ActionEvent event) {
     }
     
 }

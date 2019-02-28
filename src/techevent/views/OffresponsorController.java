@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -29,6 +30,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import techevent.entities.Evenement;
 import techevent.entities.Offre;
 import techevent.entities.Sponsor;
@@ -276,7 +278,14 @@ public class OffresponsorController implements Initializable {
     }
 
     @FXML
-    private void Retour(ActionEvent event) {
+    private void Retour(ActionEvent event) throws IOException {
+             modif1.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("accueilsponsor.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
 
     @FXML

@@ -19,10 +19,6 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
-      <JFXButton layoutX="97.0" layoutY="335.0" onAction="#ListeClub" prefHeight="130.0" prefWidth="144.0" visible="false" />
-      <JFXButton layoutX="286.0" layoutY="330.0" onAction="#ListeFormations" prefHeight="130.0" prefWidth="132.0" visible="false" />
-      <JFXButton layoutX="491.0" layoutY="327.0" onAction="#ListeEvenements" prefHeight="130.0" prefWidth="132.0" visible="false" />
-      <JFXButton layoutX="677.0" layoutY="335.0" onAction="#ListeProjets" prefHeight="130.0" prefWidth="144.0" visible="false" />
       <Label fx:id="prenom" layoutX="647.0" layoutY="104.0" prefHeight="17.0" prefWidth="60.0">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -53,5 +49,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <JFXButton layoutX="109.0" layoutY="332.0" onAction="#club" prefHeight="128.0" prefWidth="155.0" />
+      <JFXButton layoutX="299.0" layoutY="332.0" onAction="#formation" prefHeight="128.0" prefWidth="122.0" text=" " />
+      <JFXButton layoutX="496.0" layoutY="332.0" onAction="#evenement" prefHeight="128.0" prefWidth="122.0" text=" " />
+      <JFXButton layoutX="693.0" layoutY="336.0" onAction="#projet" prefHeight="118.0" prefWidth="135.0" text=" " />
    </children>
 </AnchorPane>

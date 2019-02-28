@@ -36,20 +36,20 @@ public class ServiceEvenement {
     Connection C = connexionbd.getinstance().getConn();
     
     
-    public void ajouterevenementdeclub(Evenement e1,int a,int b ){
+    public void ajouterevenementdeclub(Evenement e1,int a ){
         try{
-        PreparedStatement req = C.prepareStatement("insert into evenement(NOM,CLUB_ID,LOCALISATION,DATEORGANISATION,DESCRIPTION,SPONSOR_ID,PAYANT,PRIX,TYPE,CAPACITER,ETATDESPONSORISATION) values (?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement req = C.prepareStatement("insert into evenement(NOM,CLUB_ID,LOCALISATION,DATEORGANISATION,DESCRIPTION,PAYANT,PRIX,TYPE,CAPACITER,ETATDESPONSORISATION) values (?,?,?,?,?,?,?,?,?,?)");
         req.setString(1,e1.getNom());
         req.setInt(2, a);
         req.setString(3, e1.getLocalisation());
         req.setDate(4, e1.getDateorganisation());
         req.setString(5, e1.getDescription());
-        req.setInt(6, b);
-        req.setString(7, e1.getEtatdefinancement());
-        req.setDouble(8, e1.getPrix());
-        req.setString(9, e1.getType());
-        req.setInt(10, e1.getCapacite());
-        req.setBoolean(11, false);
+        
+        req.setString(6, e1.getEtatdefinancement());
+        req.setDouble(7, e1.getPrix());
+        req.setString(8, e1.getType());
+        req.setInt(9, e1.getCapacite());
+        req.setBoolean(10, false);
         req.execute(); 
         }
         catch(SQLException e){
@@ -58,21 +58,20 @@ public class ServiceEvenement {
         }
     }
     
-    public void ajouterevenementdeclub2(Evenement e1,int a,int b ){
+    public void ajouterevenementdeclub2(Evenement e1,int a){
         try{
-        PreparedStatement req = C.prepareStatement("insert into evenement(NOM,CLUB_ID,LOCALISATION,DATEORGANISATION,DESCRIPTION,SPONSOR_ID,PAYANT,PRIX,SOUSTYPE,CAPACITER,ETATDESPONSORISATION,TYPE) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement req = C.prepareStatement("insert into evenement(NOM,CLUB_ID,LOCALISATION,DATEORGANISATION,DESCRIPTION,PAYANT,PRIX,SOUSTYPE,CAPACITER,ETATDESPONSORISATION,TYPE) values (?,?,?,?,?,?,?,?,?,?,?)");
         req.setString(1,e1.getNom());
         req.setInt(2, a);
         req.setString(3, e1.getLocalisation());
         req.setDate(4, e1.getDateorganisation());
-        req.setString(5, e1.getDescription());
-        req.setInt(6, b);
-        req.setString(7, e1.getEtatdefinancement());
-        req.setDouble(8, e1.getPrix());
-        req.setString(9, e1.getSoustypeautre());
-        req.setInt(10, e1.getCapacite());
-        req.setBoolean(11, false);
-        req.setString(12, e1.getSoustypeautre());
+        req.setString(5, e1.getDescription());        
+        req.setString(6, e1.getEtatdefinancement());
+        req.setDouble(7, e1.getPrix());
+        req.setString(8, e1.getSoustypeautre());
+        req.setInt(9,e1.getCapacite());
+        req.setBoolean(10, false);
+        req.setString(11, e1.getSoustypeautre());
         req.execute(); 
         }
         catch(SQLException e){
@@ -110,6 +109,7 @@ public class ServiceEvenement {
                       
                       
         }
+        
         
         public void supprimerEvenement(int id){
      
