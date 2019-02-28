@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceTraiterInvitationsController">
+   <children>
+      <ImageView fitHeight="460.0" fitWidth="765.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/presidenttraiterinvi.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonaccepter" layoutX="584.0" layoutY="263.0" mnemonicParsing="false" onAction="#accepter" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: #042a68;" text="Accepter invitation" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutonrefuser" layoutX="584.0" layoutY="320.0" mnemonicParsing="false" onAction="#refuser" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: #042a68;" text="Réfuser invitation" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutonretour" layoutX="686.0" layoutY="413.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+      <TableView fx:id="tableinvitations" layoutX="11.0" layoutY="111.0" prefHeight="335.0" prefWidth="546.0">
+         <columns>
+            <TableColumn fx:id="nom" prefWidth="70.0" text="Nom" />
+            <TableColumn fx:id="prenom" text="Prenom" />
+            <TableColumn fx:id="classe" prefWidth="74.0" text="Classe" />
+            <TableColumn fx:id="Email" prefWidth="134.0" text="Email" />
+            <TableColumn fx:id="téléphone" prefWidth="173.0" text="Téléphone" />
+            <TableColumn fx:id="id" minWidth="6.0" prefWidth="26.0" text="id" />
+         </columns>
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+      </TableView>
+   </children>
+</AnchorPane>

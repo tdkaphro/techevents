@@ -8,16 +8,36 @@ public class Club implements java.io.Serializable
 	private int id ;
 	private String nom ; 
 	private Universite universiteduclub;
-	private Date datedecreation;
+	private String datedecreation; // changer dans la base
 	private String domaineduclub;
-	private President president;
 	private List<Etudiant> invitations;
-	private int fraisinscription;
+	private double fraisinscription;
         private boolean confirmationcreation;
         
 	public Club() {
 		super();
 	}
+
+        public Club(String nom,String datedecreation, String domaineduclub,double fraisinscription) {
+            this.nom = nom;
+            this.datedecreation = datedecreation;
+            this.domaineduclub = domaineduclub;
+            this.fraisinscription = fraisinscription;
+        }
+    
+        public Club(String nom,String domaineduclub,double fraisinscription) {
+            this.nom = nom;
+            this.domaineduclub = domaineduclub;
+            this.fraisinscription = fraisinscription;
+        }
+
+         public Club(int id, String nom, String domaineduclub, double fraisinscription) {
+            this.id = id;
+            this.nom = nom;
+            this.domaineduclub = domaineduclub;
+            this.fraisinscription = fraisinscription;
+        }
+        
 	public int getId() {
 		return id;
 	}
@@ -36,10 +56,10 @@ public class Club implements java.io.Serializable
 	public void setUniversiteduclub(Universite universiteduclub) {
 		this.universiteduclub = universiteduclub;
 	}
-	public Date getDatedecreation() {
+	public String getDatedecreation() {
 		return datedecreation;
 	}
-	public void setDatedecreation(Date datedecreation) {
+	public void setDatedecreation(String datedecreation) {
 		this.datedecreation = datedecreation;
 	}
 	public String getDomaineduclub() {
@@ -48,22 +68,17 @@ public class Club implements java.io.Serializable
 	public void setDomaineduclub(String domaineduclub) {
 		this.domaineduclub = domaineduclub;
 	}
-	public President getPresident() {
-		return president;
-	}
-	public void setPresident(President president) {
-		this.president = president;
-	}
+
 	public List<Etudiant> getInvitations() {
 		return invitations;
 	}
 	public void setInvitations(List<Etudiant> invitations) {
 		this.invitations = invitations;
 	}
-	public int getFraisinscription() {
+	public double getFraisinscription() {
 		return fraisinscription;
 	}
-	public void setFraisinscription(int fraisinscription) {
+	public void setFraisinscription(double fraisinscription) {
 		this.fraisinscription = fraisinscription;
 	}
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package techevent.services;
+package techevent.images;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -26,6 +26,8 @@ import techevent.entities.Evenement;
 import techevent.entities.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import techevent.services.ServiceClub;
+import techevent.services.ServiceUser;
 import techevent.utils.connexionbd;
 /**
  *

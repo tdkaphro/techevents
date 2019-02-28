@@ -33,7 +33,7 @@ import techevent.entities.Evenement;
 import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.entities.User;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 import techevent.services.ServiceFormation;
 import techevent.entities.*;
 

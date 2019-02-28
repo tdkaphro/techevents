@@ -29,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import techevent.entities.Etudiant;
 import techevent.entities.Evenement;
-import techevent.services.ServiceEvenement;
+import techevent.images.ServiceEvenement;
 
 /**
  * FXML Controller class

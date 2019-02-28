@@ -71,4 +71,21 @@ public class ServiceEtudiant {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public boolean testerEmail(int e, String s) throws SQLException{
+        boolean exist=false;
+        ServiceUniverste su= new ServiceUniverste();
+        int u=su.etudiantUniversite(e);
+        PreparedStatement pt = c.prepareStatement("select EMAIL from user where UNIVERSITEETUDIANT_ID = ? ");
+        pt.setInt(1, u);
+        ResultSet rs=pt.executeQuery();
+        while(rs.next())
+        {
+            if(rs.getString(1).equals(s))
+            {
+            return exist=true;
+            }
+        }
+        return exist;
+    }
 }

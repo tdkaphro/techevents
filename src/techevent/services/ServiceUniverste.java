@@ -5,6 +5,7 @@
  */
 package techevent.services;
 
+import techevent.images.ServiceEvenement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,5 +67,15 @@ public class ServiceUniverste {
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUniverste.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int etudiantUniversite(int e) throws SQLException{
+        int i=0;
+        PreparedStatement pt = C.prepareStatement("select * from user where id=? ");
+        pt.setInt(1, e);
+        ResultSet rs=pt.executeQuery();
+        rs.next();
+        i = rs.getInt(13);
+        return i;
     }
 }
