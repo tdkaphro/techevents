@@ -107,6 +107,14 @@ public class ServiceClub {
         }
     }
     
+    public void NombredesMembre(){
+        
+    }
+    
+    public void NombreDesresponsable(){
+        
+    }
+    
     public int getIdClubbyPresidentId(int id){
         try {
             PreparedStatement st = c.prepareStatement("select * from club where president_id=?");

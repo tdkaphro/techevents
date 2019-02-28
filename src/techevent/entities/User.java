@@ -15,6 +15,8 @@ public  abstract class User  {
 	private String email;
 	private String motpasse;
 	private long  numerotelephone;
+        String classe;
+
         private String picture;
 
     public String getPicture() {
@@ -25,6 +27,15 @@ public  abstract class User  {
         this.picture = picture;
     }
         
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+                
 	public User() {
 		
 	}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.ListeParticipantsController">
+   <children>
+      <ImageView fitHeight="756.0" fitWidth="1269.0">
+         <image>
+            <Image url="@../../images/aaa_1.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tab" layoutX="413.0" layoutY="123.0" prefHeight="576.0" prefWidth="827.0">
+        <columns>
+          <TableColumn fx:id="nomid" prefWidth="144.0" text="Nom" />
+          <TableColumn fx:id="prenomid" prefWidth="143.0" text="Prenom" />
+            <TableColumn fx:id="classid" prefWidth="117.0" text="Classe" />
+            <TableColumn fx:id="adresseid" prefWidth="272.0" text="Adresse Email" />
+            <TableColumn fx:id="telephone" prefWidth="150.0" text="Téléphone" />
+        </columns>
+      </TableView>
+      <Label layoutX="572.0" layoutY="52.0" text="La liste des participants à l'événement " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="backid" layoutX="1171.0" layoutY="11.0" onAction="#back" prefHeight="81.0" prefWidth="89.0" text=" " />
+   </children>
+</AnchorPane>
