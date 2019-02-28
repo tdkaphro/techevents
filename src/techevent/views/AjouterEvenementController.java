@@ -119,6 +119,7 @@ public class AjouterEvenementController implements Initializable {
             alert.setContentText("Merci de remplir tous les champs");
             alert.showAndWait();
         }
+        
         Evenement a = new Evenement();
 
         a.setNom(nomid.getText());
@@ -136,10 +137,10 @@ public class AjouterEvenementController implements Initializable {
         if (a.getType().equals("Autre..")) {
             a.setSoustypeautre(autretypeid.getText());
             a.setType(autretypeid.getText());
-            se.ajouterevenementdeclub2(a, 1, 2);
+            se.ajouterevenementdeclub2(a, 1);
         } else {
             a.setType(typeid.getValue());
-            se.ajouterevenementdeclub(a, 1, 2);
+            se.ajouterevenementdeclub(a, 1);
         }
 
         descid.getScene().getWindow().hide();
@@ -150,32 +151,6 @@ public class AjouterEvenementController implements Initializable {
         prStage.setResizable(false);
         prStage.show();
         descid.getScene().getWindow().hide();
-    }
-
-    void choisirevt(ActionEvent event) throws IOException {
-        /*  String nom = nomid.getText();
-        String type = typeid.getValue();
-        String autretype = autretypeid.getText();
-        String description = descriptionid.getText();
-        LocalDate dateorg = dateid.getValue();
-        String etat=financeid.getValue();
-        double prix = prixid.getValue();
-        int cap=Integer.parseInt(capacite.getText());
-
-        System.out.println(nom);
-
-        FXMLLoader loader = new FXMLLoader();
-        nomid.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        loader.setLocation(getClass().getResource("Scene.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        LatLongFXMLController mc = loader.getController();
-        //mc.initData();
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();*/
-
     }
 
     @FXML
@@ -199,6 +174,7 @@ public class AjouterEvenementController implements Initializable {
 
     @FXML
     private void reset(ActionEvent event) {
+        
         nomid.clear();
         descriptionid.clear();
         autretypeid.clear();
@@ -206,6 +182,10 @@ public class AjouterEvenementController implements Initializable {
         financeid.setValue("");
         capacite.clear();
         local.clear();
+        prixid.setValue(0);
+        
+        
+        
 
     }
 

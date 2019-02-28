@@ -30,8 +30,8 @@ public class NewMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-       //Parent root =FXMLLoader.load(getClass().getResource("AjouterEvenement.fxml"));
-       Parent root =FXMLLoader.load(getClass().getResource("login.fxml"));
+       Parent root =FXMLLoader.load(getClass().getResource("AjouterEvenement.fxml"));
+      // Parent root =FXMLLoader.load(getClass().getResource("login.fxml"));
             Scene scene = new Scene(root);
             
             // primaryStage.setTitle("Hello World!");

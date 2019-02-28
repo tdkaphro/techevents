@@ -31,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -40,6 +41,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import sun.font.EAttribute;
 import techevent.entities.Evenement;
 import techevent.services.ServiceEvenement;
@@ -105,6 +107,8 @@ public class AcceuilEtudiantEvenController implements Initializable {
     private JFXButton imprime;
     @FXML
     private Label localid;
+    @FXML
+    private JFXButton r;
 
     /**
      * Initializes the controller class.
@@ -398,6 +402,17 @@ public class AcceuilEtudiantEvenController implements Initializable {
             se.participationdpdf(tableau.getSelectionModel().getSelectedItem().getId());
         }
 
+    }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+        r.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("accueiletudiant.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
 
 }

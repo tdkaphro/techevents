@@ -16,8 +16,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import techevent.services.ServiceUser;
 
 /**
@@ -29,16 +31,6 @@ public class AccueiletudiantController implements Initializable {
 
     @FXML
     private JFXButton b1;
-    @FXML
-    private Button btnclub;
-    @FXML
-    private Button btnformation;
-    @FXML
-    private Button btnevenement;
-    @FXML
-    private JFXButton btnprojet;
-    @FXML
-    private JFXButton btnlogout;
     @FXML
     private Label nom;
     @FXML
@@ -53,6 +45,8 @@ public class AccueiletudiantController implements Initializable {
     private Label telephone;
     @FXML
     private Label role;
+    @FXML
+    private Label datenaissance;
 
     /**
      * Initializes the controller class.
@@ -83,20 +77,56 @@ public class AccueiletudiantController implements Initializable {
     private void EditProfile(ActionEvent event) {
     }
 
+
+
+
+    private void mesevenements(ActionEvent event) throws IOException {
+       
+    }
+
+
     @FXML
-    private void MesProjets(ActionEvent event) {
+    private void club(ActionEvent event) throws IOException {
+         /*    b1.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AcceuilEtudiantEven.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();*/
     }
 
     @FXML
-    private void MesEvenements(ActionEvent event) {
+    private void formation(ActionEvent event) throws IOException {
+            /* b1.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AcceuilEtudiantEven.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();*/
     }
 
     @FXML
-    private void MesFormations(ActionEvent event) {
+    private void evenement(ActionEvent event) throws IOException {
+         b1.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AcceuilEtudiantEven.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
 
     @FXML
-    private void MesClubs(ActionEvent event) {
+    private void projet(ActionEvent event) throws IOException {
+       /*      b1.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AcceuilEtudiantEven.fxml"));
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();*/
     }
     
 }
