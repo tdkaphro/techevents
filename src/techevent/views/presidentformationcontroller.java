@@ -66,6 +66,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -143,22 +144,17 @@ public class presidentformationcontroller implements Initializable {
     private GoogleMapView mapid;
     private GoogleMap map;
     public Marker marker = null;
-
     List<Formation> lf = new ArrayList<Formation>();
-
     public void initData() throws SQLException {
-
     }
 
     protected void configureMap() {
         MapOptions mapOptions = new MapOptions();
-
         mapOptions.center(new LatLong(35.6558688, 9.3910852))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .zoom(8);
 
         map = mapid.createMap(mapOptions, false);
-
     }
 
     @Override
@@ -234,68 +230,77 @@ public class presidentformationcontroller implements Initializable {
 
     @FXML
     void modifevt(ActionEvent event) throws IOException, SQLException {
-        if(tableau.getSelectionModel().isEmpty()){
+
+        if (tableau.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("selectioner le formation que vous voulez modifier!!!");
             alert.showAndWait();
-        }else{
-                FXMLLoader loader = new FXMLLoader();
-                tableau.getScene().getWindow().hide();  
-                Stage prStage =new Stage(); 
-                loader.setLocation(getClass().getResource("modifierformation.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                ServiceFormation sf = new ServiceFormation();
-                ResultSet rs =sf.afficherformation(tableau.getSelectionModel().getSelectedItem().getId());
-                rs.next();
-                modifierformationcontroller mc = loader.getController();
-                int id = rs.getInt("id");
-                String nom =  rs.getString("nom");
-                double prix =rs.getDouble("prix");
-                String description = rs.getString("description");
-                int capaciter = rs.getInt("CAPACITE");
-                int voulmehoraire = rs.getInt("VOLUMEHORAIRE");
-                java.sql.Date datedebut = rs.getDate("datedebut");
-                java.sql.Date datefinn = rs.getDate("datedefin");
-                Double lat = rs.getDouble("lat");
-                Double lon = rs.getDouble("lon");
-                Boolean certifie = rs.getBoolean("CERTIFICATION");
-                String domaine = rs.getString("domaine");
-                ResultSet rsf=sf.formateurdeformation2(rs.getInt("FORMATEUR_ID"));
-                rsf.next();
-                int  idformateur = rsf.getInt("id");
-                String nomformateur = rsf.getString("nom");
-                String prenomformateur =  rsf.getString("prenom");
-                mc.initData(id,nom,prix,description,capaciter,voulmehoraire,datedebut,datefinn,lat,lon,certifie,domaine,idformateur,nomformateur,prenomformateur);
-                prStage.setScene(scene);
-                prStage.setResizable(false);
-                prStage.show();
+        } else if (tableau.getSelectionModel().getSelectedItem().isConfirme() == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("vouz pouvez modifier une formation déja accepter par le formateur!!!");
+            alert.showAndWait();
+        } else {
+            FXMLLoader loader = new FXMLLoader();
+            tableau.getScene().getWindow().hide();
+            Stage prStage = new Stage();
+            loader.setLocation(getClass().getResource("modifierformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ServiceFormation sf = new ServiceFormation();
+            ResultSet rs = sf.afficherformation(tableau.getSelectionModel().getSelectedItem().getId());
+            rs.next();
+            modifierformationcontroller mc = loader.getController();
+            int id = rs.getInt("id");
+            String nom = rs.getString("nom");
+            double prix = rs.getDouble("prix");
+            String description = rs.getString("description");
+            int capaciter = rs.getInt("CAPACITE");
+            int voulmehoraire = rs.getInt("VOLUMEHORAIRE");
+            java.sql.Date datedebut = rs.getDate("datedebut");
+            java.sql.Date datefinn = rs.getDate("datedefin");
+            Double lat = rs.getDouble("lat");
+            Double lon = rs.getDouble("lon");
+            Boolean certifie = rs.getBoolean("CERTIFICATION");
+            String domaine = rs.getString("domaine");
+            ResultSet rsf = sf.formateurdeformation2(rs.getInt("FORMATEUR_ID"));
+            rsf.next();
+            int idformateur = rsf.getInt("id");
+            String nomformateur = rsf.getString("nom");
+            String prenomformateur = rsf.getString("prenom");
+            mc.initData(id, nom, prix, description, capaciter, voulmehoraire, datedebut, datefinn, lat, lon, certifie, domaine, idformateur, nomformateur, prenomformateur);
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
         }
     }
 
     @FXML
     void suppevt(ActionEvent event) throws IOException {
-           if(tableau.getSelectionModel().isEmpty()){
+        if (tableau.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("selectioner le formation que vous voulez supprimer!!!");
             alert.showAndWait();
-        }else{
-        tableau.getScene().getWindow().hide();  
+        } else {
+            tableau.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("supprimerformation.fxml"));
-       	    Parent root = loader.load();
-       	    Scene scene = new Scene(root);
-       	    supprimerformationcontroller mc = loader.getController();
-       	    mc.initData(tableau.getSelectionModel().getSelectedItem().getId());
-       	    Stage prStage = new Stage();
-       	    prStage.setScene(scene);
-       	    prStage.setResizable(false);
-       	    prStage.show();
-    }}
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            supprimerformationcontroller mc = loader.getController();
+            mc.initData(tableau.getSelectionModel().getSelectedItem().getId());
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
+        }
+    }
+
     private static void notifier(String pTitle, String pMessage) {
         Platform.runLater(() -> {
             Stage owner = new Stage(StageStyle.TRANSPARENT);
@@ -367,5 +372,50 @@ public class presidentformationcontroller implements Initializable {
                 }
             }
         });
+    }
+
+    @FXML
+    void formateurcon(ActionEvent event) throws SQLException {
+ if (tableau.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("selectioner le formation que vous voulez consulter son formateur!!!");
+            alert.showAndWait();
+        } else {
+        ServiceFormation sf = new ServiceFormation();
+        ResultSet rs = sf.formateurdeformation3(tableau.getSelectionModel().getSelectedItem().getId());
+        System.out.println(tableau.getSelectionModel().getSelectedItem().getId());
+        while(rs.next()){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("nom: "+rs.getString("nom")+" prenom: "+rs.getString("prenom"));
+        alert.setContentText("numerotelephone: " +rs.getLong("NUMEROTELEPHONE") +"email :"+ rs.getString("email"));
+        alert.showAndWait();
+        }
+ }
+    }
+    
+    @FXML
+    void listepar(ActionEvent event) throws IOException, SQLException {
+         if (tableau.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("selectioner le formation que vous voulez voir ces participant!!!");
+            alert.showAndWait();
+        } else {
+              tableau.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("partiformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            partiformationcontroller mc = loader.getController();
+            mc.initData(tableau.getSelectionModel().getSelectedItem().getId());
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
+    }
     }
 }

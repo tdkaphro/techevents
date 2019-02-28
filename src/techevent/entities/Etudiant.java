@@ -13,7 +13,7 @@ public class Etudiant extends User
 	private List<Evenement> mesevenement;
         
 	public Etudiant() {
-		super();
+
 	}
 	public Universite getUniversite() {
 		return universite;
@@ -45,5 +45,7 @@ public class Etudiant extends User
 	public void setMesevenement(List<Evenement> mesevenement) {
 		this.mesevenement = mesevenement;
 	}
+
+
 
 }

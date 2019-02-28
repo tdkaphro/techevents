@@ -129,7 +129,7 @@ public class ServiceFormation {
 
     public ResultSet filtrer(String et, String date, String domaine) {
         try {
-            PreparedStatement req = C.prepareStatement("select * from formation where domaine=? and confirme=1 and ?>=datedebut and id=any(select mesformations_id from user_formation where etudiant_ID=?)");
+            PreparedStatement req = C.prepareStatement("select * from formation where domaine=? and confirme=1  and ?>=datedebut and id=any(select mesformations_id from user_formation where etudiant_ID=?)");
             req.setString(1, domaine);
             req.setString(2, date);
             req.setString(3, et);
@@ -145,7 +145,7 @@ public class ServiceFormation {
     public ResultSet filtrer1(String date, String domaine) throws SQLException {
         if (domaine != null) {
             try {
-                PreparedStatement req = C.prepareStatement("select * from formation where domaine=?  and confirme=1 and ?>=datedebut and CURDATE()<datedebut");
+                PreparedStatement req = C.prepareStatement("select * from formation where domaine=? and confirme=1  and ?>=datedebut and CURDATE()<datedebut");
                 req.setString(1, domaine);
                 req.setString(2, date);
 
@@ -159,7 +159,7 @@ public class ServiceFormation {
         } else {
             try {
 
-                PreparedStatement req = C.prepareStatement("select * from formation where domaine is not null confirme=1 and ?>=datedebut and CURDATE()<datedebut");
+                PreparedStatement req = C.prepareStatement("select * from formation where domaine is not null and confirme=1 and ?>=datedebut and CURDATE()<datedebut");
                 req.setString(1, date);
 
                 ResultSet rs = req.executeQuery();
@@ -250,6 +250,18 @@ public class ServiceFormation {
                 h = rs.getString("nom");
             }
             return h;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    public ResultSet formateurdeformation3(int a) {
+        try {
+            Statement st = C.createStatement();
+            PreparedStatement req = C.prepareStatement("select * from user where id = any(select formateur_id from formation where id=?)");
+            req.setInt(1, a);
+            ResultSet rs = req.executeQuery();
+          return rs;
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -349,6 +361,28 @@ public class ServiceFormation {
         }
 
     }
+      public ResultSet afficherorganisateur(int a) throws SQLException {
+        try {
+            System.out.println(a);
+            PreparedStatement req = C.prepareStatement("select  * from user where MONCLUB_ID = ? ");
+            req.setInt(1, a);
+            ResultSet rs = req.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+            return null ;
+    } public ResultSet afficherparticipant(int a) throws SQLException {
+        try {
+            PreparedStatement req = C.prepareStatement("select  * from user where id = any(select etudiant_ID from user_formation where mesformations_ID = ?) ");
+            req.setInt(1, a);
+            ResultSet rs = req.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+            return null ;
+    }
     
-
+        
 }

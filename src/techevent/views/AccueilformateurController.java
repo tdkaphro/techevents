@@ -107,15 +107,7 @@ public class AccueilformateurController implements Initializable {
                 prStage.show();
     }
 
-    void initData(int aInt, String string, double aDouble, String string0, int aInt0, int aInt1, Date date, Date date0, double aDouble0, double aDouble1, boolean aBoolean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void initData(int aInt, String string, double aDouble, String string0, int aInt0, int aInt1, Date date, Date date0, double aDouble0, double aDouble1, boolean aBoolean, String string1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
+ 
     
 
    
