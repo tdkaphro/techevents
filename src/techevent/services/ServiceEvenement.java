@@ -107,7 +107,14 @@ public class ServiceEvenement {
 
     }  
         
+    public boolean reporterevenement(Evenement e, int a) throws SQLException {
+        PreparedStatement pt = C.prepareStatement("update evenement set DATEORGANISATION = ? where id=?");
+        pt.setDate(1, e.getDateorganisation());
+        pt.setInt(2, a);
 
+        pt.executeUpdate();
+        return true;
+    } 
    
 // annuler un evenement
     public void supprimerEvenement(int id) {
