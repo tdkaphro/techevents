@@ -51,14 +51,18 @@ public class InterfaceSendController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
+        
     }    
 
     @FXML
     private void connexion(ActionEvent event) {
-       String email=adresseemail.getText();
+       System.out.println(presidentemail);
+        String email=adresseemail.getText();
        String mp=motdepasse.getText();
        SendMail sm=new SendMail();
        sm.send(presidentemail, sujet, continu, email, mp);
+       
+       
     }
 
     @FXML
@@ -75,20 +79,16 @@ public class InterfaceSendController implements Initializable {
         }
     }
 
-    void initdata1(String text) {
-       presidentemail=text;
-    }
-
-    void initData2(String text) {
-        sujet=text;
-    }
-
-    void initData3(String text) {
-        continu=text;
-    }
 
     void initData(int idf, File file) {
         this.idf=idf;
         this.file=file;
+    }
+
+    void initdata1(String text, String text0, String text1) {
+        presidentemail=text;
+        sujet=text;
+        continu=text;
+        System.out.println(presidentemail);
     }
 }

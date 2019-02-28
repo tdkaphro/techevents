@@ -68,21 +68,7 @@ public class InterfaceMesClubsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            ServiceClub sc = new ServiceClub();
-            ServiceClub sc2 = new ServiceClub();
-            int n=sc.mesclub(idf);
-            mesclub.setText(Integer.toString(n));
-            List<Club> list = sc2.clubspersonel(idf);
-            ObservableList<Club> obslist = FXCollections.observableArrayList(list);
-            colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
-            colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            colonnedomaine.setCellValueFactory(new PropertyValueFactory<>("domaineduclub"));
-            tableclub.setItems(obslist);
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceMesClubsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
     }    
 
     @FXML
@@ -167,5 +153,20 @@ public class InterfaceMesClubsController implements Initializable {
        this.file=file;
        Image image = new Image(file.toURI().toString());
        utilisateurphoto.setImage(image);
+           try {
+            // TODO
+            ServiceClub sc = new ServiceClub();
+            ServiceClub sc2 = new ServiceClub();
+            int n=sc.mesclub(idf);
+            mesclub.setText(Integer.toString(n));
+            List<Club> list = sc2.clubspersonel(idf);
+            ObservableList<Club> obslist = FXCollections.observableArrayList(list);
+            colonneid.setCellValueFactory(new PropertyValueFactory<>("id"));
+            colonnenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            colonnedomaine.setCellValueFactory(new PropertyValueFactory<>("domaineduclub"));
+            tableclub.setItems(obslist);
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceMesClubsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -13,7 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,10 +29,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import techevent.entities.Formateur;
+import techevent.entities.Enseignant;
 import techevent.entities.Sponsor;
-import techevent.services.ServiceEvenement;
-import techevent.services.ServiceFormateur;
+import techevent.entities.Universite;
+import techevent.services.ServiceEnseignant;
 import techevent.services.ServiceSponsor;
 
 /**
@@ -36,7 +40,7 @@ import techevent.services.ServiceSponsor;
  *
  * @author Ciro
  */
-public class InscriptionSponsorController implements Initializable {
+public class InscriptionEnseignantController implements Initializable {
 
     @FXML
     private JFXTextField nom;
@@ -51,67 +55,30 @@ public class InscriptionSponsorController implements Initializable {
     @FXML
     private JFXDatePicker datedenaissance;
     @FXML
-    private JFXButton inscrire;
-    @FXML
-    private JFXTextField entreprise;
-    @FXML
     private JFXButton choisirimg;
-    File file;
     @FXML
     private ImageView img;
+    @FXML
+    private JFXButton inscrire;
+    @FXML
+    private JFXComboBox<Universite> université;
+    @FXML
+    private JFXTextField departementid;
+    File file;
+    Universite esprit;
+    ObservableList<Universite> univer = FXCollections.observableArrayList(esprit);
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+        université.setItems(univer);
 
-    @FXML
-    private void ajouter(ActionEvent event) throws IOException {
-        if (nom.getText().equals("") || datedenaissance.getValue() == null || prenom.getText() == null || entreprise.getText().equals("") || mail.getText() == null || numtel.getText() == null || motdepasse.getText() == null ) {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erreur");
-            alert.setHeaderText(null);
-            alert.setContentText("Merci de remplir tous les champs");
-            alert.showAndWait();
-        } else if (numtel.getText().matches("[0-9]+")) {
-
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            alert2.setTitle("Erreur");
-            alert2.setHeaderText(null);
-            alert2.setContentText("le champ numéro de téléphone doit avoir seulement des numéro");
-            alert2.showAndWait();
-        } else {
-            Sponsor spons = new Sponsor();
-            spons.setNom(nom.getText());
-            spons.setPrenom(nom.getText());
-            spons.setEmail(mail.getText());
-            spons.setMotpasse(motdepasse.getText());
-            spons.setNomentreprise(entreprise.getText());
-            spons.setPicture(file.toString());
-            spons.setDatedenaissance(Date.valueOf(datedenaissance.getValue()));
-            spons.setNumerotelephone(Integer.parseInt(numtel.getText()));
-            ServiceSponsor se = new ServiceSponsor();
-            se.ajouterSponsor(spons);
-            FXMLLoader loader = new FXMLLoader();
-            img.getScene().getWindow().hide();
-            Stage prStage = new Stage();
-            loader.setLocation(getClass().getResource("login.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            prStage.setScene(scene);
-            prStage.setResizable(false);
-            prStage.show();
-
-        }
     }
 
     @FXML
     private void choisirimage(ActionEvent event) {
-
         FileChooser fileChooserr = new FileChooser();
         fileChooserr.setTitle("Select PDF files");
         fileChooserr.setInitialDirectory(new File("C:"));
@@ -123,4 +90,47 @@ public class InscriptionSponsorController implements Initializable {
         img.setImage(image);
     }
 
+    @FXML
+    private void ajouter(ActionEvent event) throws IOException {
+        if (nom.getText().equals("") || datedenaissance.getValue() == null || prenom.getText() == null || departementid.getText().equals("") || mail.getText() == null || numtel.getText() == null || motdepasse.getText() == null || université.getValue() == null) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Merci de remplir tous les champs");
+            alert.showAndWait();
+        } else if (numtel.getText().matches("[0-9]+")) {
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Erreur");
+            alert2.setHeaderText(null);
+            alert2.setContentText("Vous ne pouvez pas choisir une date inférieur");
+            alert2.showAndWait();
+        } else {
+
+            Enseignant enseigant = new Enseignant();
+            enseigant.setNom(nom.getText());
+            enseigant.setPrenom(nom.getText());
+            enseigant.setEmail(mail.getText());
+            enseigant.setMotpasse(motdepasse.getText());
+            enseigant.setDepartement(departementid.getText());
+            enseigant.setUniversiteenseignant(université.getValue());
+            enseigant.setPicture(file.toString());
+            enseigant.setDatedenaissance(Date.valueOf(datedenaissance.getValue()));
+            enseigant.setNumerotelephone(Integer.parseInt(numtel.getText()));
+            ServiceEnseignant se = new ServiceEnseignant();
+            se.ajouterEnseignant(enseigant, 0);
+            FXMLLoader loader = new FXMLLoader();
+            img.getScene().getWindow().hide();
+            Stage prStage = new Stage();
+            loader.setLocation(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
+
+        }
+
+    }
 }

@@ -62,7 +62,7 @@ public class ServiceClub {
             pt.setInt(1, e); 
             ResultSet rs=pt.executeQuery();
             rs.next();
-            id=rs.getInt(1);
+            id=rs.getInt("MONCLUB_ID");
             return id;
     } 
     
@@ -83,9 +83,9 @@ public class ServiceClub {
         ps2.setString(6, rs.getString(6));
         ps2.setLong(7, rs.getLong(7));
         ps2.setString(8, rs.getString(8));
-        ps2.setString(8, rs.getString(9));
-        ps2.setInt(9, rs.getInt(12));
+        ps2.setString(9, rs.getString(9));
         ps2.setInt(10, rs.getInt(13));
+        ps2.setInt(11, rs.getInt(14));
         ps2.execute();
     }
     
@@ -528,17 +528,18 @@ public class ServiceClub {
     
     public int getIdClubbyPresidentId(int id){
         try {
-            PreparedStatement st = c.prepareStatement("select * from club where president_id=?");
+            PreparedStatement st = c.prepareStatement("select * from user where id=?");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt(17);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
+
 }
  

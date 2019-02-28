@@ -66,21 +66,7 @@ public class InterfaceTraiterInvitationsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            ServiceClub sc=new ServiceClub();
-            List<Etudiant> list = sc.AfficherInvitation(5);
-            ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
-            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-            classe.setCellValueFactory(new PropertyValueFactory<>("classe"));
-            téléphone.setCellValueFactory(new PropertyValueFactory<>("numerotelephone"));
-            Email.setCellValueFactory(new PropertyValueFactory<>("email"));
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            tableinvitations.setItems(obslist);
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceTraiterInvitationsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }    
 
     @FXML
@@ -169,6 +155,21 @@ public class InterfaceTraiterInvitationsController implements Initializable {
 
     void initData(int idf, File file) {
      this.idf=idf;
-     this.file=file;    
+     this.file=file;   
+     try {
+            // TODO
+            ServiceClub sc=new ServiceClub();
+            List<Etudiant> list = sc.AfficherInvitation(idf);
+            ObservableList<Etudiant> obslist = FXCollections.observableArrayList(list);
+            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+            classe.setCellValueFactory(new PropertyValueFactory<>("classe"));
+            téléphone.setCellValueFactory(new PropertyValueFactory<>("numerotelephone"));
+            Email.setCellValueFactory(new PropertyValueFactory<>("email"));
+            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            tableinvitations.setItems(obslist);
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceTraiterInvitationsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

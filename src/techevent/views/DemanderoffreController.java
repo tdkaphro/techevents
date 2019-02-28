@@ -58,8 +58,8 @@ public class DemanderoffreController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail();
-            String mdp = irc.mdp();
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
             List l = su.getAllSponsorNames();
             ObservableList<String> oblist = FXCollections.observableArrayList(l);
             sponsor.setItems(oblist);
