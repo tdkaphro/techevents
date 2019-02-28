@@ -143,7 +143,7 @@ void initData(int idf) {
     }
 
     void initData(int idf, File file) {
-idf = idf;
+this.idf = idf;
 this.file = file;
     }
 

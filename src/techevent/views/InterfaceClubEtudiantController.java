@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXComboBox;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -300,5 +301,9 @@ public class InterfaceClubEtudiantController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void initData(int idf, File file) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

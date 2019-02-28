@@ -160,13 +160,13 @@ public class AccueiletudiantController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("login.fxml"));
         this.creer.getChildren().setAll(pane);
     }
- 
-    }
-
-    void initData(int idf, File file) {
-idf = idf;
+  void initData(int idf, File file) {
+this.idf = idf;
 this.file = file;
 }
+    }
+
+   
     
    
-}}
+
