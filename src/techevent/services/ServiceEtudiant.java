@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import techevent.entities.Etudiant;
+import techevent.entities.Formateur;
 import techevent.utils.connexionbd;
 
 /**
@@ -48,18 +49,26 @@ public class ServiceEtudiant {
         }
     }
 
-    public void AfficherEtudiant() {
+   public Etudiant afficherEtudiant(int id) {
         Statement st;
         try {
             st = c.createStatement();
-            String req = "select * from user where dtype='etudiant'";
+            String req = "select * from user where id = "+id;
             ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                System.out.println("etudiant num : " + rs.getInt(1) + " /responsabilite : " + rs.getString(17) + " / nom : " + rs.getString(6) + " / prenom : " + rs.getString(8) + " / date de naissance : " + rs.getString(3) + " / email : " + rs.getString(4) + " / classe : " + rs.getString(12));
-            }
+            rs.next();
+            Etudiant f = new Etudiant();
+            f.setNom(rs.getString("nom"));
+            f.setPrenom(rs.getString("prenom"));
+            f.setEmail(rs.getString("email"));
+            f.setNumerotelephone(Integer.parseInt(rs.getString("NUMEROTELEPHONE")));
+            f.setPicture(rs.getString("PICTURE"));
+            f.setDatedenaissance(rs.getDate("DATEDENAISSANCE"));
+            f.setClasse(rs.getString("classe"));
+            return f;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
     
     public void SupprimerEtudiant(Etudiant e) {

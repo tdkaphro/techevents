@@ -10,6 +10,7 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -458,6 +459,5 @@ public class formateurformationcontroller implements Initializable {
         alert.setContentText("numerotelephone: " +rs1.getLong("NUMEROTELEPHONE") +"email :"+ rs1.getString("email"));
         alert.showAndWait();
         }
-    }
-      
+    }     
 }

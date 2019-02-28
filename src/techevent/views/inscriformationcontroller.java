@@ -9,6 +9,7 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -25,14 +26,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.services.ServiceFormation;
@@ -88,6 +95,8 @@ public class inscriformationcontroller implements Initializable  {
     private TableColumn<Formation, String> nbrheure;   
     @FXML
     private Label prix;
+    @FXML
+    private ImageView img;
 
     @FXML
     private Label formateur;
@@ -103,7 +112,8 @@ public class inscriformationcontroller implements Initializable  {
    ObservableList<String> list1 = FXCollections.observableArrayList("web","reseau","mobile","genieciville","mécanique","electrique");
    ObservableList<String> list2 = FXCollections.observableArrayList("1jour","1semaine","1mois","tout");
 
-
+   int idf;
+   File file;
 
       @FXML
     void trievt(ActionEvent event) throws SQLException {
@@ -212,7 +222,7 @@ alert.setContentText("le formation est plein");
 alert.showAndWait();
         }
         }else{
-            sf.desincrire(1 ,tableau.getSelectionModel().getSelectedItem().getId());
+            sf.desincrire(idf ,tableau.getSelectionModel().getSelectedItem().getId());
             b1.setText("s'incrire");
         }
     }
@@ -350,5 +360,26 @@ alert.showAndWait();
         alert.setContentText("numerotelephone: " +rs.getLong("NUMEROTELEPHONE") +"email :"+ rs.getString("email"));
         alert.showAndWait();
         }
+    }
+
+    void initData(int idf, File file) {
+        this.idf=idf;
+        this.file=file;  
+        Image image = new Image(file.toURI().toString(),142,145,false,false);
+        img.setImage(image);
+    }
+        @FXML
+    void retourevt(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader();
+                img.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("accueiletudiant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AccueiletudiantController mc = loader.getController();
+                mc.initData(idf);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 }
