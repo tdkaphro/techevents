@@ -10,6 +10,7 @@ import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -43,6 +44,12 @@ public class LatLongFXMLController_1 implements Initializable {
     String nom1; String prix1; String capaciter1; String volume1; LocalDate datedebut1; LocalDate datedefin1; String domaine1; String description1; boolean certified1;String formateur1;
     double lon =0; 
     double lat =0;
+        int idf; 
+    File file ; 
+    String a1;
+    String a2; 
+    String a3 ; 
+    String a4 ; 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         googleMapView.addMapInializedListener(() -> configureMap());
@@ -93,14 +100,13 @@ public class LatLongFXMLController_1 implements Initializable {
        	    Parent root = loader.load();
        	    Scene scene = new Scene(root);
        	    modifierformationcontroller mc = loader.getController();
-       	    mc.initData(lat,lon,nom1,prix1,capaciter1,volume1,datedebut1,datedefin1,domaine1,certified1,formateur1,description1);
+       	    mc.initData(lat,lon,nom1,prix1,capaciter1,volume1,datedebut1,datedefin1,domaine1,certified1,formateur1,description1,idf,file,a1,a2,a3,a4);
        	    Stage prStage = new Stage();
        	    prStage.setScene(scene);
        	    prStage.setResizable(false);
        	    prStage.show();
     }
-
-    void initData(String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, String description, boolean certified,String formateur) {
+    void initData(String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, String description, boolean certified,String formateur,int idf, File file, String a1, String a2, String a3, String a4) {
         nom1=nom;
         prix1 =prix;
         capaciter1 = capaciter;
@@ -111,11 +117,11 @@ public class LatLongFXMLController_1 implements Initializable {
         certified1 = certified;
         formateur1 = formateur;
         description1 =description;
-        
+        this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
     }
-
- 
-
-   
-     
 }

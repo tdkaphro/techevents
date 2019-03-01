@@ -59,6 +59,7 @@ public class AccueilformateurController implements Initializable {
     private ImageView img;
    
             int idf;
+            File file;
     @FXML
     void MesFormations(ActionEvent event) throws IOException {
                 FXMLLoader loader = new FXMLLoader();
@@ -68,7 +69,7 @@ public class AccueilformateurController implements Initializable {
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 formateurformationcontroller mc = loader.getController();
-                mc.initData(idf);
+                mc.initData(idf,file);
                 prStage.setScene(scene);
                 prStage.setResizable(false);
                 prStage.show();
@@ -88,7 +89,6 @@ public class AccueilformateurController implements Initializable {
         datenaiss.setText(String.valueOf(f.getDatedenaissance()));
         mail1.setText(f.getEmail());
         telephone.setText(String.valueOf(f.getNumerotelephone()));
-        File file ;
         file = new File(f.getPicture());
         Image image = new Image(file.toURI().toString(),142,145,false,false);
         img.setImage(image);
@@ -104,7 +104,7 @@ public class AccueilformateurController implements Initializable {
                 prStage.setScene(scene);
                 prStage.setResizable(false);
                 prStage.show();
-    }
+     }
 
  
     

@@ -18,8 +18,14 @@
             <Image url="@../images/5.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="nomclub" layoutX="248.0" layoutY="544.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
-      <Label fx:id="nompresident" layoutX="163.0" layoutY="475.0" prefHeight="17.0" prefWidth="56.0" text="Label" />
+      <Label fx:id="nomclub" layoutX="248.0" layoutY="530.0" prefHeight="46.0" prefWidth="113.0" text="Label">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+      <Label fx:id="nompresident" layoutX="138.0" layoutY="475.0" prefHeight="18.0" prefWidth="102.0" text="President" textFill="#fababa">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
       <ImageView fitHeight="124.0" fitWidth="125.0" layoutX="73.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="nbrmem" layoutX="282.0" layoutY="601.0" text="Label" />
       <Label fx:id="nbres" layoutX="317.0" layoutY="633.0" text="Label" />
@@ -45,7 +51,7 @@
          </font>
       </JFXButton>
       <JFXButton layoutX="25.0" layoutY="16.0" prefHeight="25.0" prefWidth="29.0" text=" " />
-      <ImageView fitHeight="180.0" fitWidth="176.0" layoutX="103.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img" fitHeight="180.0" fitWidth="176.0" layoutX="103.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Desktop/pi.png" />
          </image>
@@ -79,6 +85,12 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
+      <ImageView fitHeight="65.0" fitWidth="77.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RETOUR.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="13.0" layoutY="13.0" onAction="#retourevt" prefHeight="58.0" prefWidth="66.0" />
       
              
       
