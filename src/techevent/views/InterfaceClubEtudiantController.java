@@ -319,7 +319,7 @@ public class InterfaceClubEtudiantController implements Initializable {
     void initData(int idf, File file) throws SQLException{
        this.idf=idf; 
        this.file=file;
-       Image image = new Image(file.toURI().toString());
+       Image image = new Image(file.toURI().toString(),142,145,false,false);
        utilisateurphoto.setImage(image);
        ServiceClub ps=new ServiceClub();
        List<Club> list = ps.trierClub(idf); // id d'étudiant connecté

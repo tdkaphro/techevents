@@ -54,6 +54,6 @@
             <Image url="@../images/Untitled.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="utilisateurphoto" fitHeight="114.0" fitWidth="109.0" layoutX="64.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="utilisateurphoto" fitHeight="109.0" fitWidth="109.0" layoutX="65.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

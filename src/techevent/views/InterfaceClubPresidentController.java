@@ -15,10 +15,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -150,7 +153,7 @@ public class InterfaceClubPresidentController implements Initializable {
     }
 
     @FXML
-    private void ajouterformation(ActionEvent event) throws IOException {
+    private void ajouterformation(ActionEvent event) throws IOException, SQLException {
      
             nomclub.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
@@ -214,7 +217,7 @@ public class InterfaceClubPresidentController implements Initializable {
     void initData(int idf, File file) {
         this.idf=idf;
         this.file=file;
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image(file.toURI().toString(),142,145,false,false);
         utilisateurphoto.setImage(image);
         try {
             // TODO
@@ -248,17 +251,15 @@ public class InterfaceClubPresidentController implements Initializable {
 
     @FXML
     private void statistique(ActionEvent event) throws SQLException{
-        ServiceClub sc=new ServiceClub();
-        final PieChart chart = new PieChart(); 
-        chart.setTitle("Statistique"); 
-        chart.getData().setAll(new PieChart.Data("Membres",sc.NombreDesMembres(idf)), new PieChart.Data("Responsables", sc.NombreDesResponsables(idf)),  
-                new PieChart.Data("Invitations", sc.notificationInvitation(idf)), new PieChart.Data("Formations",sc.NombreDesFormations(idf)), 
-                new PieChart.Data("Evenements", sc.NombreDesEvenements(idf)), new PieChart.Data("Projets", sc.NombreDesProjets(idf)) 
-        ); 
-        final StackPane root = new StackPane(); 
-        root.getChildren().add(chart); 
-        final Scene scene = new Scene(root, 300, 250); 
-         
-        boutonstat.getScene().setRoot(root);
+       try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceStatistiques.fxml"));
+            Parent root;
+            root = loader.load();
+            InterfaceStatistiquesController irc = loader.getController();
+            irc.initData(idf,file);
+            boutonstat.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceStatistiquesController.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
 }

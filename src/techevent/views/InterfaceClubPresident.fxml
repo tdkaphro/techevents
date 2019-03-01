@@ -25,32 +25,32 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="nombresmembre" layoutX="618.0" layoutY="86.0" prefHeight="19.0" prefWidth="13.0" text="0">
+      <Label fx:id="nombresmembre" layoutX="634.0" layoutY="86.0" prefHeight="19.0" prefWidth="13.0" text="0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="nombreevenement" layoutX="636.0" layoutY="108.0" text="0">
+      <Label fx:id="nombreevenement" layoutX="645.0" layoutY="108.0" text="0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="nombreformation" layoutX="638.0" layoutY="130.0" text="0">
+      <Label fx:id="nombreformation" layoutX="646.0" layoutY="130.0" text="0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="nombreprojet" layoutX="602.0" layoutY="151.0" prefHeight="19.0" prefWidth="33.0" text="0">
+      <Label fx:id="nombreprojet" layoutX="611.0" layoutY="153.0" prefHeight="19.0" prefWidth="33.0" text="0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ImageView fx:id="utilisateurphoto" fitHeight="105.0" fitWidth="105.0" layoutX="90.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="utilisateurphoto" fitHeight="106.0" fitWidth="117.0" layoutX="96.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="106.0" layoutY="344.0" prefHeight="17.0" prefWidth="75.0" text="  President">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label fx:id="nomclub" layoutX="488.0" layoutY="39.0" text="Nom">
+      <Label fx:id="nomclub" layoutX="495.0" layoutY="39.0" text="Nom">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
@@ -60,7 +60,7 @@
       <JFXButton fx:id="boutontraitermembre" layoutX="399.0" layoutY="246.0" onAction="#traitermembre" prefHeight="30.0" prefWidth="148.0" text=" " />
       <JFXButton fx:id="boutonresponsables" layoutX="330.0" layoutY="306.0" onAction="#traiterresponsables" prefHeight="49.0" prefWidth="226.0" text=" " />
       <JFXButton fx:id="boutoninvitation" layoutX="330.0" layoutY="389.0" onAction="#traiterinvitations" prefHeight="49.0" prefWidth="226.0" text=" " />
-      <Label fx:id="nombresdesresponsable" layoutX="640.0" layoutY="65.0" prefHeight="19.0" prefWidth="13.0" text="0">
+      <Label fx:id="nombresdesresponsable" layoutX="656.0" layoutY="65.0" prefHeight="19.0" prefWidth="13.0" text="0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
