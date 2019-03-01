@@ -15,8 +15,6 @@ import techevent.views.AccueilformateurController;
 
 public class creercomptecontroller {
 
-        @FXML
-    private JFXButton etudiant;
 
     @FXML
     private Label label;
@@ -29,9 +27,20 @@ public class creercomptecontroller {
 
     @FXML
     private JFXButton sponsor;
+    @FXML
+    private JFXButton enseignant1;
 
     @FXML
-    void enseignantinscri(ActionEvent event) {
+    void enseignantinscri(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("inscriptionenseignant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
             
     }
 
@@ -51,8 +60,30 @@ public class creercomptecontroller {
     }
 
     @FXML
-    void sponsorinscri(ActionEvent event) {
+    void sponsorinscri(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("inscriptionsponsor.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
 
+    }
+
+    @FXML
+    private void etudiantinscri(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("inscriptionetudiant.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
 
 }

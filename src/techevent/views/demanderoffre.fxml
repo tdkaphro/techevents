@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="557.0" fitWidth="900.0" layoutX="-3.0" layoutY="-4.0">
          <image>
-            <Image url="@../../views/images/creeroffre.jpg" />
+            <Image url="@../images/creeroffre.jpg" />
          </image>
       </ImageView>
       <JFXTextField fx:id="prix" focusColor="#2c8df5" layoutX="296.0" layoutY="125.0" prefHeight="36.0" prefWidth="251.0" promptText="Prix" style="-fx-background-color: white;" unFocusColor="#2fff0b">

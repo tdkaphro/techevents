@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -78,7 +79,12 @@ public class OffreevenementController implements Initializable {
     public static Offre offr = new Offre();
     @FXML
     private JFXButton modif1;
-
+    int idf; 
+    File file ; 
+    String a1;
+    String a2; 
+    String a3 ; 
+    String a4 ;
     /**
      * Initializes the controller class.
      */
@@ -314,6 +320,15 @@ public class OffreevenementController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(OffresponsorController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void initData(int id, int idf, File file, String a1, String a2, String a3, String a4) {
+        this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
     }
 
 }

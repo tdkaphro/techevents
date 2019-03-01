@@ -25,16 +25,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import techevent.entities.Sponsor;
+import techevent.entities.Enseignant;
+import techevent.entities.Etudiant;
+import techevent.services.ServiceEnseignant;
 import techevent.services.ServiceEtudiant;
-import techevent.services.ServiceSponsor;
 
 /**
  * FXML Controller class
  *
- * @author Ciro
+ * @author Taboubi
  */
-public class InscriptionSponsorController implements Initializable {
+public class InscriptionenseignantController implements Initializable {
 
     @FXML
     private JFXTextField nom;
@@ -55,16 +56,15 @@ public class InscriptionSponsorController implements Initializable {
     @FXML
     private JFXButton inscrire;
     @FXML
-    private JFXTextField entreprise;
+    private JFXTextField classe;
     File f;
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
     private void choisirimage(ActionEvent event) {
@@ -81,16 +81,16 @@ public class InscriptionSponsorController implements Initializable {
 
     @FXML
     private void ajouter(ActionEvent event) throws IOException {
-        Sponsor e = new Sponsor();
-        e.setNomentreprise(entreprise.getText());
+        Enseignant e = new Enseignant();
+        e.setDepartement(classe.getText());
         e.setEmail(mail.getText());
         e.setNom(nom.getText());
         e.setPrenom(prenom.getText());
         e.setDatedenaissance(Date.valueOf(datedenaissance.getValue()));
         e.setNumerotelephone(Integer.parseInt(numtel.getText()));
         e.setMotpasse(motdepasse.getText());
-        ServiceSponsor se = new ServiceSponsor();
-        se.ajouterSponsor(e);
+        ServiceEnseignant se=new ServiceEnseignant();
+        se.ajouterEnseignant(e,0);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Succes");
         alert.setHeaderText(null);
@@ -106,5 +106,5 @@ public class InscriptionSponsorController implements Initializable {
         prStage.setResizable(false);
         prStage.show();
     }
-
+    
 }
