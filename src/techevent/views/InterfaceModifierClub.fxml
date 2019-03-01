@@ -19,7 +19,7 @@
    <children>
       <ImageView fitHeight="431.0" fitWidth="765.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/modierclubhannachi.jpg" />
+            <Image url="@../images/modierclubhannachi.jpg" />
          </image>
       </ImageView>
       <TabPane layoutX="40.0" layoutY="74.0" prefHeight="357.0" prefWidth="699.0" style="-fx-border-style: #3333ff; -fx-background-color: #e6eeff;" tabClosingPolicy="UNAVAILABLE">

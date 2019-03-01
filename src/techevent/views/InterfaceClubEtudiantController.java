@@ -160,7 +160,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             ServiceClub sc2= new ServiceClub();
             String s=" ";
             ResultSet rs2=sc2.afficherPresident(cl.getId());
-            s=rs2.getString(6)+" "+rs2.getString(8)+" et son email "+rs2.getString(4);
+            s=rs2.getString(6)+" "+rs2.getString(9)+" et son email "+rs2.getString(4);
             ServiceClub sc=new ServiceClub();
             int clubid=cl.getId();
             ResultSet rs=sc.afficherClub(clubid);
@@ -193,11 +193,6 @@ public class InterfaceClubEtudiantController implements Initializable {
             InterfaceCréerClubController irc = loader.getController();
             irc.initData(idf,file);
             boutoncréerclub.getScene().setRoot(root);
-            Scene scene = new Scene(root);
-            Stage prStage = new Stage();
-            prStage.setScene(scene);
-            prStage.setResizable(false);
-            prStage.show();
             }
         } catch (IOException ex) {
             Logger.getLogger(InterfaceClubEtudiantController.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,7 +309,7 @@ public class InterfaceClubEtudiantController implements Initializable {
             Stage prStage = new Stage();
             prStage.setScene(scene);
             prStage.setResizable(false);
-            prStage.show();
+            prStage.show(); 
         } catch (IOException ex) {
             Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
