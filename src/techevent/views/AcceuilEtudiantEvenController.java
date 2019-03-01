@@ -46,6 +46,11 @@ import javafx.stage.Stage;
 import sun.font.EAttribute;
 import techevent.entities.Evenement;
 import techevent.images.ServiceEvenement;
+import techevent.services.ServiceEtudiant;
+import techevent.services.ServiceFormateur;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
@@ -167,6 +172,11 @@ public class AcceuilEtudiantEvenController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(AcceuilevenmntController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ServiceEvenement se=new ServiceEvenement();
+        /*se.reporterevenement(evenement,1)
+        TrayNotification tray = new TrayNotification("Notification","L'evenement "+nomidd.getText()+" est reporte"+dateidd.getText(), NotificationType.NOTICE) ;
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.showAndDismiss(javafx.util.Duration.seconds(10));*/
 
     }
 

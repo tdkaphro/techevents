@@ -11,9 +11,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceTraiterResponsablesController">
    <children>
-      <ImageView fitHeight="459.0" fitWidth="777.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="480.0" fitWidth="765.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/presidenttraiterresponsable.jpg" />
+            <Image url="@../images/presidenttraiterresponsable.jpg" />
          </image>
       </ImageView>
       <TableView fx:id="table" layoutX="14.0" layoutY="126.0" prefHeight="318.0" prefWidth="526.0">

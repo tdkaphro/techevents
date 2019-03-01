@@ -10,7 +10,6 @@ import static javafx.application.Application.launch;
 import javafx.geometry.Pos;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 
 public class LatLongMainApp extends Application {
@@ -18,7 +17,7 @@ public class LatLongMainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
           
-        Parent root = FXMLLoader.load(getClass().getResource("inscriformateur.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("map");
         stage.setScene(scene);

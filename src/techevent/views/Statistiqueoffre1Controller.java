@@ -56,10 +56,9 @@ public class Statistiqueoffre1Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail();
-            String mdp = irc.mdp();
-            //ArrayList<String> l = so.getAllEvenementforSpons(su.getId(mail, mdp));
-            ArrayList<String> l = so.getAllEvenementforSpons(1);
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
+            ArrayList<String> l = so.getAllEvenementforSpons(su.getId(mail, mdp));
             XYChart.Series set = new XYChart.Series<>();
             for(String s: l){
                 set.getData().add(new XYChart.Data(s, so.getPrixbyNomeven(s)));

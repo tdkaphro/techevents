@@ -53,8 +53,8 @@ public class AccueilsponsorController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail=irc.mail();
-            String mdp=irc.mdp();
+            String mail=irc.mail1;
+            String mdp=irc.mdp1;
             nom.setText(su.getNom(mail, mdp));
             prenom.setText(su.getPrenom(mail, mdp));
             datenaiss.setText(su.getDateNaissance(mail, mdp));
