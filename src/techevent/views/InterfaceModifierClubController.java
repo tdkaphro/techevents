@@ -70,7 +70,7 @@ public class InterfaceModifierClubController implements Initializable {
             // TODO
             comboboxdomaine.setItems(domaine);
             ServiceClub sc = new ServiceClub();
-            ResultSet rs=sc.afficherClubParPresident(5);
+            ResultSet rs=sc.afficherClubParPresident(idf);
             nom.setText(rs.getString(6));
             fraisinscription.setValue(rs.getDouble(5));
             comboboxdomaine.setValue(rs.getString(4));
