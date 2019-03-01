@@ -190,10 +190,10 @@ public class OffreevenementController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail();
-            String mdp = irc.mdp();
-            //ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
-            ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2));
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
+            ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
+            //ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2));
             List<Offre> plist = so.findAllDemandeforEvenement(l);
 
             idoffre.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -231,6 +231,7 @@ public class OffreevenementController implements Initializable {
             String mail = irc.mail1;
             String mdp = irc.mdp1;
             ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp)));
+            //ArrayList<Integer> l = se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2));
             List<Offre> plist = so.findAllOffreforEvenement(l);
 
             idoffre.setCellValueFactory(new PropertyValueFactory<>("id"));

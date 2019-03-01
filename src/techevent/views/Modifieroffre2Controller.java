@@ -59,16 +59,15 @@ public class Modifieroffre2Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             LoginController irc = loader.getController();
-            String mail = irc.mail();
-            String mdp = irc.mdp();
+            String mail = irc.mail1;
+            String mdp = irc.mdp1;
 
             ServiceEvenement se = new ServiceEvenement();
             ServiceUser su = new ServiceUser();
             ServiceClub sc = new ServiceClub();
             ServiceOffre so = new ServiceOffre();
 
-            //ArrayList<String> l2=so.findAllEvenementforEvenement(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
-            ArrayList<String> l2 = so.findAllEvenementforEvenement(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(2)));
+            ArrayList<String> l2=so.findAllEvenementforEvenement(se.getEvenementIdByClubId(sc.getIdClubbyPresidentId(su.getId(mail, mdp))));
             ObservableList<String> oblist2 = FXCollections.observableArrayList(l2);
             evenement.setItems(oblist2);
 

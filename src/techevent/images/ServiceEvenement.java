@@ -337,7 +337,7 @@ public class ServiceEvenement {
     
 
     public ArrayList<Integer> getEvenementIdByClubId(int id) {
-        ArrayList<Integer> l=new ArrayList<Integer>();
+        ArrayList<Integer> l = new ArrayList<Integer>();
         try {
             PreparedStatement st = C.prepareStatement("select * from evenement where club_id=?");
             st.setInt(1, id);
@@ -352,22 +352,23 @@ public class ServiceEvenement {
         return l;
     }
     
-    public ArrayList<String> getEvenementNomIdByPresidentId(int id)  {
-        ServiceClub sc=new ServiceClub();
-        ServiceEvenement se=new ServiceEvenement();
-        ServiceUser su=new ServiceUser();
-        int club=sc.getIdClubbyPresidentId(id);
-        ArrayList<Integer> l=se.getEvenementIdByClubId(club);
-        ArrayList<String> l2=new  ArrayList<String>();
-        for(int a:l){
+    public ArrayList<String> getEvenementNomIdByPresidentId(int id) {
+        ServiceClub sc = new ServiceClub();
+        ServiceEvenement se = new ServiceEvenement();
+        ServiceUser su = new ServiceUser();
+        int club = sc.getIdClubbyPresidentId(id);
+        ArrayList<Integer> l = se.getEvenementIdByClubId(club);
+        ArrayList<String> l2 = new ArrayList<String>();
+        for (int a : l) {
             try {
-                PreparedStatement st=C.prepareStatement("select * from evenement where id=?");
+                PreparedStatement st = C.prepareStatement("select * from evenement where id=?");
                 st.setInt(1, a);
-                ResultSet rs=st.executeQuery();
+                ResultSet rs = st.executeQuery();
                 rs.beforeFirst();
-                if(rs.next()){
-                    l2.add(rs.getString(7));
-                }   } catch (SQLException ex) {
+                if (rs.next()) {
+                    l2.add(rs.getString(8));
+                }
+            } catch (SQLException ex) {
                 Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -391,14 +392,14 @@ public class ServiceEvenement {
     }
 
     public ArrayList<String> getAllEvenementNonSponsorise() {
-        ArrayList<String> l=new ArrayList<String>();
+        ArrayList<String> l = new ArrayList<String>();
         try {
-            PreparedStatement st = C.prepareStatement("select * from evenement where etatdefinancement=?");
+            PreparedStatement st = C.prepareStatement("select * from evenement where etatdesponsorisation=?");
             st.setBoolean(1, false);
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
-            while(rs.next()) {
-                l.add(rs.getString(7));
+            while (rs.next()) {
+                l.add(rs.getString(8));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);
@@ -406,14 +407,14 @@ public class ServiceEvenement {
         return l;
     }
     
-    public String getNombyId (int id){
+    public String getNombyId(int id) {
         try {
             PreparedStatement st = C.prepareStatement("select * from evenement where id=?");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getString(7);
+                return rs.getString(8);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceEvenement.class.getName()).log(Level.SEVERE, null, ex);

@@ -29,7 +29,6 @@ import techevent.entities.Etudiant;
 import techevent.entities.Formateur;
 import techevent.services.ServiceEtudiant;
 import techevent.services.ServiceFormateur;
-import techevent.services.ServiceUser;
 
 /**
  * FXML Controller class

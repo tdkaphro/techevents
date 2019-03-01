@@ -528,12 +528,12 @@ public class ServiceClub {
     
     public int getIdClubbyPresidentId(int id){
         try {
-            PreparedStatement st = c.prepareStatement("select * from club where president_id=?");
+            PreparedStatement st = c.prepareStatement("select * from user where id=?");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             rs.beforeFirst();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt(17);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);

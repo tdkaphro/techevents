@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 import techevent.entities.Formateur;
 import techevent.services.ServiceFormateur;
 import techevent.services.ServiceFormation;
-import techevent.services.ServiceUser;
 
 /**
  * FXML Controller class
