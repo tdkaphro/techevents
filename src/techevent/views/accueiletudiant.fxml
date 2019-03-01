@@ -9,9 +9,9 @@
 
 <AnchorPane id="AnchorPane" fx:id="creer" prefHeight="541.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueiletudiantController">
    <children>
-      <ImageView fitHeight="552.0" fitWidth="900.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="552.0" fitWidth="900.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../views/images/1.jpg" />
+            <Image url="@../images/Sponsor.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="img" fitHeight="141.0" fitWidth="143.0" layoutX="189.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
@@ -51,9 +51,9 @@
       <JFXButton layoutX="489.0" layoutY="330.0" onAction="#evenement" prefHeight="125.0" prefWidth="135.0" text=" " />
       <JFXButton layoutX="682.0" layoutY="330.0" onAction="#projet" prefHeight="125.0" prefWidth="143.0" text=" " />
       <Label fx:id="nom" layoutX="475.0" layoutY="105.0" text="Label" />
-      <Label fx:id="prenom" layoutX="654.0" layoutY="105.0" text="Label" />
-      <Label fx:id="datenaiss" layoutX="594.0" layoutY="135.0" text="Label" />
-      <Label fx:id="classe" layoutX="489.0" layoutY="162.0" text="Label" />
+      <Label fx:id="prenom" layoutX="654.0" layoutY="105.0" prefHeight="17.0" prefWidth="69.0" text="Label" />
+      <Label fx:id="datenaiss" layoutX="594.0" layoutY="135.0" prefHeight="17.0" prefWidth="88.0" text="Label" />
+      <Label fx:id="classe" layoutX="530.0" layoutY="162.0" prefHeight="17.0" prefWidth="69.0" text="Label" />
       <Label fx:id="role" layoutX="212.0" layoutY="250.0" text="Label" />
       <ImageView fitHeight="41.0" fitWidth="52.0" layoutX="816.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
          <image>

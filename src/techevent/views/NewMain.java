@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import techevent.images.ServiceEvenement;
+import techevent.services.ServiceUser;
 
 /**
  *
@@ -47,7 +48,6 @@ public class NewMain extends Application {
      */
     public static void main(String[] args) throws SQLException {
         launch(args);
-     
        
         
     }
