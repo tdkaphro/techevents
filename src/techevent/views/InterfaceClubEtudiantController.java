@@ -299,18 +299,17 @@ public class InterfaceClubEtudiantController implements Initializable {
     @FXML
     private void retour(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueiletudiant.fxml"));
-            Parent root;
-            root = loader.load();
-            AccueiletudiantController irc = loader.getController();
-            irc.initData(idf);
-            boutonretour.getScene().setRoot(root);
-            
-            /* Scene scene = new Scene(root);
+         
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Accueiletudiant.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+             AccueiletudiantController irc = loader.getController();
+            irc.initData(idf);;
             Stage prStage = new Stage();
             prStage.setScene(scene);
             prStage.setResizable(false);
-            prStage.show(); */
+            prStage.show(); 
         } catch (IOException ex) {
             Logger.getLogger(AccueiletudiantController.class.getName()).log(Level.SEVERE, null, ex);
         }
