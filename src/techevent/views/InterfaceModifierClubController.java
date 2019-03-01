@@ -66,18 +66,7 @@ public class InterfaceModifierClubController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            comboboxdomaine.setItems(domaine);
-            ServiceClub sc = new ServiceClub();
-            ResultSet rs=sc.afficherClubParPresident(5);
-            nom.setText(rs.getString(6));
-            fraisinscription.setValue(rs.getDouble(5));
-            comboboxdomaine.setValue(rs.getString(4));
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfaceModifierClubController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+      
     }    
 
     @FXML
@@ -152,6 +141,18 @@ public class InterfaceModifierClubController implements Initializable {
     void initData(int idf, File file) {
        this.idf=idf;
        this.file=file;
+         try {
+            // TODO
+            comboboxdomaine.setItems(domaine);
+            ServiceClub sc = new ServiceClub();
+            ResultSet rs=sc.afficherClubParPresident(idf);
+            nom.setText(rs.getString(6));
+            fraisinscription.setValue(rs.getDouble(5));
+            comboboxdomaine.setValue(rs.getString(4));
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceModifierClubController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
          }
     }
     

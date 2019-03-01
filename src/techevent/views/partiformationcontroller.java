@@ -6,6 +6,7 @@
 package techevent.views;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -58,22 +59,38 @@ public class partiformationcontroller implements Initializable {
     private JFXButton backid;
     @FXML
     private TableView<Etudiant> tab;
+    int idf; 
+    File file ; 
+    String a1;
+    String a2; 
+    String a3 ; 
+    String a4 ; 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
     
     @FXML
-    private void back(ActionEvent event) throws IOException {
-        backid.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("acceuilevenmnt.fxml"));
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();
+    private void back(ActionEvent event) throws IOException, SQLException {
+                  backid.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController(); 
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
     }
 
-    void initData(int id) throws SQLException {
+    void initData(int id,int idf, File file, String a1, String a2, String a3,String a4) throws SQLException {
+        this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
            List<Etudiant> lf = new ArrayList<Etudiant>();
       ServiceFormation sf = new ServiceFormation();
         ResultSet rs = sf.afficherparticipant(id);

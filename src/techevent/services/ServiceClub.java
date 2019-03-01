@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package techevent.services;
 
 import java.sql.Connection;
@@ -62,7 +57,7 @@ public class ServiceClub {
             pt.setInt(1, e); 
             ResultSet rs=pt.executeQuery();
             rs.next();
-            id=rs.getInt(1);
+            id=rs.getInt("MONCLUB_ID");
             return id;
     } 
     
@@ -74,7 +69,7 @@ public class ServiceClub {
         PreparedStatement ps=c.prepareStatement("delete from user where ID=?");
         ps.setInt(1, e);
         ps.executeUpdate();
-        PreparedStatement ps2=c.prepareStatement("insert into user(ID,DTYPE,DATEDENAISSANCE,EMAIL,MOTPASSE,NOM,NUMEROTELEPHONE,PRENOM,CLASSE,UNIVERSITEETUDIANT_ID)values(?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement ps2=c.prepareStatement("insert into user(ID,DTYPE,DATEDENAISSANCE,EMAIL,MOTPASSE,NOM,NUMEROTELEPHONE,PICTURE,PRENOM,CLASSE,UNIVERSITEETUDIANT_ID)values(?,?,?,?,?,?,?,?,?,?,?)");
         ps2.setInt(1, rs.getInt(1));
         ps2.setString(2, "Etudiant");
         ps2.setDate(3, rs.getDate(3));
@@ -294,7 +289,7 @@ public class ServiceClub {
        ResultSet rs2= pt2.executeQuery();
        rs2=pt2.executeQuery();
        rs2.next();
-       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(8),rs2.getString(12),rs2.getString(4),rs2.getLong(7)));
+       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(9),rs2.getString(13),rs2.getString(4),rs2.getLong(7)));
         }
        return list;
     }
@@ -342,7 +337,7 @@ public class ServiceClub {
        ResultSet rs2= pt2.executeQuery();
        rs2=pt2.executeQuery();
        rs2.next();
-       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(8),rs2.getString(12),rs2.getString(4),rs2.getLong(7)));
+       list.add(new Etudiant(rs2.getInt(1),rs2.getString(6),rs2.getString(9),rs2.getString(13),rs2.getString(4),rs2.getLong(7)));
         }
        return list;
     }
@@ -540,5 +535,6 @@ public class ServiceClub {
         }
         return 0;
     }
+
 }
  

@@ -1,3 +1,5 @@
+
+       
 package techevent.views;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -5,6 +7,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -31,6 +34,7 @@ import techevent.entities.Formateur;
 import techevent.entities.Formation;
 import techevent.services.ServiceFormation;
 import java.util.*;
+import techevent.services.ServiceClub;
 public class ajouterformationcontroller implements Initializable {
 
     
@@ -83,9 +87,14 @@ public class ajouterformationcontroller implements Initializable {
               
        ObservableList<String> list = FXCollections.observableArrayList("web","reseau","mobile","genieciville","mécanique","electrique");
 
-     
+       int idf; 
+    File file ; 
+    String a1;
+    String a2; 
+    String a3 ; 
+    String a4 ;
     @FXML
-    void ajouterevt(ActionEvent event) throws IOException {
+    void ajouterevt(ActionEvent event) throws IOException, SQLException {
 	java.util.Date date = new java.util.Date();
         int aa = 0;
         if(nomid.getText()==null||prixid.getText()==null||capaciterid.getText()==null||volumeid.getText()==null||datedeb.getValue()==null||datefin.getValue()==null||cbformateur.getSelectionModel().isEmpty()||descriptionid.getText()==null){
@@ -141,14 +150,19 @@ public class ajouterformationcontroller implements Initializable {
     ServiceFormation sf = new ServiceFormation();
     a.setLon(lon1);
     a.setLat(lat1);
-    sf.ajouterformationdeclub(a, 2, e);
-    ajouter.getScene().getWindow().hide();  
-    Stage prStage =new Stage(); 
-    Parent root = FXMLLoader.load(getClass().getResource("presidentformation.fxml"));
-    Scene scene = new Scene(root);
-    prStage.setScene(scene);
-    prStage.setResizable(false);
-    prStage.show();
+    ServiceClub sc = new ServiceClub();
+    sf.ajouterformationdeclub(a, sc.getMonClubId(idf), e);
+     choisir.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController(); 
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
             }
    
     }      
@@ -177,13 +191,13 @@ public class ajouterformationcontroller implements Initializable {
     Parent root = loader.load();
     Scene scene = new Scene(root);
     LatLongFXMLController mc = loader.getController();
-    mc.initData(nom,prix,capaciter,volume,datedebut,datedefin,domaine,description,certified,formateur);
+    mc.initData(nom,prix,capaciter,volume,datedebut,datedefin,domaine,description,certified,formateur,idf,file,a1,a2,a3,a4);
     prStage.setScene(scene);
     prStage.setResizable(false);
     prStage.show();
         
     }
- void initData(double lat, double lon, String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, boolean certified, String formateur) throws SQLException {
+    void initData(double lat, double lon, String nom, String prix, String capaciter, String volume, LocalDate datedebut, LocalDate datedefin, String domaine, boolean certified, String formateur,String description, int idf, File file, String a1, String a2, String a3, String a4) throws SQLException {
         lat1 = lat; 
         lon1 = lon;
         nom1=nom;
@@ -195,6 +209,7 @@ public class ajouterformationcontroller implements Initializable {
         domaine1 = domaine;
         certified1 = certified;
         formateur1 = formateur;
+        description1 =description;
           nomid.setText(nom1);
     prixid.setText(prix1);
     capaciterid.setText(capaciter1);
@@ -216,7 +231,12 @@ public class ajouterformationcontroller implements Initializable {
     if(certified1 == true){
         certifieid.setSelected(true);
     }
-        
+          this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -237,7 +257,34 @@ public class ajouterformationcontroller implements Initializable {
         }
         cbformateur.setItems(listf);
        
+
+
     }
 
+    void initData(int idf, File file, String a1, String a2, String a3, String a4) {
+       this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
+    }
+  @FXML
+    void retourevt(ActionEvent event) throws IOException, SQLException {
+            choisir.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("presidentformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            presidentformationcontroller mc = loader.getController(); 
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
+
+    }
+
+     
  
 }

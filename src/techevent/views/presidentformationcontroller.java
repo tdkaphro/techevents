@@ -72,6 +72,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -83,6 +85,7 @@ import org.controlsfx.control.Notifications;
 import techevent.entities.Club;
 import techevent.entities.Formateur;
 import techevent.entities.Formation;
+import techevent.services.ServiceClub;
 import techevent.services.ServiceFormation;
 
 public class presidentformationcontroller implements Initializable {
@@ -143,9 +146,17 @@ public class presidentformationcontroller implements Initializable {
     private TableColumn<Formation, String> id;
     @FXML
     private GoogleMapView mapid;
+    @FXML
+    private ImageView img;
     private GoogleMap map;
     public Marker marker = null;
     List<Formation> lf = new ArrayList<Formation>();
+      int idf; 
+    File file ; 
+    String a1;
+    String a2; 
+    String a3 ; 
+    String a4 ; 
     public void initData() throws SQLException {
     }
 
@@ -160,57 +171,7 @@ public class presidentformationcontroller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mapid.addMapInializedListener(() -> configureMap());
-        ServiceFormation sf = new ServiceFormation();
-        ResultSet rs = sf.formationparclub(2);
-        try {
-            while (rs.next()) {
-                Formateur form = new Formateur();
-                form.setId(rs.getInt("formateur_id"));
-                Formation f = new Formation();
-                f.setId(rs.getInt("id"));
-                f.setNom(rs.getString("nom"));
-                f.setDomaine(rs.getString("domaine"));
-                f.setC("null");
-                if (rs.getBoolean("confirme") == true) {
-                    f.setC("oui");
-                } else {
-                    f.setC("non");
-                }
-                f.setDescription(sf.formateurdeformation(rs.getInt("FORMATEUR_ID")));
-                f.setVolumehoraire(sf.nombredinscri(rs.getInt("id")));
-                Date datedeb = rs.getDate("datedebut");
-                Date datefin = rs.getDate("DATEDEFIN");
-                Date date = new Date();
-
-                if (date.compareTo(datedeb) < 0) {
-                    f.setLocalisation("pas commencé");
-                } else if (date.compareTo(datefin) > 0) {
-                    f.setLocalisation("terminé");
-                } else {
-                    f.setLocalisation("en progress");
-                }
-                lf.add(f);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(presidentformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ObservableList<Formation> listObAbn = FXCollections.observableArrayList(lf);
-        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        domaine.setCellValueFactory(new PropertyValueFactory<>("domaine"));
-        formateur.setCellValueFactory(new PropertyValueFactory<>("description"));
-        inscri.setCellValueFactory(new PropertyValueFactory<>("volumehoraire"));
-        etat.setCellValueFactory(new PropertyValueFactory<>("localisation"));
-        confirmer.setCellValueFactory(new PropertyValueFactory<>("c"));
-        tableau.setItems(listObAbn);
-        try {
-            remplirTab();
-
-        } catch (IOException ex) {
-            Logger.getLogger(presidentformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // notification();
-        notifier("aa", "aa");
+   
     }
 
     @FXML
@@ -220,13 +181,17 @@ public class presidentformationcontroller implements Initializable {
 
     @FXML
     void ajouteevt(ActionEvent event) throws IOException {
-        tableau.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("ajouterformation.fxml"));
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();
+            img.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("ajouterformation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            ajouterformationcontroller mc = loader.getController(); 
+            mc.initData(idf,file,a1,a2,a3,a4);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
     }
 
     @FXML
@@ -272,7 +237,7 @@ public class presidentformationcontroller implements Initializable {
             int idformateur = rsf.getInt("id");
             String nomformateur = rsf.getString("nom");
             String prenomformateur = rsf.getString("prenom");
-            mc.initData(id, nom, prix, description, capaciter, voulmehoraire, datedebut, datefinn, lat, lon, certifie, domaine, idformateur, nomformateur, prenomformateur);
+            mc.initData(id, nom, prix, description, capaciter, voulmehoraire, datedebut, datefinn, lat, lon, certifie, domaine, idformateur, nomformateur, prenomformateur,idf,file,a1,a2,a3,a4);
             prStage.setScene(scene);
             prStage.setResizable(false);
             prStage.show();
@@ -294,7 +259,7 @@ public class presidentformationcontroller implements Initializable {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             supprimerformationcontroller mc = loader.getController();
-            mc.initData(tableau.getSelectionModel().getSelectedItem().getId());
+            mc.initData(tableau.getSelectionModel().getSelectedItem().getId(),idf,file,a1,a2,a3,a4);
             Stage prStage = new Stage();
             prStage.setScene(scene);
             prStage.setResizable(false);
@@ -412,15 +377,92 @@ public class presidentformationcontroller implements Initializable {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             partiformationcontroller mc = loader.getController();
-            mc.initData(tableau.getSelectionModel().getSelectedItem().getId());
+            mc.initData(tableau.getSelectionModel().getSelectedItem().getId(),idf,file,a1,a2,a3,a4);
             Stage prStage = new Stage();
             prStage.setScene(scene);
             prStage.setResizable(false);
             prStage.show();
     }
     }
+     @FXML
+    void retourevt(ActionEvent event) throws IOException, SQLException {
+            tableau.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("InterfaceClubPresident.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            InterfaceClubPresidentController mc = loader.getController();
+            mc.initData(idf,file);
+            Stage prStage = new Stage();
+            prStage.setScene(scene);
+            prStage.setResizable(false);
+            prStage.show();
+    }
+    
 
-    void initData(int idf, File file, String a1, String a2, String a3, String a4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void initData(int idf, File file, String a1, String a2, String a3, String a4) throws SQLException {
+        
+        this.idf=idf;
+        this.file=file;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
+          Image image = new Image(file.toURI().toString(),142,145,false,false);
+        img.setImage(image);
+        nomclub.setText(a1);
+        nbrfor.setText(a2);
+        nbres.setText(a4);
+        nbrmem.setText(a3);
+             mapid.addMapInializedListener(() -> configureMap());
+        ServiceFormation sf = new ServiceFormation();
+        ServiceClub sc = new ServiceClub();
+        ResultSet rs = sf.formationparclub(sc.getMonClubId(idf));
+        try {
+            while (rs.next()) {
+                Formateur form = new Formateur();
+                form.setId(rs.getInt("formateur_id"));
+                Formation f = new Formation();
+                f.setId(rs.getInt("id"));
+                f.setNom(rs.getString("nom"));
+                f.setDomaine(rs.getString("domaine"));
+                f.setC("null");
+                if (rs.getBoolean("confirme") == true) {
+                    f.setC("oui");
+                } else {
+                    f.setC("non");
+                }
+                f.setDescription(sf.formateurdeformation(rs.getInt("FORMATEUR_ID")));
+                f.setVolumehoraire(sf.nombredinscri(rs.getInt("id")));
+                Date datedeb = rs.getDate("datedebut");
+                Date datefin = rs.getDate("DATEDEFIN");
+                Date date = new Date();
+
+                if (date.compareTo(datedeb) < 0) {
+                    f.setLocalisation("pas commencé");
+                } else if (date.compareTo(datefin) > 0) {
+                    f.setLocalisation("terminé");
+                } else {
+                    f.setLocalisation("en progress");
+                }
+                lf.add(f);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(presidentformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ObservableList<Formation> listObAbn = FXCollections.observableArrayList(lf);
+        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        domaine.setCellValueFactory(new PropertyValueFactory<>("domaine"));
+        formateur.setCellValueFactory(new PropertyValueFactory<>("description"));
+        inscri.setCellValueFactory(new PropertyValueFactory<>("volumehoraire"));
+        etat.setCellValueFactory(new PropertyValueFactory<>("localisation"));
+        confirmer.setCellValueFactory(new PropertyValueFactory<>("c"));
+        tableau.setItems(listObAbn);
+        try {
+            remplirTab();
+
+        } catch (IOException ex) {
+            Logger.getLogger(presidentformationcontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

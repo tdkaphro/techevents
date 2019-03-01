@@ -150,7 +150,7 @@ public class InterfaceClubPresidentController implements Initializable {
     }
 
     @FXML
-    private void ajouterformation(ActionEvent event) throws IOException {
+    private void ajouterformation(ActionEvent event) throws IOException, SQLException {
      
             nomclub.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
