@@ -128,5 +128,6 @@ public class InterfaceCréerClubController implements Initializable {
     void initData(int idf, File file) {
         this.idf=idf;
         this.file=file;
+        
     }
 }
