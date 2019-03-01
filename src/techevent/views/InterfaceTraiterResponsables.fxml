@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.InterfaceTraiterResponsablesController">
+   <children>
+      <ImageView fitHeight="480.0" fitWidth="765.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/presidenttraiterresponsable.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="table" layoutX="14.0" layoutY="126.0" prefHeight="318.0" prefWidth="526.0">
+         <columns>
+            <TableColumn fx:id="nom" prefWidth="71.0" text="Nom" />
+            <TableColumn fx:id="prenom" prefWidth="88.0" text="Prenom" />
+            <TableColumn fx:id="classe" prefWidth="74.0" text="Classe" />
+            <TableColumn fx:id="Email" prefWidth="99.0" text="Email" />
+            <TableColumn fx:id="telephone" prefWidth="90.0" text="Téléphone" />
+            <TableColumn fx:id="Responsabilite" prefWidth="94.0" text="Résponsabilité" />
+            <TableColumn fx:id="id" prefWidth="94.0" text="id" visible="false" />
+         </columns>
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+      </TableView>
+      <Button fx:id="boutonretour" layoutX="685.0" layoutY="413.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+      <Button fx:id="boutonannuler" layoutX="575.0" layoutY="287.0" mnemonicParsing="false" onAction="#annuler" prefHeight="30.0" prefWidth="179.0" style="-fx-background-color: #042a68;" text="Annuler résponsabilté" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="boutonsupprimer" layoutX="575.0" layoutY="327.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="30.0" prefWidth="179.0" style="-fx-background-color: #042a68;" text="Supprimer résponsable" textFill="#f7f7f7">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

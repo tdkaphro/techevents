@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AjouterEvenementController">
+   <children>
+      <ImageView fitHeight="448.0" fitWidth="782.0" layoutY="-2.0">
+         <image>
+            <Image url="@../../images/11.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="ajouterid" layoutX="622.0" layoutY="222.0" onAction="#ajouter" prefHeight="40.0" prefWidth="154.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Ajouter" textAlignment="CENTER" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="retour" layoutX="708.0" onAction="#retourmenu" prefHeight="69.0" prefWidth="74.0" text=" " />
+      <JFXButton fx:id="reeset" layoutX="622.0" layoutY="269.0" onAction="#reset" prefHeight="40.0" prefWidth="154.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Rénitialiser" textAlignment="CENTER" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <TabPane layoutX="6.0" layoutY="83.0" prefHeight="347.0" prefWidth="614.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Partie 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField fx:id="nomid" layoutX="42.0" layoutY="21.0" prefHeight="33.0" prefWidth="160.0" promptText="Nom" unFocusColor="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXComboBox fx:id="financeid" layoutX="282.0" layoutY="30.0" onAction="#pay" prefHeight="25.0" prefWidth="161.0" promptText="Etat de financement" unFocusColor="WHITE" />
+                        <JFXDatePicker fx:id="dateid" defaultColor="#4851ff" layoutX="282.0" layoutY="88.0" promptText="Date organisation" />
+                        <JFXComboBox fx:id="typeid" layoutX="42.0" layoutY="147.0" onAction="#passerautre" prefHeight="25.0" prefWidth="154.0" promptText="Type" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="autretypeid" layoutX="282.0" layoutY="153.0" prefHeight="25.0" prefWidth="161.0" promptText="Choisir Type" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="capacite" layoutX="42.0" layoutY="211.0" prefHeight="25.0" prefWidth="154.0" promptText="Capacite" unFocusColor="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="local" layoutX="42.0" layoutY="90.0" prefHeight="25.0" prefWidth="162.0" promptText="Localisation" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Partie 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="614.0">
+                     <children>
+                        <Label fx:id="descid" layoutX="373.0" layoutY="195.0" prefHeight="25.0" prefWidth="107.0" text="255">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="sponsorisélab1" layoutX="51.0" layoutY="32.0" text="Prix" textFill="#3b3434d3">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <JFXSlider fx:id="prixid" layoutX="118.0" layoutY="35.0" prefHeight="14.0" prefWidth="179.0" />
+                        <JFXTextArea fx:id="descriptionid" layoutX="45.0" layoutY="99.0" onKeyPressed="#keyevent" prefHeight="121.0" prefWidth="435.0" promptText="Description">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

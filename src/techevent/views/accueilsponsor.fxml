@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AccueilsponsorController">
+   <children>
+      <ImageView fitHeight="557.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../views/images/Sponsor.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="142.0" fitWidth="144.0" layoutX="188.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nom" layoutX="471.0" layoutY="104.0" prefHeight="17.0" prefWidth="60.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label fx:id="prenom" layoutX="647.0" layoutY="104.0" prefHeight="17.0" prefWidth="60.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="datenaiss" layoutX="603.0" layoutY="132.0" prefHeight="25.0" prefWidth="102.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="entre" layoutX="527.0" layoutY="157.0" prefHeight="25.0" prefWidth="102.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="mail1" layoutX="188.0" layoutY="483.0" prefHeight="25.0" prefWidth="111.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="telephone" layoutX="471.0" layoutY="483.0" prefHeight="25.0" prefWidth="102.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="role" layoutX="191.0" layoutY="245.0" prefHeight="25.0" prefWidth="80.0" text="Sponseur">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="109.0" layoutY="332.0" onAction="#club" prefHeight="128.0" prefWidth="155.0" />
+      <JFXButton layoutX="299.0" layoutY="332.0" onAction="#formation" prefHeight="128.0" prefWidth="122.0" text=" " />
+      <JFXButton layoutX="496.0" layoutY="332.0" onAction="#evenement" prefHeight="128.0" prefWidth="122.0" text=" " />
+      <JFXButton layoutX="693.0" layoutY="336.0" onAction="#projet" prefHeight="118.0" prefWidth="135.0" text=" " />
+   </children>
+</AnchorPane>

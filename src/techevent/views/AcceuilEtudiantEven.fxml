@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="756.0" prefWidth="1258.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="techevent.views.AcceuilEtudiantEvenController">
+   <children>
+      <ImageView fitHeight="756.0" fitWidth="1258.0">
+         <image>
+            <Image url="@../../images/acceuilEvenEtudiant_1.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="participer" layoutX="964.0" layoutY="599.0" onAction="#participerEvenement" onMouseClicked="#ajouter" prefHeight="55.0" prefWidth="202.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Participer à l'évenement" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="pdpid" fitHeight="174.0" fitWidth="174.0" layoutX="113.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nometudiant" layoutX="103.0" layoutY="458.0" prefHeight="30.0" prefWidth="150.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></Label>
+      <Label fx:id="Description" layoutX="384.0" layoutY="578.0" text="Description" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="489.0" layoutY="14.0" text="Les événements que vous pouvez y participer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="descid" layoutX="384.0" layoutY="610.0" prefHeight="99.0" prefWidth="464.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></JFXTextArea>
+      <TableView fx:id="tableau" layoutX="382.0" layoutY="135.0" prefHeight="443.0" prefWidth="862.0">
+         <columns>
+            <TableColumn fx:id="nomidd" prefWidth="108.0" text="Nom" />
+            <TableColumn fx:id="clubid" prefWidth="127.0" text="Club" />
+            <TableColumn fx:id="dateidd" prefWidth="130.0" text="Date" />
+            <TableColumn fx:id="payantidd" prefWidth="139.0" text="État financier">
+               <columns>
+                  <TableColumn fx:id="ettafinance" prefWidth="79.0" text="Payant" />
+                  <TableColumn fx:id="prixid" prefWidth="71.0" text="Prix" />
+               </columns></TableColumn>
+            <TableColumn fx:id="typeidd" prefWidth="150.0" text="Type" />
+            <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="id" />
+            <TableColumn fx:id="nbrparticipant" prefWidth="99.0" text="Nbr. Participants" />
+            <TableColumn fx:id="capacite" prefWidth="97.0" text="Capacité" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="evenementvenir" layoutX="80.0" layoutY="626.0" onAction="#Evenementàvenir" onMouseClicked="#ajouter" prefHeight="46.0" prefWidth="234.0" ripplerFill="WHITE" style="-fx-background-color: #b1bcce;" text="Vos évenement à venir" textAlignment="CENTER" textFill="#f23f3f">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="tousevenem" layoutX="80.0" layoutY="682.0" onAction="#tousevenementback" onMouseClicked="#ajouter" prefHeight="46.0" prefWidth="234.0" ripplerFill="WHITE" style="-fx-background-color: #b1bcce;" text="Événement  à particper" textAlignment="CENTER" textFill="#f23f3f">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ComboBox fx:id="filtretype" layoutX="889.0" layoutY="90.0" onAction="#filtre" prefWidth="150.0" promptText="Par Type" />
+      <JFXButton fx:id="optiondefiltrage" layoutX="674.0" layoutY="79.0" onAction="#optionsdefiltrage" onMouseClicked="#ajouter" prefHeight="46.0" prefWidth="174.0" ripplerFill="WHITE" style="-fx-background-color: #b1bcce;" text="Options de Filtrage" textAlignment="CENTER" textFill="#f23f3f">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ComboBox fx:id="filtrepayant" layoutX="1074.0" layoutY="90.0" onAction="#filtre" prefWidth="150.0" promptText="Payant" />
+      <Label fx:id="local" layoutX="384.0" layoutY="711.0" text="Localisation" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="imprime" layoutX="964.0" layoutY="672.0" onAction="#imprimer" onMouseClicked="#ajouter" prefHeight="55.0" prefWidth="202.0" ripplerFill="#f5f5f5" style="-fx-background-color: #042a68;" text="Imprime de participation" textFill="#f5f5f5">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="localid" layoutX="541.0" layoutY="716.0" prefHeight="27.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="r" layoutX="1183.0" layoutY="24.0" onAction="#retour" text=",jhgj," />
+      <JFXButton layoutX="14.0" layoutY="12.0" onAction="#retour" prefHeight="46.0" prefWidth="52.0" />
+   </children>
+</AnchorPane>

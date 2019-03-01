@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="295.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="techevent.views.supprimerformationcontroller">
+   <children>
+      <ImageView fitHeight="381.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/DialogueSuppform.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="oui" layoutX="257.0" layoutY="172.0" onAction="#supprimerevt" prefHeight="32.0" prefWidth="58.0" text="Oui" />
+      <JFXButton fx:id="non" layoutX="315.0" layoutY="172.0" onAction="#retourevt" prefHeight="32.0" prefWidth="58.0" text="Non" />
+   </children>
+</AnchorPane>
